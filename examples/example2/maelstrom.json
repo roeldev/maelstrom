@@ -1,0 +1,89 @@
+{
+    "assetsDir":    "assets/",
+    "publicDir":    "public/",
+    "tasksDir":     "gulp_tasks/",
+    "templatesDir": "gulp_tasks/templates",
+
+    //--------------------------------------------------------------------------
+    // Task variables
+    //--------------------------------------------------------------------------
+    "sass":
+    {
+        "dirSource": "assets/scss",
+        "dirOutput": "public/css"
+    },
+
+    "icons":
+    {
+        "dirSource": "assets/icons"
+    },
+
+    "fonts":
+    {
+        "dirOutput": "public/fonts",
+    },
+
+    "imgs":
+    {
+        "dirSource":  "assets/imgs",
+        "dirOutput":  "public/imgs",
+        "extensions": ["jpg", "jpeg", "png", "gif", "svg"]
+    },
+
+    //--------------------------------------------------------------------------
+    // Module variables
+    //--------------------------------------------------------------------------
+    "pagespeed":
+    {
+        "domain":   "domain.com",
+        "strategy": "mobile",
+        "key":      "YOUR_API_KEY"
+    },
+
+    "autoprefixer":
+    {
+        "cascade":  false,
+        "browsers": [
+            "last 4 version",
+            "safari 5", "ios 6"
+            "ie 8", "ie 9",
+            "ff 17",
+            "opera 12.1",
+            "android 4"
+        ]
+    },
+
+    "imagemin":
+    {
+        "progressive": true,
+        "interlaced":  true
+    },
+
+    "iconfont":
+    {
+        "fontName":           "your-project-icons",
+        "appendCodepoints":   true,
+        "normalize":          true,
+        "centerHorizontally": true,
+        "fixedWidth":         false,
+        "fontHeight":         18,
+    },
+
+    "notifyError":
+    {
+        "message": "Error: <%= error.message %>",
+        "time":    8000,
+        "wait":    false
+    },
+
+    "browserSync":
+    {
+        "server": { "baseDir": "public" },
+        "host":   "192.168.0.128",
+        "port":   80,
+        "files":  ["public/*.php", "public/css/*.css", "public/js/*.js", "public/images/**"],
+        "open":   true,
+        "ui":     false,
+        "notify": false
+    }
+}
