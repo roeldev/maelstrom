@@ -1,0 +1,4 @@
+/*
+- optimize images
+- resize image
+*/

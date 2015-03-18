@@ -18,9 +18,11 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-var _          = require('underscore'),
-    fileSystem = require('fs'),
-    requireDir = require('require-dir');
+var _           = require('underscore'),
+    _deepExtend = require('deep-extend'),
+    _fileSystem = require('fs'),
+    _requireDir = require('require-dir'),
+    _gulp       = require('gulp');
 
 /*
 
@@ -43,10 +45,105 @@ Task commands:
 
 //------------------------------------------------------------------------------
 
+var _dirAssets = 'assets',
+    _dirOutput = 'public'
+
 // default config
 var _config =
 {
+    'assets':
+    {
+        'favicon': _dirAssets +'/favicon',
+        'icons':   _dirAssets +'/icons',
+        'images':  _dirAssets +'/imgs',
+        'js':      _dirAssets +'/js',
+        'sass':    _dirAssets +'/scss'
+    },
 
+    'output':
+    {
+        'css':    _dirOutput +'/css',
+        'fonts':  _dirOutput +'/fonts',
+        'images': _dirOutput +'/imgs',
+        'js':     _dirOutput +'/js'
+    },
+
+    //--------------------------------------------------------------------------
+    // MODULES
+    //--------------------------------------------------------------------------
+    'css':
+    {
+        'autoprefixer':
+        {
+            'cascade':  false,
+            'browsers': ['last 4 version']
+        },
+
+        'concatenate': {}
+    },
+
+    'sass':
+    {
+        'compiler': 'libsass', // libsass|ruby
+
+        'libsass':
+        {
+            style:          'expanded',
+            sourceComments: true
+        }
+    },
+
+    //--------------------------------------------------------------------------
+
+    'images':
+    {
+        'imagemin':
+        {
+            'progressive': true,
+            'interlaced':  true
+        }
+    },
+
+    //--------------------------------------------------------------------------
+
+    'icons':
+    {
+        'type': 'font', // font|sprite
+
+        'iconfont':
+        {
+            'fontName':           'iconfont',
+            'appendCodepoints':   true,
+            'normalize':          true,
+            'centerHorizontally': true,
+            'fixedWidth':         false,
+            'fontHeight':         18,
+        }
+    },
+
+    //--------------------------------------------------------------------------
+
+    'notify':
+    {
+        'error':
+        {
+            'message': 'Error: <%= error.message %>',
+            'time':    8000,
+            'wait':    false
+        },
+    },
+
+    //--------------------------------------------------------------------------
+
+    'browserSync':
+    {
+        'proxy':  'localhost:8000',
+        'port':   80,
+        'files':  [],
+        'open':   false,
+        'ui':     false,
+        'notify': false,
+    }
 };
 
 //------------------------------------------------------------------------------
@@ -54,59 +151,66 @@ var _config =
 /*
     config volgorde
     - default
-    - maelstrom.json
-    - $config parameter
+    - maelstrom.JSON
+    - config parameter
 */
-var _init = function($customConfig)
+var _init = function(customConfig)
 {
-    var $result            = {},
-        $configs           = [$result, maelstrom.config],
-        $projectConfig     = {},
-        $projectConfigFile = 'maelstrom.json';
+    var result            = {},
+        configs           = [result, maelstrom.config],
+        projectConfig     = {},
+        projectConfigFile = 'maelstrom.json';
 
     // read config json file from project root folder
-    if (fileSystem.existsSync($projectConfigFile))
+    if (_fileSystem.existsSync(projectConfigFile))
     {
-        $projectConfig = fileSystem.readFileSync($projectConfigFile, 'utf8');
-        $projectConfig = JSON.parse($projectConfig);
+        projectConfig = _fileSystem.readFileSync(projectConfigFile, 'utf8');
+        projectConfig = JSON.parse(projectConfig);
 
-        if (!_.isEmpty($projectConfig))
+        if (!_.isEmpty(projectConfig))
         {
-            $configs.push($projectConfig);
+            configs.push(projectConfig);
         }
     }
 
-    if (_.isObject($customConfig) && !_.isEmpty($customConfig))
+    if (_.isObject(customConfig) && !_.isEmpty(customConfig))
     {
-        $configs.push($customConfig);
+        configs.push(customConfig);
     }
 
     // combine the 3 config sources in to one object
-    _.extend.apply($result, $configs);
-    maelstrom.config = $result;
+    result = _deepExtend.apply(result, configs);
+    maelstrom.config = result;
 };
 
 //------------------------------------------------------------------------------
 
-var maelstrom = function($taskDirs, $config)
+/**
+ * Maelstrom initializer
+ *
+ * @param  {string|array} tasksDirs - Array with dirs to require
+ * @param  {object} config - Config options
+ * @return null
+ */
+var maelstrom = function(tasksDirs, config)
 {
-    var $requireDirs = ['./tasks']
-    if (_.isArray($taskDirs))
+    var requireDirs = ['./tasks']
+    if (_.isArray(tasksDirs))
     {
-        $taskDirs.unshift($requireDirs[0]);
-        $requireDirs = $taskDirs;
+        tasksDirs.unshift(requireDirs[0]);
+        requireDirs = tasksDirs;
     }
-    elseif (_.isString($taskDirs))
+    elseif (_.isString(tasksDirs))
     {
-        $requireDirs.push($taskDirs);
+        requireDirs.push(tasksDirs);
     }
 
-    _init($config);
-    requireDir($requireDirs);
+    _init(config);
+    _requireDir(requireDirs);
 };
 
-maelstrom.config     = _config;
-maelstrom.init       = _init;
-maelstrom.requireDir = requireDir;
+maelstrom.config  = _config;
+maelstrom.init    = _init;
+maelstrom.require = _requireDir;
 
 module.exports = maelstrom;

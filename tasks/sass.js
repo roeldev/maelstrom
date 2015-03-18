@@ -1,5 +1,7 @@
 "use strict";
 
+// sass -> css + autoprefix + minify
+
 var sass = function()
 {
 

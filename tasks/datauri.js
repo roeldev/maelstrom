@@ -1,0 +1,1 @@
+// watch generated css file. check images from src. filter imgs <= 5kb. save these images to assets/datauri folder as base64 encoded data string files. create _datauri.scss import file with placeholders from these files. show message to developer so he/she can update their css by extending the placeholder.
