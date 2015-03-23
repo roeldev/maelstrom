@@ -46,10 +46,10 @@ Task commands:
 //------------------------------------------------------------------------------
 
 var _dirAssets = 'assets',
-    _dirOutput = 'public'
+    _dirOutput = 'public',
 
 // default config
-var _config =
+_config =
 {
     'assets':
     {
@@ -154,33 +154,33 @@ var _config =
     - maelstrom.JSON
     - config parameter
 */
-var _init = function(customConfig)
+var _init = function($customConfig)
 {
-    var result            = {},
-        configs           = [result, maelstrom.config],
-        projectConfig     = {},
-        projectConfigFile = 'maelstrom.json';
+    var $result            = {},
+        $configs           = [$result, maelstrom.config],
+        $projectConfig     = {},
+        $projectConfigFile = 'maelstrom.json';
 
     // read config json file from project root folder
-    if (_fileSystem.existsSync(projectConfigFile))
+    if (_fileSystem.existsSync($projectConfigFile))
     {
-        projectConfig = _fileSystem.readFileSync(projectConfigFile, 'utf8');
-        projectConfig = JSON.parse(projectConfig);
+        $projectConfig = _fileSystem.readFileSync($projectConfigFile, 'utf8');
+        $projectConfig = JSON.parse($projectConfig);
 
-        if (!_.isEmpty(projectConfig))
+        if (!_.isEmpty($projectConfig))
         {
-            configs.push(projectConfig);
+            $configs.push($projectConfig);
         }
     }
 
-    if (_.isObject(customConfig) && !_.isEmpty(customConfig))
+    if (_.isObject($customConfig) && !_.isEmpty($customConfig))
     {
-        configs.push(customConfig);
+        $configs.push($customConfig);
     }
 
     // combine the 3 config sources in to one object
-    result = _deepExtend.apply(result, configs);
-    maelstrom.config = result;
+    $result = _deepExtend.apply($result, $configs);
+    maelstrom.config = $result;
 };
 
 //------------------------------------------------------------------------------
