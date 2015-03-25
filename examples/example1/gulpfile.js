@@ -4,8 +4,6 @@ var $assetsDir = 'assets/',
 
 //------------------------------------------------------------------------------
 
-module.exports =
-
 require('maelstrom')
 ({
     assetsDir:    $assetsDir,

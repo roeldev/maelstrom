@@ -1,6 +1,6 @@
 "use strict";
 /*
-    maelstrom-js - A collection of Gulp tasks
+    Maelstrom-js - A collection of Gulp tasks
     Copyright (c) 2015 Roel Schut (roelschut.nl)
 
     This program is free software; you can redistribute it and/or modify
@@ -18,153 +18,30 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-var _           = require('underscore'),
-    _deepExtend = require('deep-extend'),
-    _fileSystem = require('fs'),
-    _requireDir = require('require-dir'),
-    _gulp       = require('gulp');
-
-/*
-
-Task commands:
-- sass (kiest adhv. config welke engine te gebuiken)
-- sass-compile:libsass (compilen dmv. libsass)
-- sass-compile:ruby (compilen dmv. ruby)
-
-- images (optimaliseer alle afbeeldingen vanuit assets/imgs)
-- image-optimize (optimaliseer losse afbeelding adhv. parameter)
-- image-resize (verklein afbeelding adhv. parameter, sla verkleinde variant ook op in asset/imgs)
-
-- iconfont
-
-- watch (watch all)
-- watch:assets (watch alle asset files)
-- watch:public (watch alle public files -> browserSync)
-
-*/
-
-//------------------------------------------------------------------------------
-
-var _dirAssets = 'assets',
-    _dirOutput = 'public',
-
-// default config
-_config =
-{
-    'assets':
-    {
-        'favicon': _dirAssets +'/favicon',
-        'icons':   _dirAssets +'/icons',
-        'images':  _dirAssets +'/imgs',
-        'js':      _dirAssets +'/js',
-        'sass':    _dirAssets +'/scss'
-    },
-
-    'output':
-    {
-        'css':    _dirOutput +'/css',
-        'fonts':  _dirOutput +'/fonts',
-        'images': _dirOutput +'/imgs',
-        'js':     _dirOutput +'/js'
-    },
-
-    //--------------------------------------------------------------------------
-    // MODULES
-    //--------------------------------------------------------------------------
-    'css':
-    {
-        'autoprefixer':
-        {
-            'cascade':  false,
-            'browsers': ['last 4 version']
-        },
-
-        'concatenate': {}
-    },
-
-    'sass':
-    {
-        'compiler': 'libsass', // libsass|ruby
-
-        'libsass':
-        {
-            style:          'expanded',
-            sourceComments: true
-        }
-    },
-
-    //--------------------------------------------------------------------------
-
-    'images':
-    {
-        'imagemin':
-        {
-            'progressive': true,
-            'interlaced':  true
-        }
-    },
-
-    //--------------------------------------------------------------------------
-
-    'icons':
-    {
-        'type': 'font', // font|sprite
-
-        'iconfont':
-        {
-            'fontName':           'iconfont',
-            'appendCodepoints':   true,
-            'normalize':          true,
-            'centerHorizontally': true,
-            'fixedWidth':         false,
-            'fontHeight':         18,
-        }
-    },
-
-    //--------------------------------------------------------------------------
-
-    'notify':
-    {
-        'error':
-        {
-            'message': 'Error: <%= error.message %>',
-            'time':    8000,
-            'wait':    false
-        },
-    },
-
-    //--------------------------------------------------------------------------
-
-    'browserSync':
-    {
-        'proxy':  'localhost:8000',
-        'port':   80,
-        'files':  [],
-        'open':   false,
-        'ui':     false,
-        'notify': false,
-    }
-};
+var _          = require('underscore'),
+    DeepExtend = require('deep-extend'),
+    FileSystem = require('fs'),
+    RequireDir = require('require-dir');
 
 //------------------------------------------------------------------------------
 
 /*
     config volgorde
     - default
-    - maelstrom.JSON
+    - Maelstrom.JSON
     - config parameter
 */
-var _init = function($customConfig)
+var init = function($gulp, $customConfig)
 {
     var $result            = {},
-        $configs           = [$result, maelstrom.config],
+        $configs           = [$result, Maelstrom.config],
         $projectConfig     = {},
         $projectConfigFile = 'maelstrom.json';
 
     // read config json file from project root folder
-    if (_fileSystem.existsSync($projectConfigFile))
+    if (FileSystem.existsSync($projectConfigFile))
     {
-        $projectConfig = _fileSystem.readFileSync($projectConfigFile, 'utf8');
+        $projectConfig = FileSystem.readFileSync($projectConfigFile, 'utf8');
         $projectConfig = JSON.parse($projectConfig);
 
         if (!_.isEmpty($projectConfig))
@@ -179,8 +56,13 @@ var _init = function($customConfig)
     }
 
     // combine the 3 config sources in to one object
-    $result = _deepExtend.apply($result, $configs);
-    maelstrom.config = $result;
+    $result = DeepExtend.apply($result, $configs);
+
+    Maelstrom.config = $result;
+    Maelstrom.gulp   = $gulp;
+
+    Maelstrom.test = require('./plugins/test.js');
+    Maelstrom.sass = require('./plugins/sass.js');
 };
 
 //------------------------------------------------------------------------------
@@ -188,29 +70,29 @@ var _init = function($customConfig)
 /**
  * Maelstrom initializer
  *
- * @param  {string|array} tasksDirs - Array with dirs to require
- * @param  {object} config - Config options
+ * @param  {string|array} $tasksDirs - Array with dirs to require
+ * @param  {object} $config - Config options
  * @return null
  */
-var maelstrom = function(tasksDirs, config)
+var Maelstrom = function($gulp, $tasksDirs, $config)
 {
-    var requireDirs = ['./tasks']
-    if (_.isArray(tasksDirs))
+    var $requireDirs = ['./tasks'];
+    if (_.isArray($tasksDirs))
     {
-        tasksDirs.unshift(requireDirs[0]);
-        requireDirs = tasksDirs;
+        $tasksDirs.unshift($requireDirs[0]);
+        $requireDirs = $tasksDirs;
     }
-    elseif (_.isString(tasksDirs))
+    elseif (_.isString($tasksDirs))
     {
-        requireDirs.push(tasksDirs);
+        $requireDirs.push($tasksDirs);
     }
 
-    _init(config);
-    _requireDir(requireDirs);
+    init($gulp, $config);
+    RequireDir($requireDirs);
 };
 
-maelstrom.config  = _config;
-maelstrom.init    = _init;
-maelstrom.require = _requireDir;
+Maelstrom.config  = require('./config.js');
+Maelstrom.init    = init;
+Maelstrom.require = RequireDir;
 
-module.exports = maelstrom;
+module.exports = Maelstrom;

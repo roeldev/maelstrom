@@ -1,0 +1,14 @@
+$color1: red;
+$color2: purple;
+
+body
+{
+    background-color: $color1;
+    font-size: 300px;
+}
+
+div
+{
+    content: 'a scss compile test';
+    color: $color2;
+}

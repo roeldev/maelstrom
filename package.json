@@ -5,6 +5,13 @@
   "description": "A collection of Gulp tasks.",
   "version": "0.0.0",
   "license": "GPL-2.0+",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/roeldev/maelstrom-js.git"
+  },
+  "engines": {
+    "node": ">=0.12"
+  },
   "dependencies": {
     "browser-sync": "^2.2.1",
     "deep-extend": "^0.3.2",
@@ -31,7 +38,20 @@
     "psi": "^1.0.6",
     "require-dir": "^0.1.0",
     "run-sequence": "^1.0.2",
+    "through2": "^0.6.3",
     "underscore": "^1.8.2",
     "vinyl": "^0.4.6"
-  }
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "gulp",
+    "svg",
+    "icon",
+    "font"
+  ]
 }
