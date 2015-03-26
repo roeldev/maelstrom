@@ -17,6 +17,8 @@ Maelstrom.init(Gulp,
     }
 });
 
+//------------------------------------------------------------------------------
+
 Gulp.task('test:css', function()
 {
     Gulp.src('./tests/input/*.css')
@@ -28,7 +30,7 @@ Gulp.task('test:sass', function()
 {
     Del(Maelstrom.sass.dest() +'/*.*');
 
-    var $src = Gulp.src( Maelstrom.sass.src() )
+    Gulp.src( Maelstrom.sass.src() )
         .pipe( Maelstrom.sass() )
         .pipe( Gulp.dest(Maelstrom.sass.dest()) );
 });
