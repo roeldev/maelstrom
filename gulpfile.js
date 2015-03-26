@@ -1,6 +1,7 @@
-var Gulp       = require('gulp'),
-    GulpPlugin = require('gulp-load-plugins')(),
-    Maelstrom  = require('./index.js');
+var Gulp        = require('gulp'),
+    GulpPlugins = require('gulp-load-plugins')(),
+    Maelstrom   = require('./lib/index.js'),
+    Del         = require('del');
 
 Maelstrom.init();
 
@@ -13,8 +14,14 @@ Gulp.task('test:css', function()
 
 Gulp.task('test:sass', function()
 {
-    Gulp.src('./tests/input/*.scss')
+    Del('./tests/output/*.*');
+
+    var $src = Gulp.src('./tests/input/*.scss')
         .pipe( Maelstrom.sass() )
-        .pipe( GulpPlugin.minifyCss() )
         .pipe( Gulp.dest('./tests/output/') );
+});
+
+Gulp.task('watch:tests', function()
+{
+    Gulp.watch('tests/input/*.scss', ['test:sass']);
 });

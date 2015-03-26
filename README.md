@@ -43,6 +43,8 @@ Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide ge
 - sync:start - start browser-sync server/proxy
 - sync:reload - reload browser-sync browsers
 - datauri - css bestanden in de gaten houden, vervolgens alle src(.*) strings nalopen en afbeeldingen hierin van <= 5kb apart opslaan als base64 encoded strings in /assets/datauri/filename.txt. Vervolgens Sass import bestand maken met placeholders met deze data adhv. template.
+- flags - vlaggen van alle landen als svg in assets/flags/. via config aangeven welke vlaggen gebruiken. vlaggen worden als sprite opgeslagen.
+- watch --task <task> - watch specifieke task
 
 ##Distant future support
 - Less
