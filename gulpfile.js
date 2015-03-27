@@ -48,5 +48,5 @@ Gulp.task('watch:tests', function()
 {
     Gulp.watch('tests/input/*.scss', ['test:sass']);
 
-    Maelstrom.libsass.watch();
+    Maelstrom.watch('sass');
 });
