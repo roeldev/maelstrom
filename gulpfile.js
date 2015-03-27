@@ -1,6 +1,6 @@
 var Gulp        = require('gulp'),
     Maelstrom   = require('./lib/index.js'),
-    Del         = require('del');
+    Delete      = require('del');
 
 Maelstrom.init(Gulp,
 {
@@ -17,6 +17,14 @@ Maelstrom.init(Gulp,
     }
 });
 
+/*Maelstrom.addPlugin('henk',
+{
+    'stream': function()
+    {
+        console.log('henk test');
+    }
+});*/
+
 //------------------------------------------------------------------------------
 
 Gulp.task('test:css', function()
@@ -28,16 +36,17 @@ Gulp.task('test:css', function()
 
 Gulp.task('test:sass', function()
 {
-    Del(Maelstrom.sass.dest() +'/*.*');
+    Delete(Maelstrom.libsass.dest() +'/*.*');
 
-    Gulp.src( Maelstrom.sass.src() )
-        .pipe( Maelstrom.sass() )
-        .pipe( Gulp.dest(Maelstrom.sass.dest()) );
+    Gulp.src( Maelstrom.libsass.src() )
+        .pipe( Maelstrom.plumber() )
+        .pipe( Maelstrom.libsass() )
+        .pipe( Gulp.dest(Maelstrom.libsass.dest()) );
 });
 
 Gulp.task('watch:tests', function()
 {
     Gulp.watch('tests/input/*.scss', ['test:sass']);
 
-    Maelstrom.sass.watch();
+    Maelstrom.libsass.watch();
 });
