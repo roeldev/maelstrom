@@ -25,7 +25,7 @@ maelstrom.init();
 
 gulp.task('some-task', function()
 {
-    gulp.src('path/to/src/*.*')
+    gulp.src('path/to/src/*')
         .pipe(maelstrom.pluginName()) // wrapper function
         .pipe(gulp.dest('path/to/dest/'));
 });
@@ -43,7 +43,7 @@ gulp.task('watch', function()
 ```
 gulp sass
 ```
-- --compiler _libsass|ruby_
+- --compiler <_libsass | ruby_>
 - --dev*
 
 Compile Sass bestanden dmv. _libsass_ of _Ruby_ (default in te stellen via config, of anders via parameter). Wanneer niet *dev*, de output door _autoprefixer_ en _minifycss_.
@@ -57,16 +57,17 @@ Optimaliseer afbeeldingen dmv. _imagemin_.
 ```
 gulp images:resize
 ```
-- –-size _width_x_height_
-- --quality _quality_
-- --dir _dir_
+- –-size <_width_ x _height_>
+- --quality <_quality_>
+- --dir <_dir_>
+
 Verkleint de afbeeldingen in map *dir* volgens de opgegeven *width* x *height* en/of *quality* parameter.
 
 ###Icons###
 ```
 gulp icons
 ```
-- –-create _font|sprite_
+- –-create <_font | sprite_>
 
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
 
