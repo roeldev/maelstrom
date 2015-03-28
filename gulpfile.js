@@ -17,13 +17,11 @@ Maelstrom.init(Gulp,
     }
 });
 
-/*Maelstrom.addPlugin('henk',
-{
-    'stream': function()
-    {
-        console.log('henk test');
-    }
-});*/
+Maelstrom.extend('tests/custom-plugin.js');
+Maelstrom.extend('customPlugin2', 'tests/custom-plugin.js');
+Maelstrom.extend('customPlugin3', {});
+
+console.log(Maelstrom);
 
 //------------------------------------------------------------------------------
 
