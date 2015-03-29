@@ -50,24 +50,29 @@ Compile Sass bestanden dmv. _libsass_ of _Ruby_ (default in te stellen via confi
 
 ###Images###
 ```
-gulp images
+gulp images:optimize
 ```
-Optimaliseer afbeeldingen dmv. _imagemin_.
+Optimize images with _imagemin_.
 
 ```
 gulp images:resize
 ```
-- –-size <_width_ x _height_>
+- --size <_width_ x _height_>
 - --quality <_quality_>
 - --dir <_dir_>
 
 Verkleint de afbeeldingen in map *dir* volgens de opgegeven *width* x *height* en/of *quality* parameter.
 
+```
+gulp images
+```
+Runs all images related tasks.
+
 ###Icons###
 ```
 gulp icons
 ```
-- –-create <_font | sprite_>
+- --create <_font | sprite_>
 
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
 
