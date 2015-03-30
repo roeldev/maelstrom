@@ -43,36 +43,60 @@ gulp.task('watch', function()
 ```
 gulp sass
 ```
-- --compiler <_libsass | ruby_>
-- --dev*
+> `--compiler`
 
-Compile Sass bestanden dmv. _libsass_ of _Ruby_ (default in te stellen via config, of anders via parameter). Wanneer niet *dev*, de output door _autoprefixer_ en _minifycss_.
+> Type: `string`
+> Default: `libsass`
+> Values: `libsass` or `ruby`
+
+The compiler to use: `libsass` works with _gulp-sass_ and `ruby` with _gulp-ruby-sass_.
+
+> `--dev`
+
+> Type: `boolean`
+> Default: `1`
+> Values: `0` or `1`
+
+This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
+
 
 ###Images###
 ```
-gulp images:optimize
-```
-Optimize images with _imagemin_.
-
-```
-gulp images:resize
-```
-- --size <_width_ x _height_>
-- --quality <_quality_>
-- --dir <_dir_>
-
-Verkleint de afbeeldingen in map *dir* volgens de opgegeven *width* x *height* en/of *quality* parameter.
-
-```
 gulp images
 ```
-Runs all images related tasks.
+> `--optimize`
+
+> Type: `boolean`
+> Default: `1`
+> Values: `0` or `1`
+
+Optimize images with _imagemin_.
+
+> `--resize`
+
+> Type: `number`
+> Default:
+> Format: `width`x`height`
+
+Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
+
+> `--quality`
+
+> Type: `number`
+> Default: `1`
+> Values: either number from 1 to 100.
+
+Specify the image quality. A higher number means better quality, but also a larger file size.
+
 
 ###Icons###
 ```
 gulp icons
 ```
-- --create <_font | sprite_>
+<table>
+<thead><td>Parameter</td><td>Default</td><td>Example</td></thead>
+<tr><td>`--create`</td><td>font</td><td>sprite</td></tr>
+</table>
 
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
 
