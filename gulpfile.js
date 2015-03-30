@@ -1,6 +1,7 @@
-var Gulp        = require('gulp')
-    Maelstrom   = require('./lib/index.js'),
-    Delete      = require('del');
+var Maelstrom = require('./lib/index.js'),
+    Gulp      = require('gulp')
+    GulpSize  = require('gulp-size'),
+    Delete    = require('del');
 
 Maelstrom.init(Gulp,
 {
@@ -16,12 +17,18 @@ Maelstrom.init(Gulp,
         'images': './tests/output',
         'css':    './tests/output',
         'js':     './tests/output'
+    },
+
+    'cssConcat':
+    {
+        'vendor': './assets/bower_components/*/**.css',
+        'base': './assets/bower_components/base-css/**/*.css'
     }
 });
 
-Maelstrom.extend('tests/custom-plugin.js');
+/*Maelstrom.extend('tests/custom-plugin.js');
 Maelstrom.extend('customPlugin2', 'tests/custom-plugin.js');
-Maelstrom.extend('customPlugin3', {});
+Maelstrom.extend('customPlugin3', {});*/
 
 //------------------------------------------------------------------------------
 
@@ -33,8 +40,9 @@ Gulp.task('test:sass', function()
 
     Gulp.src( Maelstrom.sass.src() )
         .pipe( Maelstrom.plumber() )
-        .pipe( Maelstrom.sass('libsass') )
+        .pipe( Maelstrom.sass() )
         //.pipe( Maelstrom.sass('ruby') )
+        .pipe( GulpSize({ 'showFiles': true }) )
         .pipe( Gulp.dest(Maelstrom.sass.dest()) );
 });
 
