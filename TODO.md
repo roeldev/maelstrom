@@ -35,3 +35,21 @@ Compile CoffeeScript files to JavaScript, concat and minify.
 
 ####`gulp icons --type sprite`
 Create a sprite from the SVG icons instead of the default icon font.
+
+-------------
+
+##Todo's and near future support
+- clean - clean the public and temp folders and remove unnecessary files (like Thumbs.db and .DS_Store)
+- sync:start - start browser-sync server/proxy
+- sync:reload - reload browser-sync browsers
+- datauri - css bestanden in de gaten houden, vervolgens alle src(.*) strings nalopen en afbeeldingen hierin van <= 5kb apart opslaan als base64 encoded strings in /assets/datauri/filename.txt. Vervolgens Sass import bestand maken met placeholders met deze data adhv. template.
+- flags - vlaggen van alle landen als svg in assets/flags/. via config aangeven welke vlaggen gebruiken. vlaggen worden als sprite opgeslagen.
+- watch --task <task> - watch specifieke task
+
+##Distant future support
+- Less
+- Stylus
+- CoffeeScript
+- TypeScript
+- Jade
+- Haml
