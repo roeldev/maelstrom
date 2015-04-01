@@ -11,62 +11,60 @@
 ```
 npm install --save maelstrom
 ```
+> Before installing maelstrom, make sure you have globally installed both gulp and browser-sync: `npm install -g gulp browser-sync`.
 
 ##How to use
-After installation you can configure Maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located).
+After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located).
 
-
-##Sample `gulpfile.js`
-Using all of Maelstrom's default plugins and tasks:
-```js
-require('maelstrom)();
-```
-
-Using a Maelstrom plugin as a wrapper in a gulp task:
+If you would like maelstrom to add all of it's default tasks to gulp you only have to have the following two lines in your gulpfile:
 ```js
 var gulp      = require('gulp'),
-    maelstrom = require('maelstrom);
+    maelstrom = require('maelstrom')(gulp);
+```
+> Note that gulp is directly passed to the maelstrom function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
 
-maelstrom.init();
+When you only want to use a certain plugin and/or task, you'll have to add a little more code. First `require` both the gulp and maelstrom packages. Then pass gulp to maelstrom's initializer: `maelstrom.init(gulp)`.
+You are now ready to use all of the default maelstrom plugins with `maelstrom.pluginName()`, add tasks with `maelstrom.task()` and/or watch tasks with `maelstrom.watch()`.
+```js
+var gulp      = require('gulp'),
+    maelstrom = require('maelstrom');
 
-gulp.task('some-task', function()
+// init maelstrom
+maelstrom.init(gulp);
+// add one of maelstrom's default tasks to gulp
+maelstrom.task('some-default-maelstrom-task');
+
+// create your own specific tasks
+gulp.task('my-custom-task', function()
 {
-    gulp.src('path/to/src/*')
-        .pipe(maelstrom.pluginName()) // wrapper function
-        .pipe(gulp.dest('path/to/dest/'));
+    gulp.src( maelstrom.pluginName.src() ) // <-- use src from plugin
+        .pipe( maelstrom.pluginName() ) // <-- add plugin to the stream
+        .pipe( gulp.dest('path/to/dest/') );
 });
 
 // call the plugin's default watch function
 gulp.task('watch', function()
 {
-    maelstrom.pluginName.watch();
-})
-
+    maelstrom.watch('some-default-maelstrom-task');
+});
 ```
+> Note that gulp is passed to `maelstrom.init()` unlike the first example. By initializing maelstrom this way, all default tasks will not be added to gulp.
 
-##Available default Gulp tasks
-###Sass###
+> When using `maelstrom.watch()`, don't forget to add the task with `maelstrom.task()`.
+
+##Available default tasks
+###Sass
 ```
 gulp sass
 ```
-> `--compiler`
-
-> Type: `string`
-> Default: `libsass`
-> Values: `libsass` or `ruby`
-
-The compiler to use: `libsass` works with _gulp-sass_ and `ruby` with _gulp-ruby-sass_.
-
-> `--dev`
-
+`--dev`
 > Type: `boolean`
 > Default: `1`
 > Values: `0` or `1`
+> This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
 
-This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
 
-
-###Images###
+###Images
 ```
 gulp images
 ```
