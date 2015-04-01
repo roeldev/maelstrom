@@ -57,6 +57,8 @@ gulp.task('watch', function()
 
 > When using `maelstrom.watch()`, don't forget to add the task with `maelstrom.task()`.
 
+Ofcourse you can combine the above examples by requiring maelstrom so it'll add all default tasks, and still be able to use the plugins in your own custom tasks!
+
 ##Available default tasks
 ###Sass
 ```
@@ -65,11 +67,16 @@ gulp sass
 > `--dev`
 
 > Type: `boolean`
-> Default: `1`
+> Default: `0`
 > Values: `0` or `1`
 
 This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
 
+> `--prod`
+
+> Type: `boolean`
+> Default: `0`
+> Values: `0` or `1`
 
 ###Images
 ```
@@ -86,7 +93,7 @@ Optimize images with _imagemin_.
 > `--resize`
 
 > Type: `number`
-> Default:
+> Default: 0
 > Format: `width`x`height`
 
 Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
