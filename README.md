@@ -17,7 +17,7 @@ npm install --save maelstrom
 After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located).
 
 ####Using all default plugins and tasks
-If you would like maelstrom to add all of it's default tasks to gulp you only have to have the following two lines in your gulpfile:
+If you would like maelstrom to add all of it's default tasks to gulp. you only have to have the following two lines in your `gulpfile.js`:
 
 ```js
 var gulp      = require('gulp'),
@@ -26,8 +26,8 @@ var gulp      = require('gulp'),
 > Note that gulp is directly passed to the maelstrom function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
 
 ####Using a specific plugin/task
-When you only want to use a certain plugin and/or task, you'll have to add a little more code. First `require` both the gulp and maelstrom packages. Then pass gulp to maelstrom's initializer: `maelstrom.init(gulp)`.
-You are now ready to use all of the default maelstrom plugins with `maelstrom.pluginName()`, add tasks with `maelstrom.task()` and/or watch tasks with `maelstrom.watch()`.
+When you only want to use a certain plugin and/or task, you'll have to add a little more code. First require both the gulp and maelstrom packages. Then pass gulp to maelstrom's initializer: `maelstrom.init(gulp)`.
+You are now ready to use all of the default maelstrom plugins with `maelstrom.pluginName()` (replace _pluginName_ with the name of the plugin you'd like to use), add tasks with `maelstrom.task()` and/or watch tasks with `maelstrom.watch()`.
 
 ```js
 var gulp      = require('gulp'),
@@ -38,7 +38,7 @@ maelstrom.init(gulp);
 // add one of maelstrom's default tasks to gulp
 maelstrom.task('some-default-maelstrom-task');
 
-// use a maelstrom plugin in your own task
+// or you can use a maelstrom plugin in your own task
 gulp.task('my-custom-task', function()
 {
     // replace 'pluginName' with the name of the plugin you'd like to use
@@ -63,6 +63,7 @@ gulp.task('watch', function()
 gulp sass
 ```
 > `--dev`
+
 > Type: `boolean`
 > Default: `1`
 > Values: `0` or `1`
@@ -75,6 +76,7 @@ This flag indicates if the compiled CSS file should not be minified. The default
 gulp images
 ```
 > `--optimize`
+
 > Type: `boolean`
 > Default: `1`
 > Values: `0` or `1`
@@ -82,6 +84,7 @@ gulp images
 Optimize images with _imagemin_.
 
 > `--resize`
+
 > Type: `number`
 > Default:
 > Format: `width`x`height`
@@ -89,6 +92,7 @@ Optimize images with _imagemin_.
 Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
 
 > `--quality`
+
 > Type: `number`
 > Default: `1`
 > Values: either number from 1 to 100.
@@ -100,9 +104,5 @@ Specify the image quality. A higher number means better quality, but also a larg
 ```
 gulp icons
 ```
-<table>
-<thead><td>Parameter</td><td>Default</td><td>Example</td></thead>
-<tr><td>`--create`</td><td>font</td><td>sprite</td></tr>
-</table>
 
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
