@@ -11,7 +11,7 @@
 ```
 npm install --save maelstrom
 ```
-> Before installing maelstrom, make sure you have globally installed both gulp and browser-sync: `npm install -g gulp browser-sync`.
+> Before installing maelstrom, make sure you have installed both gulp and browser-sync with the `-g` or `--global` flag: `npm install -g gulp browser-sync`.
 
 ##How to use
 After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located).
@@ -59,8 +59,20 @@ gulp.task('watch', function()
 
 Ofcourse you can combine the above examples by requiring maelstrom so it'll add all default tasks, and still be able to use the plugins in your own custom tasks!
 
-##Available default tasks
-###Sass
+##Config
+
+##API
+`maelstrom()`
+`maelstrom.init()`
+`maelstrom.task()`
+`maelstrom.watch()`
+`maelstrom.extend()`
+`maelstrom.config`
+
+##Available plugins
+
+##Available tasks
+####Sass
 ```
 gulp sass
 ```
@@ -78,7 +90,7 @@ This flag indicates if the compiled CSS file should not be minified. The default
 > Default: `0`
 > Values: `0` or `1`
 
-###Images
+####Images
 ```
 gulp images
 ```
@@ -107,7 +119,7 @@ Resizes the images to the specified width and height values. This can be either 
 Specify the image quality. A higher number means better quality, but also a larger file size.
 
 
-###Icons###
+####Icons
 ```
 gulp icons
 ```
