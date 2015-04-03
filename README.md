@@ -61,14 +61,81 @@ Ofcourse you can combine the above examples by requiring maelstrom so it'll add 
 
 --------------------------------------------------------------------------------
 ##Config
+- [src][config-src]
+- [dest][config-dest]
+- [browserSyncWatch][config-browserSyncWatch]
+- [cssConcat][config-cssConcat]
+- [defaultMode][config-defaultMode]
+- [iconsOutputName][config-iconsOutputName]
+- [iconsType][config-iconsType]
+- [imageExtensions][config-imageExtensions]
+- [jsConcat][config-jsConcat]
+- [sassCompiler][config-sassCompiler]
+
+> ######_src_
+> Type: `object`
+> Default:
+- `favicon`: `assets/favicon`
+- `flags`: `assets/flags`
+- `icons`: `assets/icons`
+- `images`: `assets/imgs`
+- `js`: `assets/js`
+- `sass`: `assets/scss`
+
+> ######_dest_
+> Type: `object`
+> Default:
+- `css`: `public/css`
+- `fonts`: `public/fonts`
+- `images`: `public/imgs`
+- `js`: `public/js`
+
+> ######_browserSyncWatch_
+> Type: `array`
+> Default: `[]`
+
+An array with globs wich should trigger browser-sync to reload the browsers.
+
+> ######_cssConcat_
+> Type: `object`
+> Default: `{}`
+
+A list of files wich should be concatenated. The key will be the name of the output file, wich will be saved in the `src.css` folder.
+
+> ######_defaultMode_
+> Type: `string`
+> Default: `dev`
+> Values: `dev` or `prod`
+
+> ######_iconsOutputName_
+> Type: `string`
+> Default: `iconfont`
+
+> ######_iconsType_
+> Type: `string`
+> Default: `font`
+> Values: `font` or `sprite` (not yet available)
+
+> ######_imageExtensions_
+> Type: `array`
+> Default: `['jpg', 'jpeg', 'png', 'gif', 'svg']`
+
+> ######_jsConcat_
+> Type: `object`
+> Default: `{}`
+
+> ######_sassCompiler_
+> Type: `string`
+> Default: `libsass`
+> Values: `libsass` or `ruby` (not yet available)
 
 --------------------------------------------------------------------------------
 ##API
-- [`maelstrom`][api-maelstrom]
-- [`maelstrom.init`][api-maelstrom-init]
-- [`maelstrom.task`][api-maelstrom-task]
-- [`maelstrom.watch`][api-maelstrom-watch]
-- [`maelstrom.extend`][api-maelstrom-extend]
+- [maelstrom()][api-maelstrom]
+- [maelstrom.init()][api-maelstrom-init]
+- [maelstrom.task()][api-maelstrom-task]
+- [maelstrom.watch()][api-maelstrom-watch]
+- [maelstrom.extend()][api-maelstrom-extend]
 
 ####`maelstrom()`
 Initializing maelstrom by calling this function passes all arguments to the `maelstrom.init()` function, and adds all default tasks to gulp.
@@ -76,12 +143,12 @@ Initializing maelstrom by calling this function passes all arguments to the `mae
 ####`maelstrom.init(gulp[, customConfig])`
 Maelstrom initializer wich allows you to use the default plugins inside your own gulp tasks.
 
-> ######`gulp`
+> ######_gulp_
 > Type: `object`
 
 A reference to the required gulp module.
 
-> ######`customConfig`
+> ######_customConfig_
 > Type: `object`
 
 An optional custom config object. This will overrule both the default maelstrom config and the options loaded from `maelstrom.json`.
@@ -89,12 +156,12 @@ An optional custom config object. This will overrule both the default maelstrom 
 ####`maelstrom.task(taskName[, options...])`
 This function adds a default maelstrom task to `gulp.task()`. The result from the `gulp.task()` function is returned. If for some reason `gulp.task()` is not called, the default value of `false` is returned.
 
-> ######`taskName`
+> ######_taskName_
 > Type: `string`
 
 Name of the maelstrom task to add to gulp.
 
-> ######`options`
+> ######_options_
 > Type: `mixed`
 
 All other arguments are passed along to the task function. Check the documentation for the task you would like to use to see wich extra options are available.
@@ -103,17 +170,17 @@ All other arguments are passed along to the task function. Check the documentati
 ####`maelstrom.watch(taskName[, extraFiles][, extraTasks])`
 This function adds a file watcher with `gulp.watch()` for the given task. The files to watch are taken from the plugin wich defined the task. The default result from the `gulp.watch()` function is returned. If for some reason `gulp.watch` is not called, the default value of `false` is returned.
 
-> ######`taskName`
+> ######_taskName_
 > Type: `string`
 
 Name of the maelstrom task to watch.
 
-> ######`extraFiles`
+> ######_extraFiles_
 > Type: `array` or `string`
 
 Optional extra files to pass to `gulp.watch()`.
 
-> ######`extraTasks`
+> ######_extraTasks_
 > Type: `array` or `string`
 
 Optional extra tasks to pass to `gulp.watch()`.
@@ -121,12 +188,12 @@ Optional extra tasks to pass to `gulp.watch()`.
 ####`maelstrom.extend(name, plugin)`
 Extend maelstrom by adding your own functions, objects or arrays. To load a plugin from a file pass the filename as a string. The results from the file (`module.exports`) will be added as the plugin.
 
-> ######`name`
+> ######_name_
 > Type: `string`
 
 The name to call the plugin: `maelstrom._name_`.
 
-> ######`plugin`
+> ######_plugin_
 > Type: `function` or `object` or `string`
 
 A plugin to add to maelstrom.
@@ -146,35 +213,35 @@ A plugin to add to maelstrom.
 
 ####`gulp sass [--compiler <libsass|ruby>] [--dev] [--prod]`
 
-> ######`--dev`
+> ######_--dev_
 > Type: `boolean`
 > Default: `0`
 > Values: `0` or `1`
 
 This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
 
-> ######`--prod`
+> ######_--prod_
 > Type: `boolean`
 > Default: `0`
 > Values: `0` or `1`
 
 
 ####`gulp images [--optimize][ --resize][ --quality]`
-> ######`--optimize`
+> ######_--optimize_
 > Type: `boolean`
 > Default: `1`
 > Values: `0` or `1`
 
 Optimize images with _imagemin_.
 
-> ######`--resize`
+> ######_--resize_
 > Type: `number`
 > Default: `0`
 > Format: `width`x`height`
 
 Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
 
-> ######`--quality`
+> ######_--quality_
 > Type: `number`
 > Default: `1`
 > Values: a number from `1` to `100`.
@@ -184,6 +251,17 @@ Specify the image quality. A higher number means better quality, but also a larg
 
 ####`gulp icons`
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
+
+[config-src]:
+[config-dest]:
+[config-browserSyncWatch]:
+[config-cssConcat]:
+[config-defaultMode]:
+[config-iconsOutputName]:
+[config-iconsType]:
+[config-imageExtensions]:
+[config-jsConcat]:
+[config-sassCompiler]:
 
 [api-maelstrom]: #maelstrom-1
 [api-maelstrom-init]: #maelstrominitgulp-customconfig
