@@ -59,9 +59,17 @@ gulp.task('watch', function()
 
 Ofcourse you can combine the above examples by requiring maelstrom so it'll add all default tasks, and still be able to use the plugins in your own custom tasks!
 
+--------------------------------------------------------------------------------
 ##Config
 
+--------------------------------------------------------------------------------
 ##API
+- [`maelstrom`][api-maelstrom]
+- [`maelstrom.init`][api-maelstrom-init]
+- [`maelstrom.task`][api-maelstrom-task]
+- [`maelstrom.watch`][api-maelstrom-watch]
+- [`maelstrom.extend`][api-maelstrom-extend]
+
 ####`maelstrom()`
 Initializing maelstrom by calling this function passes all arguments to the `maelstrom.init()` function, and adds all default tasks to gulp.
 
@@ -123,44 +131,50 @@ The name to call the plugin: `maelstrom._name_`.
 
 A plugin to add to maelstrom.
 
+--------------------------------------------------------------------------------
 ##Available plugins
+- [browserSync]
+- [images]
+- [plumber]
+- [sass]
 
+--------------------------------------------------------------------------------
 ##Available tasks
-####Sass
-```
-gulp sass
-```
-######`--dev`
+- Sass
+- Images
+- Icons
+
+####`gulp sass [--compiler <libsass|ruby>] [--dev] [--prod]`
+
+> ######`--dev`
 > Type: `boolean`
 > Default: `0`
 > Values: `0` or `1`
 
 This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
 
-######`--prod`
+> ######`--prod`
 > Type: `boolean`
 > Default: `0`
 > Values: `0` or `1`
 
-####Images
-```
-gulp images
-```
-######`--optimize`
+
+####`gulp images [--optimize][ --resize][ --quality]`
+> ######`--optimize`
 > Type: `boolean`
 > Default: `1`
 > Values: `0` or `1`
 
 Optimize images with _imagemin_.
 
-######`--resize`
+> ######`--resize`
 > Type: `number`
 > Default: `0`
 > Format: `width`x`height`
 
 Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
 
-######`--quality`
+> ######`--quality`
 > Type: `number`
 > Default: `1`
 > Values: a number from `1` to `100`.
@@ -168,8 +182,11 @@ Resizes the images to the specified width and height values. This can be either 
 Specify the image quality. A higher number means better quality, but also a larger file size.
 
 
-####Icons
-```
-gulp icons
-```
+####`gulp icons`
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
+
+[api-maelstrom]: #maelstrom-1
+[api-maelstrom-init]: #maelstrominitgulp-customconfig
+[api-maelstrom-task]: #maelstromtasktaskname-options
+[api-maelstrom-watch]: #maelstromwatchtaskname-extrafiles-extratasks
+[api-maelstrom-extend]: #maelstromextendname-plugin
