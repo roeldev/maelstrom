@@ -2,11 +2,14 @@
 ####`gulp icons`
 Create icon fonts from SVG files in `src.icons`. The sprite option has low priority.
 
-####`gulp jslint`
+####`gulp js --lint`
 Check all `src.js` JavaScript files for errors/problems with _jshint_ and check styleguide with _jscs_.
 
 
 ##Medium priority
+####`gulp sass --lint`
+Lint Sass files with _gulp-scss-lint_.
+
 ####`gulp clean`
 Clean all *dest* related dirs. Remove all temp files (like Thumbs.db, .DS_Store, error logs etc.).
 
