@@ -74,23 +74,25 @@ Ofcourse you can combine the above examples by requiring maelstrom so it'll add 
 
 > ######_src_
 > Type: `object`
+
 > Default:
-- `favicon`: `assets/favicon`
-- `flags`: `assets/flags`
-- `icons`: `assets/icons`
-- `images`: `assets/imgs`
-- `js`: `assets/js`
-- `sass`: `assets/scss`
+- `'favicon': 'assets/favicon'`
+- `'flags': 'assets/flags'`
+- `'icons': 'assets/icons'`
+- `'images': 'assets/imgs'`
+- `'js': 'assets/js'`
+- `'sass': 'assets/scss'`
 
 Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 
 > ######_dest_
 > Type: `object`
+
 > Default:
-- `css`: `public/css`
-- `fonts`: `public/fonts`
-- `images`: `public/imgs`
-- `js`: `public/js`
+- `'css': 'public/css'`
+- `'fonts': 'public/fonts'`
+- `'images': 'public/imgs'`
+- `'js': 'public/js'`
 
 Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
 
@@ -105,6 +107,7 @@ An array with globs wich should trigger browser-sync to reload the browsers.
 > Default: `{}`
 
 A list of CSS files wich will be concatenated to one file. The output file will be autoprefixed, minified and saved to the `dest.css` folder.
+
 Example: `'output-filename': ['file.css', '/files/to/concat/*.css']`
 
 > ######_defaultMode_
