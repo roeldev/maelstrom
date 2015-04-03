@@ -68,12 +68,12 @@ Initializing maelstrom by calling this function passes all arguments to the `mae
 ####`maelstrom.init(gulp[, customConfig])`
 Maelstrom initializer wich allows you to use the default plugins inside your own gulp tasks.
 
-######`gulp`
+> ######`gulp`
 > Type: `object`
 
 A reference to the required gulp module.
 
-######`customConfig`
+> ######`customConfig`
 > Type: `object`
 
 An optional custom config object. This will overrule both the default maelstrom config and the options loaded from `maelstrom.json`.
@@ -81,12 +81,12 @@ An optional custom config object. This will overrule both the default maelstrom 
 ####`maelstrom.task(taskName[, options...])`
 This function adds a default maelstrom task to `gulp.task()`. The result from the `gulp.task()` function is returned. If for some reason `gulp.task()` is not called, the default value of `false` is returned.
 
-######`taskName`
+> ######`taskName`
 > Type: `string`
 
 Name of the maelstrom task to add to gulp.
 
-######`options`
+> ######`options`
 > Type: `mixed`
 
 All other arguments are passed along to the task function. Check the documentation for the task you would like to use to see wich extra options are available.
@@ -95,17 +95,17 @@ All other arguments are passed along to the task function. Check the documentati
 ####`maelstrom.watch(taskName[, extraFiles][, extraTasks])`
 This function adds a file watcher with `gulp.watch()` for the given task. The files to watch are taken from the plugin wich defined the task. The default result from the `gulp.watch()` function is returned. If for some reason `gulp.watch` is not called, the default value of `false` is returned.
 
-######`taskName`
+> ######`taskName`
 > Type: `string`
 
 Name of the maelstrom task to watch.
 
-######`extraFiles`
+> ######`extraFiles`
 > Type: `array` or `string`
 
 Optional extra files to pass to `gulp.watch()`.
 
-######`extraTasks`
+> ######`extraTasks`
 > Type: `array` or `string`
 
 Optional extra tasks to pass to `gulp.watch()`.
@@ -113,12 +113,12 @@ Optional extra tasks to pass to `gulp.watch()`.
 ####`maelstrom.extend(name, plugin)`
 Extend maelstrom by adding your own functions, objects or arrays. To load a plugin from a file pass the filename as a string. The results from the file (`module.exports`) will be added as the plugin.
 
-######`name`
+> ######`name`
 > Type: `string`
 
 The name to call the plugin: `maelstrom._name_`.
 
-######`plugin`
+> ######`plugin`
 > Type: `function` or `object` or `string`
 
 A plugin to add to maelstrom.
@@ -155,7 +155,7 @@ Optimize images with _imagemin_.
 
 ######`--resize`
 > Type: `number`
-> Default: 0
+> Default: `0`
 > Format: `width`x`height`
 
 Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
@@ -163,7 +163,7 @@ Resizes the images to the specified width and height values. This can be either 
 ######`--quality`
 > Type: `number`
 > Default: `1`
-> Values: either number from 1 to 100.
+> Values: a number from `1` to `100`.
 
 Specify the image quality. A higher number means better quality, but also a larger file size.
 
