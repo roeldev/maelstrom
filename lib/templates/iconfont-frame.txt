@@ -1,19 +1,15 @@
 /**
  * Maelstrom | lib/templates/iconfont-frame.txt
- * file version: 0.00.002
+ * file version: 0.00.003
  */
-@import '<%= bowerDir %>/frame-scss/source/fontastic';
+@import '<%= bowerDir %>frame-scss/source/_iconfont';
 
 @include add-iconfont('<%= fontName %>', '<%= className %>', '<%= fontPath %>')
 {
-
 <% _.each(glyphs, function(glyph) { %>
-
     .<%= className %>-<%= glyph.name %>:before
     {
         content: '\<%= glyph.content %>'
     }
-
 <% }); %>
-
 }

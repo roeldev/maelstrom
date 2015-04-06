@@ -52,19 +52,16 @@ Gulp.task('test:icons', function()
     var $src  = 'tests/icons/*.svg',
         $dest = 'tests/icons/dest',
 
-    $options =
+    $templateConfig =
     {
-        'bowerDir':  'bowerdir/jeweet',
-        'fontName':  'dit-is-die-font',
-        'fontPath':  '/fonts/pad/',
-        'className': 'icon-henk'
+        'dest': 'tests/icons/dest/'
     };
 
     Delete($dest +'/*.*');
 
     Gulp.src($src)
         .pipe( Maelstrom.plumber() )
-        .pipe( Maelstrom.icons('iconfont', $options) )
+        .pipe( Maelstrom.icons('iconfont', $templateConfig) )
         .pipe( GulpSize({ 'showFiles': true }) )
         .pipe( Gulp.dest($dest) );
 });
