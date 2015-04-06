@@ -189,6 +189,8 @@ A reference to the required gulp module.
 ######_customConfig_
 > Type: `object`
 
+> Optional
+
 An optional custom config object. This will overrule both the default maelstrom config and the options loaded from `maelstrom.json`.
 
 ####`maelstrom.task(taskName[, options...])`
@@ -197,12 +199,12 @@ This function adds a default maelstrom task to `gulp.task()`. The result from th
 ######_taskName_
 > Type: `string`
 
-> Optional
-
 Name of the maelstrom task to add to gulp.
 
 ######_options_
 > Type: `mixed`
+
+> Optional
 
 All other arguments are passed along to the task function. Check the documentation for the task you would like to use to see wich extra options are available.
 
