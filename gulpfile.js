@@ -1,8 +1,14 @@
+/**
+ * maelstrom | gulpfile.js
+ * file version: 0.00.001
+ */
+'use strict';
+
 var Maelstrom  = require('./lib/index.js'),
-    Gulp       = require('gulp')
+    Gulp       = require('gulp'),
     GulpJsHint = require('gulp-jshint'),
     GulpSize   = require('gulp-size'),
-    Delete     = require('del'),
+    Delete     = require('del');
 
 Maelstrom.init(Gulp,
 {
@@ -31,63 +37,93 @@ Maelstrom.init(Gulp,
 Maelstrom.extend('customPlugin2', 'tests/custom-plugin.js');
 Maelstrom.extend('customPlugin3', {});*/
 
-Maelstrom.useTask('sass');
-Maelstrom.useTask('images');
-
 //------------------------------------------------------------------------------
+// Test related tasks
+//------------------------------------------------------------------------------
+/*
+    Icons
+    - svg -> iconfont
+    - create iconfont Sass import file
+    - svg -> sprite*
+    - create sprite Sass import file*
+ */
+Gulp.task('test:icons', function()
+{
+    var $src  = 'tests/icons/*.svg',
+        $dest = 'tests/icons/dest',
 
-Gulp.task('default', function(){ Maelstrom.utils.isDev(); });
+    $options =
+    {
+        'bowerDir':  'bowerdir/jeweet',
+        'fontName':  'dit-is-die-font',
+        'fontPath':  '/fonts/pad/',
+        'className': 'icon-henk'
+    };
 
+    Delete($dest +'/*.*');
+
+    Gulp.src($src)
+        .pipe( Maelstrom.plumber() )
+        .pipe( Maelstrom.icons('iconfont', $options) )
+        .pipe( GulpSize({ 'showFiles': true }) )
+        .pipe( Gulp.dest($dest) );
+});
+
+/*
+    Images plugin
+    ✓ optimize images
+    - resize images*
+ */
+Gulp.task('test:images', function()
+{
+    var $imgExt = Maelstrom.config.imageExtensions.join(','),
+        $src    = 'tests/images/*.{'+ $imgExt +'}',
+        $dest   = 'tests/images/dest';
+
+    Delete($dest +'/*.*');
+
+    Gulp.src($src)
+        .pipe( Maelstrom.plumber() )
+        .pipe( Maelstrom.images('optimize') )
+        .pipe( GulpSize({ 'showFiles': true }) )
+        .pipe( Gulp.dest($dest) );
+});
+
+/*
+    Sass plugin
+    ✓ compile sass
+    ✓ autoprefix
+    ✓ minify
+ */
 Gulp.task('test:sass', function()
 {
-    console.log('src: '+ Maelstrom.sass.src());
-    console.log('dest: '+ Maelstrom.sass.dest());
-    console.log('stream '+ Maelstrom.sass('libsass'));
+    var $src  = 'tests/sass/*.scss',
+        $dest = 'tests/sass/dest';
 
-    Delete(Maelstrom.sass.dest() +'/*.*');
+    Delete($dest +'/*.*');
 
-    Gulp.src( Maelstrom.sass.src() )
+    Gulp.src($src)
         .pipe( Maelstrom.plumber() )
         .pipe( Maelstrom.sass() )
-        //.pipe( Maelstrom.sass('ruby') )
         .pipe( GulpSize({ 'showFiles': true }) )
-        .pipe( Gulp.dest(Maelstrom.sass.dest()) );
-});
-
-Gulp.task('test:imgs', function()
-{
-    console.log('src: '+ Maelstrom.images.src());
-    console.log('dest: '+ Maelstrom.images.dest());
-    console.log('stream '+ Maelstrom.images());
-
-    Delete(Maelstrom.sass.dest() +'/*.*');
-
-    Gulp.src( Maelstrom.images.src() )
-        .pipe( Maelstrom.plumber() )
-        .pipe( Maelstrom.images() )
-        .pipe( GulpSize({ 'showFiles': true }) )
-        .pipe( Gulp.dest(Maelstrom.images.dest()) );
-});
-
-Gulp.task('watch:tests', function()
-{
-    Gulp.watch('tests/input/*.scss', ['test:sass']);
-
-    Maelstrom.watch('sass');
+        .pipe( Gulp.dest($dest) );
 });
 
 //------------------------------------------------------------------------------
-
-Gulp.task('jshint', function()
+// Dev related tasks
+//------------------------------------------------------------------------------
+Gulp.task('dev:jshint', function()
 {
-    Gulp.src('lib/**/*.js')
+    Gulp.src([__filename, 'lib/**/*.js'])
         .pipe( Maelstrom.plumber() )
         .pipe( GulpJsHint() )
         .pipe( GulpJsHint.reporter('jshint-stylish') )
         .pipe( GulpJsHint.reporter('fail') );
 });
 
-Gulp.task('watch', function()
+Gulp.task('dev:watch', function()
 {
-    Gulp.watch('lib/**/*.js', ['jshint']);
+    Gulp.watch([__filename, 'lib/**/*.js'], ['dev:jshint']);
 });
+
+Gulp.task('default', function(){ });
