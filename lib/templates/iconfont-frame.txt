@@ -1,15 +1,19 @@
 /**
- * Maelstrom | lib/templates/iconfront-frame.js
- * file version: 0.00.001
+ * Maelstrom | lib/templates/iconfont-frame.txt
+ * file version: 0.00.002
  */
 @import '<%= bowerDir %>/frame-scss/source/fontastic';
 
 @include add-iconfont('<%= fontName %>', '<%= className %>', '<%= fontPath %>')
 {
+
 <% _.each(glyphs, function(glyph) { %>
+
     .<%= className %>-<%= glyph.name %>:before
     {
-        content: '\<%= glyph.codepoint.toString(16).toUpperCase() %>'
+        content: '\<%= glyph.content %>'
     }
+
 <% }); %>
+
 }
