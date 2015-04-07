@@ -1,6 +1,6 @@
 /**
  * maelstrom | gulpfile.js
- * file version: 0.00.001
+ * file version: 0.00.002
  */
 'use strict';
 
@@ -61,7 +61,7 @@ Gulp.task('test:icons', function()
 
     Gulp.src($src)
         .pipe( Maelstrom.plumber() )
-        .pipe( Maelstrom.icons('iconfont', $templateConfig) )
+        .pipe( Maelstrom.icons('font', $templateConfig) )
         .pipe( GulpSize({ 'showFiles': true }) )
         .pipe( Gulp.dest($dest) );
 });
