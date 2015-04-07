@@ -16,25 +16,25 @@ npm install --save maelstrom
 ##Requirements
 To avoid any problems, make sure the following software is installed on your system. This pretty much avoids any problems, so you can make use of all of maelstrom's plugins.
 
-- #####[node.js][url-nodejs]
+- **[node.js][url-nodejs]**
 > On Windows: make sure to install the 32-bit version!
 
-- #####[Python 2.7.x][url-python]
+- **[Python 2.7.x][url-python]**
 > On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), install [Visual Studio Express 2012][url-vsx2012], and add the system variable PYTHON with value `C:\Python27\python.exe`. The you probably need to restart your system or sign-out and sign-in again.
 
-- #####[Git][url-git]
+- **[Git][url-git]**
 > On Windows: make sure to install with the option 'Use Git from the Windows Command Prompt', so Git is added to your PATH variable.
 
-- #####[Ruby][url-ruby]
+- **[Ruby][url-ruby]**
 > On Windows: use the default installation location with the option 'Add Ruby executables to your PATH' selected.
 
-- #####Node modules:
+- **Node modules:**
 Make sure these npm packages are installed using the `-g` or `--global` flag:
 ```bash
 npm install -g gulp browser-sync jshint jscs
 ```
 
-- #####Ruby gems:
+- **Ruby gems:**
 Install these Ruby gems with Bundler `bundle install` or install them manually:
 ```bash
 gem install compass
