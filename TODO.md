@@ -1,13 +1,17 @@
 ##High priority
-####`gulp icons`
+####`gulp icons:font`
 Create icon fonts from SVG files in `src.icons`. The sprite option has low priority.
 
-####`gulp js --lint`
+####`gulp css:concat`
+
+####`gulp js:concat`
+
+####`gulp js:lint`
 Check all `src.js` JavaScript files for errors/problems with _jshint_ and check styleguide with _jscs_.
 
 
 ##Medium priority
-####`gulp sass --lint`
+####`gulp sass:lint`
 Lint Sass files with _gulp-scss-lint_.
 
 ####`gulp clean`
@@ -19,10 +23,10 @@ Execute the `clean` task. Then execute all tasks wich write files to the *dest* 
 ####`gulp datauri`
 Watch the CSS files in dest. Filter the images <= 5kb in these files. Base64 encode these images and save the output to a src.datauri folder. Create a _datauri.scss import file with placeholders from the base64 encoded files. Show message to developer so he/she can update their CSS by extending the placeholder.
 
-####`gulp phpunit`
+####`gulp php:unit`
 Add phpunit support.
 
-####`gulp phpspec`
+####`gulp php:spec`
 Add phpspec support.
 
 ####`gulp screenshot`

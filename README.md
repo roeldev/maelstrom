@@ -5,14 +5,44 @@
 </p>
 
 #maelstrom
-**A collection of Gulp tasks. Work in progress.**
+**A collection of gulp tasks. Work in progress.**
 
 ##Installation
-```
+```bash
 npm install --save maelstrom
 ```
-> Before installing maelstrom, make sure you have installed both gulp and browser-sync with the `-g` or `--global` flag: `npm install -g gulp browser-sync`.
+> Before installing maelstrom, make sure you have installed all the required software, packages and gems.
 
+##Requirements
+To avoid any problems, make sure the following software is installed on your system. This pretty much guarantees that you can use of all of maelstrom's plugins.
+
+- #####[node.js][url-nodejs]
+> On Windows: make sure to install the 32-bit version!
+
+- #####[Python 2.7.x][url-python]
+> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), and install [Visual Studio Express 2012][url-vsx2012]. Add the system variable PYTHON with value `C:\Python27\python.exe`.
+
+- #####[Git][url-git]
+> On Windows: make sure to install with the option 'Use Git from the Windows Command Prompt', so Git is added to your PATH variable.
+
+- #####[Ruby][url-ruby]
+> On Windows: use the default installation location.
+
+- #####Node modules:
+Make sure these npm packages are installed using the `-g` or `--global` flag:
+```bash
+npm install -g gulp browser-sync jshint jscs
+```
+
+- #####Ruby gems:
+Install these Ruby gems with Bundler `bundle install` or install them manually:
+```bash
+gem install compass
+gem install scss-lint
+```
+
+
+--------------------------------------------------------------------------------
 ##How to use
 After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located). See [config][section-config] for all available options.
 
@@ -308,6 +338,13 @@ Specify the image quality. A higher number means better quality, but also a larg
 
 ####`gulp icons`
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
+
+
+[url-nodejs]: https://nodejs.org/download/
+[url-python]: https://www.python.org/downloads/release/python-279/
+[url-vsx2012]: http://go.microsoft.com/?linkid=9816758
+[url-git]: http://git-scm.com/downloads
+[url-ruby]: https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller
 
 [section-config]: #config
 [section-api]: #api
