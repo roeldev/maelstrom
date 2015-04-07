@@ -14,19 +14,19 @@ npm install --save maelstrom
 > Before installing maelstrom, make sure you have installed all the required software, packages and gems.
 
 ##Requirements
-To avoid any problems, make sure the following software is installed on your system. This pretty much guarantees that you can use of all of maelstrom's plugins.
+To avoid any problems, make sure the following software is installed on your system. This pretty much avoids any problems, so you can make use of all of maelstrom's plugins.
 
 - #####[node.js][url-nodejs]
 > On Windows: make sure to install the 32-bit version!
 
 - #####[Python 2.7.x][url-python]
-> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), and install [Visual Studio Express 2012][url-vsx2012]. Add the system variable PYTHON with value `C:\Python27\python.exe`.
+> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), install [Visual Studio Express 2012][url-vsx2012], and add the system variable PYTHON with value `C:\Python27\python.exe`. The you probably need to restart your system or sign-out and sign-in again.
 
 - #####[Git][url-git]
 > On Windows: make sure to install with the option 'Use Git from the Windows Command Prompt', so Git is added to your PATH variable.
 
 - #####[Ruby][url-ruby]
-> On Windows: use the default installation location.
+> On Windows: use the default installation location with the option 'Add Ruby executables to your PATH' selected.
 
 - #####Node modules:
 Make sure these npm packages are installed using the `-g` or `--global` flag:
