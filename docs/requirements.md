@@ -4,13 +4,13 @@
 - [API][docs-api]: Want to know how to use the maelstrom functions?
 - [Plugins][docs-plugins]: Detailed descriptions for all default maelstrom plugins.
 - [Tasks][docs-tasks]: More info about maelstrom's default gulp tasks.
-- [< Back to Readme](../README.md)
+[< Back to Readme](../)
 
 --------------------------------------------------------------------------------
 
 
 #Requirements
-To avoid any problems, make sure the following software is installed on your system. This pretty much avoids any problems, so you can make use of all of maelstrom's plugins.
+To avoid any problems, make sure the following software is installed on your system. Some maelstrom plugins may not function without them:
 
 - **[node.js][url-nodejs]**
 > On Windows: make sure to install the 32-bit version!

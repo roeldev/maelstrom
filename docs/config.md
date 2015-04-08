@@ -4,7 +4,7 @@
 - [API][docs-api]: Want to know how to use the maelstrom functions?
 - [Plugins][docs-plugins]: Detailed descriptions for all default maelstrom plugins.
 - [Tasks][docs-tasks]: More info about maelstrom's default gulp tasks.
-- [< Back to Readme](../README.md)
+[< Back to Readme](../)
 
 --------------------------------------------------------------------------------
 
