@@ -17,7 +17,7 @@ To avoid any problems, make sure the following software is installed on your sys
 > On Windows: make sure to install the 32-bit version!
 
 - **[Python 2.7.x][url-python]**
-> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), install [Visual Studio Express 2012][url-vsx2012], and add the system variable PYTHON with value `C:\Python27\python.exe`. After that you probably need to restart your computer or sign-out and sign-in again to make sure all system vars are loaded :)
+> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), install [Visual Studio Express 2012][url-vsx2012], and add the system environment variable PYTHON with value `C:\Python27\python.exe` in the Advanced System Settings panel.
 
 - **[Git][url-git]**
 > On Windows: make sure to install with the option 'Use Git from the Windows Command Prompt', so Git is added to your PATH variable.
@@ -25,13 +25,15 @@ To avoid any problems, make sure the following software is installed on your sys
 - **[Ruby][url-ruby]**
 > On Windows: use the default installation location with the option 'Add Ruby executables to your PATH' selected.
 
-- **Node modules:**
+After that you probably need to restart your computer or sign-out and sign-in again to make sure all system env vars are loaded :)
+
+**Node modules:**
 Make sure these npm packages are installed using the `-g` or `--global` flag:
 ```bash
 npm install -g gulp browser-sync jshint jscs
 ```
 
-- **Ruby gems:**
+**Ruby gems:**
 Install the required Ruby gems with Bundler: `bundle install`; or install them manually:
 ```bash
 gem install compass
