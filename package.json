@@ -1,13 +1,13 @@
 {
-  "title": "maelstrom-js",
-  "name": "maelstrom-js",
-  "homepage": "https://github.com/roeldev/maelstrom-js",
-  "description": "A collection of Gulp tasks.",
+  "title": "maelstrom",
+  "name": "maelstrom",
+  "homepage": "https://github.com/roeldev/maelstrom",
+  "description": "A collection of gulp tasks.",
   "version": "0.0.0",
   "license": "GPL-2.0+",
   "repository": {
     "type": "git",
-    "url": "git://github.com/roeldev/maelstrom-js.git"
+    "url": "https://github.com/roeldev/maelstrom.git"
   },
   "main": "lib/index.js",
   "engines": {
@@ -20,6 +20,7 @@
     "graceful-fs": "^3.0.6",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-changed": "^1.1.1",
+    "gulp-concat": "^2.5.2",
     "gulp-consolidate": "^0.1.2",
     "gulp-favicons": "^1.0.8",
     "gulp-filter": "^2.0.2",
@@ -39,6 +40,7 @@
     "main-bower-files": "^2.6.2",
     "require-dir": "^0.1.0",
     "through2": "^0.6.3",
+    "tildify": "^1.0.0",
     "underscore": "^1.8.2"
   },
   "devDependencies": {
