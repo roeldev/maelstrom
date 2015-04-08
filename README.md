@@ -7,44 +7,16 @@
 #maelstrom
 **A collection of gulp tasks. Work in progress.**
 
+
 ##Installation
 ```bash
 npm install --save maelstrom
 ```
-> Before installing maelstrom, make sure you have installed all the required software, packages and gems.
-
-##Requirements
-To avoid any problems, make sure the following software is installed on your system. This pretty much avoids any problems, so you can make use of all of maelstrom's plugins.
-
-- **[node.js][url-nodejs]**
-> On Windows: make sure to install the 32-bit version!
-
-- **[Python 2.7.x][url-python]**
-> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), install [Visual Studio Express 2012][url-vsx2012], and add the system variable PYTHON with value `C:\Python27\python.exe`. The you probably need to restart your system or sign-out and sign-in again.
-
-- **[Git][url-git]**
-> On Windows: make sure to install with the option 'Use Git from the Windows Command Prompt', so Git is added to your PATH variable.
-
-- **[Ruby][url-ruby]**
-> On Windows: use the default installation location with the option 'Add Ruby executables to your PATH' selected.
-
-- **Node modules:**
-Make sure these npm packages are installed using the `-g` or `--global` flag:
-```bash
-npm install -g gulp browser-sync jshint jscs
-```
-
-- **Ruby gems:**
-Install these Ruby gems with Bundler `bundle install` or install them manually:
-```bash
-gem install compass
-gem install scss-lint
-```
+> Before installing maelstrom, make sure you have installed all the [required software, packages and gems][docs-requirements].
 
 
---------------------------------------------------------------------------------
 ##How to use
-After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located). See [config][section-config] for all available options.
+After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located). See [config][docs-config] for all available options.
 
 ####Using all default plugins and tasks
 If you would like maelstrom to add all of it's default tasks to gulp. you only have to have the following two lines in your `gulpfile.js`:
@@ -56,7 +28,7 @@ var gulp      = require('gulp'),
 > Note that you should pass gulp to the maelstrom function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
 
 ####Using a specific plugin/task
-When you only want to use a certain plugin and/or task, you'll have to add a little more code. Below you'll find an example of what is possible. For a better explanation of the used maelstrom functions, check the [API][section-api].
+When you only want to use a certain plugin and/or task, you'll have to add a little more code. Below you'll find an example of what is possible. For a better explanation of the used maelstrom functions, check the [API][docs-api].
 
 ```js
 var gulp      = require('gulp'),
@@ -88,280 +60,15 @@ gulp.task('watch', function()
 
 Ofcourse you can combine the above examples by requiring maelstrom so it'll add all default tasks, and still be able to use the plugins in your own custom tasks!
 
---------------------------------------------------------------------------------
-##Config
-- [src][config-src]
-- [dest][config-dest]
-- [browserSyncWatch][config-browserSyncWatch]
-- [cssConcat][config-cssConcat]
-- [defaultMode][config-defaultMode]
-- [iconsOutputName][config-iconsOutputName]
-- [iconsType][config-iconsType]
-- [imageExtensions][config-imageExtensions]
-- [jsConcat][config-jsConcat]
-- [sassCompiler][config-sassCompiler]
-
-#####_src_
-> Type: `object`
-
-> Default:
-```js
-{
-    'favicon': 'assets/favicon',
-    'flags':   'assets/flags',
-    'icons':   'assets/icons',
-    'images':  'assets/imgs',
-    'js':      'assets/js',
-    'sass':    'assets/scss'
-}
-```
-
-Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
-
-#####_dest_
-> Type: `object`
-
-> Default:
-```js
-{
-    'css':    'public/css',
-    'fonts':  'public/fonts',
-    'images': 'public/imgs',
-    'js':     'public/js'
-}
-```
-
-Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
-
-#####_browserSyncWatch_
-> Type: `array`
-
-> Default: `[]`
-
-An array with globs wich should trigger browser-sync to reload the browsers.
-
-#####_cssConcat_
-> Type: `object`
-
-> Default: `{}`
-
-A list of CSS files wich will be concatenated to one file. The output file will be autoprefixed, minified and saved to the `dest.css` folder.
-
-Example: `'output-filename': ['file.css', '/files/to/concat/*.css']`
-
-#####_defaultMode_
-> Type: `string`
-
-> Default: `dev`
-
-> Values: `dev` or `prod`
-
-x
-
-#####_iconsOutputName_
-> Type: `string`
-
-> Default: `iconfont`
-
-x
-
-#####_iconsType_
-> Type: `string`
-
-> Default: `font`
-
-> Values: `font` or `sprite` (not yet available)
-
-x
-
-#####_imageExtensions_
-> Type: `array`
-
-> Default: `['jpg', 'jpeg', 'png', 'gif', 'svg']`
-
-x
-
-#####_jsConcat_
-> Type: `object`
-
-> Default: `{}`
-
-x
-
-#####_sassCompiler_
-> Type: `string`
-
-> Default: `libsass`
-
-> Values: `libsass` or `ruby` (not yet available)
-
-x
-
---------------------------------------------------------------------------------
-##API
-- [maelstrom()][api-maelstrom]
-- [maelstrom.init()][api-maelstrom-init]
-- [maelstrom.task()][api-maelstrom-task]
-- [maelstrom.watch()][api-maelstrom-watch]
-- [maelstrom.extend()][api-maelstrom-extend]
-
-####`maelstrom()`
-Initializing maelstrom by calling this function passes all arguments to the `maelstrom.init()` function, and adds all default tasks to gulp.
-
-####`maelstrom.init(gulp[, customConfig])`
-Maelstrom initializer wich allows you to use the default plugins inside your own gulp tasks.
-
-#####_gulp_
-> Type: `object`
-
-A reference to the required gulp module.
-
-#####_customConfig_
-> Type: `object`
-
-> Optional
-
-An optional custom config object. This will overrule both the default maelstrom config and the options loaded from `maelstrom.json`.
-
-####`maelstrom.task(taskName[, options...])`
-This function adds a default maelstrom task to `gulp.task()`. The result from the `gulp.task()` function is returned. If for some reason `gulp.task()` is not called, the default value of `false` is returned.
-
-#####_taskName_
-> Type: `string`
-
-Name of the maelstrom task to add to gulp.
-
-#####_options_
-> Type: `mixed`
-
-> Optional
-
-All other arguments are passed along to the task function. Check the documentation for the task you would like to use to see wich extra options are available.
-
-
-####`maelstrom.watch(taskName[, extraFiles][, extraTasks])`
-This function adds a file watcher with `gulp.watch()` for the given task. The files to watch are taken from the plugin wich defined the task. The default result from the `gulp.watch()` function is returned. If for some reason `gulp.watch` is not called, the default value of `false` is returned.
-
-#####_taskName_
-> Type: `string`
-
-Name of the maelstrom task to watch.
-
-#####_extraFiles_
-> Type: `array` or `string`
-
-> Optional
-
-Optional extra files to pass to `gulp.watch()`.
-
-#####_extraTasks_
-> Type: `array` or `string`
-
-> Optional
-
-Optional extra tasks to pass to `gulp.watch()`.
-
-####`maelstrom.extend(name, plugin)`
-Extend maelstrom by adding your own functions, objects or arrays. To load a plugin from a file pass the filename as a string. The results from the file (`module.exports`) will be added as the plugin.
-
-#####_name_
-> Type: `string`
-
-The name to call the plugin: `maelstrom._name_`.
-
-#####_plugin_
-> Type: `function` or `object` or `string`
-
-A plugin to add to maelstrom.
-
---------------------------------------------------------------------------------
-##Available plugins
-- [browserSync]
-- [icons]
-- [images]
-- [plumber]
-- [sass]
-
---------------------------------------------------------------------------------
-##Available tasks
-- Sass
-- Images
-- Icons
-
-####`gulp sass [--compiler <libsass|ruby>] [--dev] [--prod]`
-
-#####_--dev_
-> Type: `boolean`
-
-> Default: `0`
-
-> Values: `0` or `1`
-
-This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
-
-#####_--prod_
-> Type: `boolean`
-
-> Default: `0`
-
-> Values: `0` or `1`
-
-
-####`gulp images [--optimize][ --resize][ --quality]`
-#####_--optimize_
-> Type: `boolean`
-
-> Default: `1`
-
-> Values: `0` or `1`
-
-Optimize images with _imagemin_.
-
-#####_--resize_
-> Type: `number`
-
-> Default: `0`
-
-> Format: `width`x`height`
-
-Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
-
-#####_--quality_
-> Type: `number`
-
-> Default: `1`
-
-> Values: a number from `1` to `100`.
-
-Specify the image quality. A higher number means better quality, but also a larger file size.
-
-
-####`gulp icons`
-Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
-
-
-[url-nodejs]: https://nodejs.org/download/
-[url-python]: https://www.python.org/downloads/release/python-279/
-[url-vsx2012]: http://go.microsoft.com/?linkid=9816758
-[url-git]: http://git-scm.com/downloads
-[url-ruby]: https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller
-
-[section-config]: #config
-[section-api]: #api
-
-[config-src]: #src
-[config-dest]: #dest
-[config-browserSyncWatch]: #browsersyncwatch
-[config-cssConcat]: #cssconcat
-[config-defaultMode]: #defaultmode
-[config-iconsOutputName]: #iconsoutputname
-[config-iconsType]: #iconstype
-[config-imageExtensions]: #imageextensions
-[config-jsConcat]: #jsconcat
-[config-sassCompiler]: #sasscompiler
-
-[api-maelstrom]: #maelstrom-1
-[api-maelstrom-init]: #maelstrominitgulp-customconfig
-[api-maelstrom-task]: #maelstromtasktaskname-options
-[api-maelstrom-watch]: #maelstromwatchtaskname-extrafiles-extratasks
-[api-maelstrom-extend]: #maelstromextendname-plugin
+##More info
+- [Requirements][docs-requirements]: What software, packages and gems are required?
+- [Config][docs-config]: All available config options described and explained.
+- [API][docs-api]: Want to know how to use the maelstrom functions?
+- [Plugins][docs-plugins]: Detailed descriptions for all default maelstrom plugins.
+- [Tasks][docs-tasks]: More info about maelstrom's default gulp tasks.
+
+[docs-requirements]: docs/requirements.md
+[docs-config]: docs/config.md
+[docs-api]: docs/api.md
+[docs-plugins]: docs/plugins.md
+[docs-tasks]: docs/tasks.md
