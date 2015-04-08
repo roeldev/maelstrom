@@ -23,7 +23,7 @@
 - [sassCompiler][config-sassCompiler]
 
 
-#####_src_
+###src
 > Type: `object`
 
 > Default:
@@ -37,10 +37,11 @@
     'sass':    'assets/scss'
 }
 ```
+
 Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 
 
-#####_dest_
+###dest
 > Type: `object`
 
 > Default:
@@ -52,10 +53,11 @@ Folders returned by the plugin's `.src()` functions. Used while adding tasks to 
     'js':     'public/js'
 }
 ```
+
 Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
 
 
-#####_browserSyncWatch_
+###browserSyncWatch
 > Type: `array`
 
 > Default: `[]`
@@ -63,7 +65,7 @@ Folders returned by the plugin's `.dest()` functions. Used inside task functions
 An array with globs wich should trigger browser-sync to reload the browsers.
 
 
-#####_cssConcat_
+###cssConcat
 > Type: `object`
 
 > Default: `{}`
@@ -73,7 +75,7 @@ A list of CSS files wich will be concatenated to one file. The output file will 
 Example: `'output-filename': ['file.css', '/files/to/concat/*.css']`
 
 
-#####_defaultMode_
+###defaultMode
 > Type: `string`
 
 > Default: `dev`
@@ -83,7 +85,7 @@ Example: `'output-filename': ['file.css', '/files/to/concat/*.css']`
 x
 
 
-#####_iconsOutputName_
+###iconsOutputName
 > Type: `string`
 
 > Default: `iconfont`
@@ -91,7 +93,7 @@ x
 x
 
 
-#####_iconsType_
+###iconsType
 > Type: `string`
 
 > Default: `font`
@@ -101,7 +103,7 @@ x
 x
 
 
-#####_imageExtensions_
+###imageExtensions
 > Type: `array`
 
 > Default: `['jpg', 'jpeg', 'png', 'gif', 'svg']`
@@ -109,7 +111,7 @@ x
 x
 
 
-#####_jsConcat_
+###jsConcat
 > Type: `object`
 
 > Default: `{}`
@@ -117,7 +119,7 @@ x
 x
 
 
-#####_sassCompiler_
+###sassCompiler
 > Type: `string`
 
 > Default: `libsass`
