@@ -99,7 +99,7 @@ The name to call the plugin: `maelstrom._name_`.
 
 A plugin to add to maelstrom.
 
-[api-maelstrom]: #maelstrom-1
+[api-maelstrom]: #maelstrom
 [api-maelstrom-init]: #maelstrominitgulp-customconfig
 [api-maelstrom-task]: #maelstromtasktaskname-options
 [api-maelstrom-watch]: #maelstromwatchtaskname-extrafiles-extratasks
