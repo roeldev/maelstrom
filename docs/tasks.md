@@ -16,9 +16,9 @@
 - Icons
 
 
-####`gulp sass [--compiler <libsass|ruby>] [--dev] [--prod]`
+###gulp sass [--compiler <libsass|ruby>] [--dev] [--prod]
 
-#####_--dev_
+####`--dev`
 > Type: `boolean`
 
 > Default: `0`
@@ -27,7 +27,7 @@
 
 This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
 
-#####_--prod_
+####`--prod`
 > Type: `boolean`
 
 > Default: `0`
@@ -35,8 +35,8 @@ This flag indicates if the compiled CSS file should not be minified. The default
 > Values: `0` or `1`
 
 
-####`gulp images [--optimize][ --resize][ --quality]`
-#####_--optimize_
+###gulp images [--optimize][ --resize][ --quality]
+####`--optimize`
 > Type: `boolean`
 
 > Default: `1`
@@ -45,7 +45,7 @@ This flag indicates if the compiled CSS file should not be minified. The default
 
 Optimize images with _imagemin_.
 
-#####_--resize_
+####`--resize`
 > Type: `number`
 
 > Default: `0`
@@ -54,7 +54,7 @@ Optimize images with _imagemin_.
 
 Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
 
-#####_--quality_
+####`--quality`
 > Type: `number`
 
 > Default: `1`
@@ -64,7 +64,7 @@ Resizes the images to the specified width and height values. This can be either 
 Specify the image quality. A higher number means better quality, but also a larger file size.
 
 
-####`gulp icons`
+###gulp icons
 Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
 
 [docs-requirements]: requirements.md
