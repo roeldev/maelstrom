@@ -7,9 +7,10 @@
 #maelstrom
 **A collection of gulp tasks. Work in progress.**
 
+[![NPM version][npm-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Dependency Status][david-img]][david-url]
 
 ##Installation
-```bash
+```sh
 npm install --save maelstrom
 ```
 > Before installing maelstrom, make sure you have installed all the [required software, packages and gems][docs-requirements].
@@ -66,6 +67,13 @@ Ofcourse you can combine the above examples by requiring maelstrom so it'll add 
 - [API][docs-api]: Want to know how to use the maelstrom functions?
 - [Plugins][docs-plugins]: Detailed descriptions for all default maelstrom plugins.
 - [Tasks][docs-tasks]: More info about maelstrom's default gulp tasks.
+
+[npm-img]: https://badge.fury.io/js/maelstrom.svg
+[npm-url]: https://www.npmjs.com/package/maelstrom
+[travis-img]: https://travis-ci.org/roeldev/maelstrom.svg?branch=master
+[travis-url]: https://travis-ci.org/roeldev/maelstrom
+[david-img]: https://david-dm.org/roeldev/maelstrom.svg
+[david-url]: https://david-dm.org/roeldev/maelstrom
 
 [docs-requirements]: docs/requirements.md
 [docs-config]: docs/config.md
