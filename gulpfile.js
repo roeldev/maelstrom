@@ -6,7 +6,6 @@
 
 var Maelstrom  = require('./lib/index.js'),
     Gulp       = require('gulp'),
-    GulpJsHint = require('gulp-jshint'),
     GulpSize   = require('gulp-size'),
     Delete     = require('del');
 
@@ -111,11 +110,9 @@ Gulp.task('test:sass', function()
 //------------------------------------------------------------------------------
 Gulp.task('dev:jshint', function()
 {
-    Gulp.src([__filename, 'lib/**/*.js'])
+    return Gulp.src([__filename, 'lib/**/*.js'])
         .pipe( Maelstrom.plumber() )
-        .pipe( GulpJsHint() )
-        .pipe( GulpJsHint.reporter('jshint-stylish') )
-        .pipe( GulpJsHint.reporter('fail') );
+        .pipe( Maelstrom.js('lint') );
 });
 
 Gulp.task('dev:watch', function()
