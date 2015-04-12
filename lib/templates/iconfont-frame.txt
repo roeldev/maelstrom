@@ -1,8 +1,4 @@
-/**
- * Maelstrom | lib/templates/iconfont-frame.txt
- * file version: 0.00.003
- */
-@import '<%= bowerDir %>frame-scss/source/_iconfont';
+@import '<%= bowerDir %>frame-scss/source/iconfont';
 
 @include add-iconfont('<%= fontName %>', '<%= className %>', '<%= fontPath %>')
 {

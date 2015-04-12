@@ -1,12 +1,6 @@
-/**
- * Maelstrom | lib/templates/iconfont.txt
- * file version: 0.00.002
- */
 <% _.each(glyphs, function(glyph) { %>
-
     .<%= className %>-<%= glyph.name %>:before
     {
-        content: '\<%= glyph.content %>'
+        content: '\<%= glyph.content %>';
     }
-
 <% }); %>
