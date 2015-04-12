@@ -37,11 +37,13 @@
     "gulp-scss-lint": "^0.1.11",
     "gulp-scss-lint-stylish": "^0.1.0",
     "gulp-size": "^1.2.1",
+    "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.3",
     "jshint-stylish": "^1.0.1",
     "lodash": "^3.3.1",
     "main-bower-files": "^2.6.2",
     "require-dir": "^0.1.0",
+    "run-sequence": "^1.0.2",
     "through2": "^0.6.3",
     "tildify": "^1.0.0",
     "underscore": "^1.8.2"

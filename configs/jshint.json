@@ -21,7 +21,8 @@
     "strict": true,
     "validthis": true,
 
+    "browser": true,
     "devel": true,
-    "mocha": true,
-    "node": true
+    "jquery": true,
+    "mocha": true
 }

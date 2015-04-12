@@ -29,7 +29,9 @@ Maelstrom.init(Gulp,
     {
         'vendor': './assets/bower_components/*/**.css',
         'base': './assets/bower_components/base-css/**/*.css'
-    }
+    },
+
+    'jshintConfig': false
 });
 
 /*Maelstrom.extend('tests/custom-plugin.js');
