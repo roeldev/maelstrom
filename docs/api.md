@@ -11,15 +11,10 @@
 
 
 #API
-- [maelstrom()][api-maelstrom]
 - [maelstrom.init()][api-maelstrom-init]
 - [maelstrom.task()][api-maelstrom-task]
 - [maelstrom.watch()][api-maelstrom-watch]
 - [maelstrom.extend()][api-maelstrom-extend]
-
-
-###maelstrom()
-Initializing maelstrom by calling this function passes all arguments to the `maelstrom.init()` function, and adds all default tasks to gulp.
 
 
 ###maelstrom.init(gulp[, addTasks][, customConfig])
@@ -106,8 +101,7 @@ The name to call the plugin: `maelstrom._name_`.
 
 A plugin to add to maelstrom.
 
-[api-maelstrom]: #maelstrom
-[api-maelstrom-init]: #maelstrominitgulp-customconfig
+[api-maelstrom-init]: #maelstrominitgulp-addtasks-customconfig
 [api-maelstrom-task]: #maelstromtasktaskname-options
 [api-maelstrom-watch]: #maelstromwatchtaskname-extrafiles-extratasks
 [api-maelstrom-extend]: #maelstromextendname-plugin
