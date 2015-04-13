@@ -25,12 +25,6 @@ Maelstrom.init(Gulp,
         'js':     './tests/output'
     },
 
-    'cssConcat':
-    {
-        'vendor': './assets/bower_components/*/**.css',
-        'base': './assets/bower_components/base-css/**/*.css'
-    },
-
     'jshintConfig': false
 });
 
