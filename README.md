@@ -36,7 +36,7 @@ var gulp      = require('gulp'),
     maelstrom = require('maelstrom');
 
 // init maelstrom
-maelstrom.init(gulp);
+maelstrom.init(gulp, false);
 // add one of maelstrom's default tasks to gulp
 maelstrom.task('some-default-maelstrom-task');
 
@@ -55,8 +55,6 @@ gulp.task('watch', function()
     maelstrom.watch('some-default-maelstrom-task');
 });
 ```
-> Note that gulp is passed to `maelstrom.init()` unlike the first example. By initializing maelstrom this way, all default tasks will not be added to gulp.
-
 > When using `maelstrom.watch()`, don't forget to add the task with `maelstrom.task()`.
 
 Ofcourse you can combine the above examples by requiring maelstrom so it'll add all default tasks, and still be able to use the plugins in your own custom tasks!

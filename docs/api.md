@@ -22,7 +22,7 @@
 Initializing maelstrom by calling this function passes all arguments to the `maelstrom.init()` function, and adds all default tasks to gulp.
 
 
-###maelstrom.init(gulp[, customConfig])
+###maelstrom.init(gulp[, addTasks][, customConfig])
 Maelstrom initializer wich allows you to use the default plugins inside your own gulp tasks.
 
 
@@ -30,6 +30,14 @@ Maelstrom initializer wich allows you to use the default plugins inside your own
 > Type: `object`
 
 A reference to the required gulp module.
+
+
+####`addTasks`
+> Type: `boolean` or `array`
+
+> Default: `true`
+
+Specify wich default maelstrom tasks to add to gulp. By default, all tasks are added. When `false`, no tasks will be added.
 
 
 ####`customConfig`
@@ -48,7 +56,6 @@ This function adds a default maelstrom task to `gulp.task()`. The result from th
 > Type: `string`
 
 Name of the maelstrom task to add to gulp.
-
 
 ####`options`
 > Type: `mixed`
