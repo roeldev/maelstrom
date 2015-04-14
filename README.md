@@ -5,9 +5,9 @@
 </p>
 
 #maelstrom
-**A collection of gulp tasks. Work in progress.**
-
 [![NPM version][npm-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Dependency Status][david-img]][david-url]
+
+**A collection of gulp tasks. Work in progress.**
 
 ##Installation
 ```sh
