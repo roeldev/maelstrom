@@ -1,4 +1,4 @@
-scss_files: "**/*.scss"
+scss_files: '**/*.scss'
 
 linters:
   BangFormat:
@@ -98,7 +98,101 @@ linters:
 
   PropertySortOrder:
     enabled: true
-    order: ["content", "display", "visibility", "overflow", "overflow-x", "overflow-y", "position", "z-index", "top", "bottom", "left", "right", "float", "clear", "table-layout", "border-collapse", "empty-cells", "box-sizing", "width", "min-width", "max-width", "height", "min-height", "max-height", "margin", "margin-top", "margin-bottom", "margin-left", "margin-right", "padding", "padding-top", "padding-bottom", "padding-left", "padding-right", "border", "border-width", "border-style", "border-color", "border-radius", "border-top", "border-top-width", "border-top-style", "border-top-color", "border-bottom", "border-bottom-width", "border-bottom-style", "border-bottom-color", "border-left", "border-left-width", "border-left-style", "border-left-color", "border-right", "border-right-width", "border-right-style", "border-right-color", "border-top-left-radius", "border-top-right-radius", "border-bottom-left-radius", "border-bottom-right-radius", "outline", "outline-width", "outline-style", "outline-color", "white-space", "list-style", "list-style-type", "list-style-position", "list-style-image", "background", "background-color", "background-image", "background-attachment", "background-position", "background-repeat", "background-size", "opacity", "color", "font", "font-family", "font-size", "font-style", "font-variant", "font-weight", "letter-spacing", "line-height", "text-align", "text-decoration", "text-indent", "text-transform", "text-shadow", "box-shadow", "animation", "transform", "transition"]
+    order: [
+      'content',
+      'display',
+      'visibility',
+      'overflow',
+      'overflow-x',
+      'overflow-y',
+      'position',
+      'z-index',
+      'top',
+      'bottom',
+      'left',
+      'right',
+      'float',
+      'clear',
+      'table-layout',
+      'border-collapse',
+      'empty-cells',
+      'box-sizing',
+      'width',
+      'min-width',
+      'max-width',
+      'height',
+      'min-height',
+      'max-height',
+      'margin',
+      'margin-top',
+      'margin-bottom',
+      'margin-left',
+      'margin-right',
+      'padding',
+      'padding-top',
+      'padding-bottom',
+      'padding-left',
+      'padding-right',
+      'border',
+      'border-width',
+      'border-style',
+      'border-color',
+      'border-radius',
+      'border-top',
+      'border-top-width',
+      'border-top-style',
+      'border-top-color',
+      'border-bottom',
+      'border-bottom-width',
+      'border-bottom-style',
+      'border-bottom-color',
+      'border-left',
+      'border-left-width',
+      'border-left-style',
+      'border-left-color',
+      'border-right',
+      'border-right-width',
+      'border-right-style',
+      'border-right-color',
+      'border-top-left-radius',
+      'border-top-right-radius',
+      'border-bottom-left-radius',
+      'border-bottom-right-radius',
+      'outline',
+      'outline-width',
+      'outline-style',
+      'outline-color',
+      'white-space',
+      'list-style',
+      'list-style-type',
+      'list-style-position',
+      'list-style-image',
+      'background',
+      'background-color',
+      'background-image',
+      'background-attachment',
+      'background-position',
+      'background-repeat',
+      'background-size',
+      'opacity',
+      'color',
+      'font',
+      'font-family',
+      'font-size',
+      'font-style',
+      'font-variant',
+      'font-weight',
+      'letter-spacing',
+      'line-height',
+      'text-align',
+      'text-decoration',
+      'text-indent',
+      'text-transform',
+      'text-shadow',
+      'box-shadow',
+      'animation',
+      'transform',
+      'transition']
 
   PropertySpelling:
     enabled: true
@@ -106,7 +200,8 @@ linters:
 
   PropertyUnits:
     enabled: true
-    global: ['em', 'ex', '%', 'px', 'ch', 'cm', 'mm', 'in', 'pt', 'pc', 'rem', 'vh', 'vw', 'vmin', 'vmax']
+    global: ['em', 'ex', '%', 'px', 'ch', 'cm', 'mm', 'in',
+             'pt', 'pc', 'rem', 'vh', 'vw', 'vmin', 'vmax']
     properties: {}
 
   QualifyingElement:

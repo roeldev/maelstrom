@@ -1,0 +1,145 @@
+# Folders returned by the plugin's `.src()` functions. Used while adding
+# tasks to gulp.
+src:
+  css:     'assets/css'
+  favicon: 'assets/favicon'
+  flags:   'assets/flags'
+  icons:   'assets/icons'
+  images:  'assets/imgs'
+  js:      'assets/js'
+  sass:    'assets/scss'
+
+# Folders returned by the plugin's `.dest()` functions. Used inside task
+# functions wich are added to gulp.
+dest:
+  css:    'public/css'
+  fonts:  'public/fonts'
+  images: 'public/imgs'
+  js:     'public/js'
+
+# A list of files/globs wich should trigger browser-sync to reload when
+# changed.
+browserSyncWatch: [
+  '%dest.css%/**/*',
+  '%dest.fonts%/**/*',
+  '%dest.images%/**/*',
+  '%dest.js%/**/*',
+  'public/**/*.{html,php}']
+
+# Specify wich library should be used to compile the Sass files to CSS.
+# Available options are `libsass` (_gulp-sass_) and `ruby`
+# (_gulp-ruby-sass_). All output files will be autoprefixed by default. When
+# the `--dev` flag is not added, the files will also be minified.
+sassCompiler: libsass # libsass|ruby|compass
+
+# A list of CSS files wich will be concatenated to one file. The output file
+# will be autoprefixed, minified and saved to the `dest.css` folder.
+cssConcat: {}
+
+# A list of JS wich will be combined to one file. The output file will be
+# minified and saved to the `config.dest.js` folder.
+jsConcat: {}
+
+jshintConfig: '%configs%/jshint.yml'
+
+# The name as what the output fonts or sprite will be saved.
+iconsOutputName: iconfont
+
+# Name of template to use
+iconsTemplate: '%templates%/iconfont-frame.txt'
+
+# Specify how you would like to use SVG icons. Valid options are as a `font`
+# or `sprite`. Both options will create a Sass .scss file in the
+# `config.src.sass` folder, wich should be imported with `@import` in your
+# main Sass file. Fonts files are written to `config.dest.fonts`, the sprite
+# file to `config.dest.images`. Any files with the same name will be
+# overwritten.
+iconsType: font # font|sprite
+
+# Image file extension wich should be optimized with _gulp-imagemin_.
+imageExtensions: ['jpg', 'jpeg', 'png', 'gif', 'svg']
+
+# The config file to search for in the project root folder.
+config: 'maelstrom.yml'
+
+# Specify the default mode. This is either `dev` or `prod`.
+defaultMode: dev
+
+# Turn information on/off of plugins that are loaded and added tasks.
+verbose: true
+
+
+# Define all variables wich are used in the config
+vars:
+
+  # path to bower components dir
+  bower: 'assets/bower_components'
+
+  # path to default configs dir
+  configs: '%module%/configs'
+
+  # path to templates dir
+  templates: '%module%/lib/templates'
+
+
+# All module specific default settings
+modules:
+
+  # gulp-autoprefixer: https://github.com/sindresorhus/gulp-autoprefixer
+  autoprefixer:
+    cascade:  false
+    browsers: ['last 4 version']
+
+  # browser-sync: https://github.com/BrowserSync/browser-sync
+  # The `files` option is set from `config.browserSyncWatch`.
+  browserSync:
+    proxy:  localhost:8000
+    port:   80
+    open:   false
+    ui:     false
+    notify: false
+
+  # gulp-iconfont: https://github.com/nfroidure/gulp-iconfont
+  # The `fontName` option is set from `config.iconsOutputname`.
+  iconfont:
+    appendCodepoints:   true
+    normalize:          true
+    centerHorizontally: true
+    fixedWidth:         false
+    fontHeight':        100
+
+  # gulp-imagemin: https://github.com/sindresorhus/gulp-imagemin
+  imagemin:
+    progressive: true
+    interlaced:  true
+
+  # jshint: https://github.com/jshint/jshint
+  jshint:
+    lookup: true
+    linter: jshint
+
+  # gulp-sass: https://github.com/dlmanning/gulp-sass
+  libsass:
+    style:          expanded
+    sourceComments: true
+
+  # gulp-notify: https://github.com/mikaelbr/gulp-notify
+  notifyError:
+    message: 'Error: <%= error.message %>'
+    time:    8000,
+    wait:    false
+
+  # gulp-scss-lint: https://github.com/juanfran/gulp-scss-lint
+  scssLint:
+    config:     '%configs%/scss-lint.yml'
+    bundleExec: false
+    verbose:    false
+
+  # gulp-size: https://github.com/sindresorhus/gulp-size
+  size:
+    showFiles: true
+
+  # gulp-uglify: https://github.com/terinjokes/gulp-uglify
+  uglify:
+    mangle:           true
+    preserveComments: some
