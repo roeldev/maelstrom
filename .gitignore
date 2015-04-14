@@ -1,23 +1,25 @@
-## folders
-.hg/
-.idea/
-.svn/
-_notes/
-logs/
-node_modules/
-test/output/
-
-## specific files without extension
 .DS_Store
+.grunt
+.hg
+.idea
 .lock-wscript
+.svn
 
-## specific files with extension
+_notes
+build/Release
+coverage
+lib-cov
+logs
+node_modules
+pids
+test/output
 desktop.ini
 Thumbs.db
 
-## all files with specific extension
 *.cfg
 *.dmp
 *.log
+*.pid
+*.seed
 *.sublime-project
 *.sublime-workspace
