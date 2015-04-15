@@ -1,4 +1,4 @@
-##Documentation
+## Documentation
 - [Requirements][docs-requirements]: What software, packages and gems are required?
 - [Config][docs-config]: All available config options described and explained.
 - [API][docs-api]: Want to know how to use the maelstrom functions?
@@ -10,7 +10,7 @@
 --------------------------------------------------------------------------------
 
 
-#Available plugins
+# Available plugins
 - [browserSync][plugin-browserSync]
 - [icons][plugin-icons]
 - [images][plugin-images]

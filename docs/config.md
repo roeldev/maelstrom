@@ -1,4 +1,4 @@
-##Documentation
+## Documentation
 - [Requirements][docs-requirements]: What software, packages and gems are required?
 - [Config][docs-config]: All available config options described and explained.
 - [API][docs-api]: Want to know how to use the maelstrom functions?
@@ -10,7 +10,7 @@
 --------------------------------------------------------------------------------
 
 
-#Config
+# Config
 - [src][config-src]
 - [dest][config-dest]
 - [browserSyncWatch][config-browserSyncWatch]
@@ -23,7 +23,7 @@
 - [sassCompiler][config-sassCompiler]
 
 
-###src
+### src
 > Type: `object`
 
 > Default:
@@ -41,7 +41,7 @@
 Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 
 
-###dest
+### dest
 > Type: `object`
 
 > Default:
@@ -57,7 +57,7 @@ Folders returned by the plugin's `.src()` functions. Used while adding tasks to 
 Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
 
 
-###browserSyncWatch
+### browserSyncWatch
 > Type: `array`
 
 > Default: `[]`
@@ -65,7 +65,7 @@ Folders returned by the plugin's `.dest()` functions. Used inside task functions
 An array with globs wich should trigger browser-sync to reload the browsers.
 
 
-###cssConcat
+### cssConcat
 > Type: `object`
 
 > Default: `{}`
@@ -75,7 +75,7 @@ A list of CSS files wich will be concatenated to one file. The output file will 
 Example: `'output-filename': ['file.css', '/files/to/concat/*.css']`
 
 
-###defaultMode
+### defaultMode
 > Type: `string`
 
 > Default: `dev`
@@ -85,7 +85,7 @@ Example: `'output-filename': ['file.css', '/files/to/concat/*.css']`
 x
 
 
-###iconsOutputName
+### iconsOutputName
 > Type: `string`
 
 > Default: `iconfont`
@@ -93,7 +93,7 @@ x
 x
 
 
-###iconsType
+### iconsType
 > Type: `string`
 
 > Default: `font`
@@ -103,7 +103,7 @@ x
 x
 
 
-###imageExtensions
+### imageExtensions
 > Type: `array`
 
 > Default: `['jpg', 'jpeg', 'png', 'gif', 'svg']`
@@ -111,7 +111,7 @@ x
 x
 
 
-###jsConcat
+### jsConcat
 > Type: `object`
 
 > Default: `{}`
@@ -119,7 +119,7 @@ x
 x
 
 
-###sassCompiler
+### sassCompiler
 > Type: `string`
 
 > Default: `libsass`

@@ -4,22 +4,27 @@
   </a>
 </p>
 
-#maelstrom
-[![NPM version][npm-img]][npm-url] [![Build Status][travis-img]][travis-url] [![Dependency Status][david-img]][david-url]
+# maelstrom
+
+  [![NPM Version][npm-img]][npm-url]
+  [![Linux Build][travis-img]][travis-url]
+  [![Windows Build][appveyor-img]][appveyor-url]
+  [![Test Coverage][coveralls-img]][coveralls-url]
+  [![Dependency Status][david-img]][david-url]
 
 **A collection of gulp tasks. Work in progress.**
 
-##Installation
+## Installation
 ```sh
 npm install --save maelstrom
 ```
 > Before installing maelstrom, make sure you have installed all the [required software, packages and gems][docs-requirements].
 
 
-##How to use
+## How to use
 After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located). See [config][docs-config] for all available options.
 
-####Using all default plugins and tasks
+#### Using all default plugins and tasks
 If you would like maelstrom to add all of it's default tasks to gulp. you only have to have the following two lines in your `gulpfile.js`:
 
 ```js
@@ -28,7 +33,7 @@ var gulp      = require('gulp'),
 ```
 > Note that you should pass gulp to the maelstrom function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
 
-####Using a specific plugin/task
+#### Using a specific plugin/task
 When you only want to use a certain plugin and/or task, you'll have to add a little more code. Below you'll find an example of what is possible. For a better explanation of the used maelstrom functions, check the [API][docs-api].
 
 ```js
@@ -59,7 +64,7 @@ gulp.task('watch', function()
 
 Ofcourse you can combine the above examples by requiring maelstrom so it'll add all default tasks, and still be able to use the plugins in your own custom tasks!
 
-##More info
+## More info
 - [Requirements][docs-requirements]: What software, packages and gems are required?
 - [Config][docs-config]: All available config options described and explained.
 - [API][docs-api]: Want to know how to use the maelstrom functions?
@@ -68,8 +73,12 @@ Ofcourse you can combine the above examples by requiring maelstrom so it'll add 
 
 [npm-img]: https://badge.fury.io/js/maelstrom.svg
 [npm-url]: https://www.npmjs.com/package/maelstrom
-[travis-img]: https://travis-ci.org/roeldev/maelstrom.svg?branch=master
+[travis-img]: https://img.shields.io/travis/roeldev/maelstrom/master.svg?label=linux
 [travis-url]: https://travis-ci.org/roeldev/maelstrom
+[appveyor-img]: https://img.shields.io/appveyor/ci/roeldev/maelstrom/master.svg?label=windows
+[appveyor-url]: https://ci.appveyor.com/project/roeldev/maelstrom
+[coveralls-img]: https://img.shields.io/coveralls/roeldev/maelstrom/master.svg
+[coveralls-url]: https://coveralls.io/r/roeldev/maelstrom?branch=master
 [david-img]: https://david-dm.org/roeldev/maelstrom.svg
 [david-url]: https://david-dm.org/roeldev/maelstrom
 

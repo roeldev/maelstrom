@@ -1,4 +1,4 @@
-##Documentation
+## Documentation
 - [Requirements][docs-requirements]: What software, packages and gems are required?
 - [Config][docs-config]: All available config options described and explained.
 - [API][docs-api]: Want to know how to use the maelstrom functions?
@@ -10,7 +10,7 @@
 --------------------------------------------------------------------------------
 
 
-#Requirements
+# Requirements
 To avoid any problems, make sure the following software is installed on your system. Some maelstrom plugins may not function without them:
 
 - **[node.js][url-nodejs]**
@@ -29,13 +29,13 @@ After that you probably need to restart your computer or sign-out and sign-in ag
 
 **Node modules:**
 Make sure these npm packages are installed using the `-g` or `--global` flag:
-```bash
+```sh
 npm install -g gulp browser-sync jshint jscs
 ```
 
 **Ruby gems:**
 Install the required Ruby gems with Bundler: `bundle install`; or install them manually:
-```bash
+```sh
 gem install compass
 gem install scss-lint
 ```
