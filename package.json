@@ -15,8 +15,7 @@
   },
   "dependencies": {
     "browser-sync": "^2.2.1",
-    "confirge": "^0.1.0",
-    "deep-extend": "^0.3.2",
+    "confirge": "^0.1.1",
     "del": "^1.1.1",
     "graceful-fs": "^3.0.6",
     "gulp-autoprefixer": "^2.1.0",
