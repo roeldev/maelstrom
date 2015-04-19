@@ -1,13 +1,20 @@
 /**
  * maelstrom | gulpfile.js
- * file version: 0.00.002
+ * file version: 0.00.003
  */
 'use strict';
 
-var Maelstrom  = require('./lib/index.js'),
-    Gulp       = require('gulp'),
-    GulpSize   = require('gulp-size'),
-    Delete     = require('del');
+var Maelstrom   = require('./lib/index.js'),
+    Gulp        = require('gulp'),
+    GulpJsHint  = require('gulp-jshint'),
+    GulpMocha   = require('gulp-mocha'),
+    GulpSize    = require('gulp-size'),
+    Delete      = require('del'),
+    RunSequence = require('run-sequence');
+
+var JS_SRC = ['gulpfile.js', 'lib/**/*.js', '!lib/templates/*.js', 'test/*.js'];
+
+////////////////////////////////////////////////////////////////////////////////
 
 Maelstrom.init(Gulp,
 {
@@ -104,16 +111,30 @@ Gulp.task('test:sass', function()
 //------------------------------------------------------------------------------
 // Dev related tasks
 //------------------------------------------------------------------------------
-Gulp.task('dev:jshint', function()
+Gulp.task('lint', function()
 {
-    return Gulp.src([__filename, 'lib/**/*.js'])
-        .pipe( Maelstrom.plumber() )
-        .pipe( Maelstrom.js('lint') );
+    return Gulp.src(JS_SRC)
+        .pipe( GulpJsHint() )
+        .pipe( GulpJsHint.reporter('jshint-stylish') );
 });
 
-Gulp.task('dev:watch', function()
+Gulp.task('test', function()
 {
-    Gulp.watch([__filename, 'lib/**/*.js'], ['dev:jshint']);
+    return Gulp.src('test/*.js', { 'read': false })
+        .pipe( GulpMocha() );
 });
 
-Gulp.task('default', function(){ });
+Gulp.task('dev', function()
+{
+    for(var $i = 0; $i < 30; $i++)
+    {
+        console.log('');
+    }
+
+    RunSequence('lint', 'test');
+});
+
+Gulp.task('watch', function()
+{
+    Gulp.watch(JS_SRC, ['dev']);
+});
