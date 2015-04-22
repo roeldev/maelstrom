@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://github.com/roeldev/maelstrom-js">
-    <img width="200" src="https://raw.githubusercontent.com/roeldev/maelstrom-js/develop/imgs/maelstrom.svg">
-  </a>
-</p>
-
 # maelstrom
 
   [![NPM Version][npm-img]][npm-url]

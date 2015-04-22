@@ -14,7 +14,14 @@ var GulpSize        = require('gulp-size');
 var Delete          = require('del');
 var RunSequence     = require('run-sequence');
 
-var JS_SRC = ['gulpfile.js', 'lib/**/*.js', '!lib/templates/*.js', 'test/*.js'];
+var JS_SRC =
+[
+    'gulpfile.js',
+    'lib/**/*.js',
+    '!lib/**/_*.js',
+    '!lib/templates/*.js',
+    'test/*.js'
+];
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -56,12 +63,12 @@ Gulp.task('test:icons', function()
     var $src  = 'tests/icons/*.svg';
     var $dest = 'tests/icons/dest';
 
-    $templateConfig =
+    var $templateConfig =
     {
         'dest': 'tests/icons/dest/'
     };
 
-    Delete($dest +'/*.*');
+    Delete($dest + '/*.*');
 
     Gulp.src($src)
         .pipe( Maelstrom.plumber() )
@@ -78,10 +85,10 @@ Gulp.task('test:icons', function()
 Gulp.task('test:images', function()
 {
     var $imgExt = Maelstrom.config.imageExtensions.join(',');
-    var $src    = 'tests/images/*.{'+ $imgExt +'}';
+    var $src    = 'tests/images/*.{' + $imgExt + '}';
     var $dest   = 'tests/images/dest';
 
-    Delete($dest +'/*.*');
+    Delete($dest + '/*.*');
 
     Gulp.src($src)
         .pipe( Maelstrom.plumber() )
@@ -101,7 +108,7 @@ Gulp.task('test:sass', function()
     var $src  = 'tests/sass/*.scss';
     var $dest = 'tests/sass/dest';
 
-    Delete($dest +'/*.*');
+    Delete($dest + '/*.*');
 
     Gulp.src($src)
         .pipe( Maelstrom.plumber() )
