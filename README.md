@@ -23,9 +23,9 @@ If you would like maelstrom to add all of it's default tasks to gulp. you only h
 
 ```js
 var gulp      = require('gulp'),
-    maelstrom = require('maelstrom')(gulp);
+    maelstrom = require('maelstrom').init(gulp);
 ```
-> Note that you should pass gulp to the maelstrom function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
+> Note that you should pass gulp to the `maelstrom.init` function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
 
 #### Using a specific plugin/task
 When you only want to use a certain plugin and/or task, you'll have to add a little more code. Below you'll find an example of what is possible. For a better explanation of the used maelstrom functions, check the [API][docs-api].
