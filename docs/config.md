@@ -15,13 +15,16 @@
 - [dest][config-dest]
 - [browserSyncWatch][config-browserSyncWatch]
 - [cssConcat][config-cssConcat]
+- [config][config-config]
 - [defaultMode][config-defaultMode]
 - [iconsOutputName][config-iconsOutputName]
+- [iconsTemplate][config-iconsTemplate]
 - [iconsType][config-iconsType]
 - [imageExtensions][config-imageExtensions]
 - [jsConcat][config-jsConcat]
+- [jsHintConfig][config-jsHintConfig]
 - [sassCompiler][config-sassCompiler]
-
+- [verbose][config-verbose]
 
 ### src
 <table>
@@ -62,7 +65,7 @@ Folders returned by the plugin's `.dest()` functions. Used inside task functions
     'public/**/*.{html,php}'
 ]</code></td></tr>
 </table>
-An array with globs wich should trigger browser-sync to reload the browsers.
+An array with globs wich should trigger BrowserSync to reload.
 
 
 ### cssConcat
@@ -169,12 +172,16 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
 [config-dest]: #dest
 [config-browserSyncWatch]: #browsersyncwatch
 [config-cssConcat]: #cssconcat
+[config-config]:  #config-1
 [config-defaultMode]: #defaultmode
 [config-iconsOutputName]: #iconsoutputname
+[config-iconsTemplate]: #iconstemplate
 [config-iconsType]: #iconstype
 [config-imageExtensions]: #imageextensions
 [config-jsConcat]: #jsconcat
+[config-jsHintConfig]: #jshintconfig
 [config-sassCompiler]: #sasscompiler
+[config-verbose]: #verbose
 
 [docs-requirements]: requirements.md
 [docs-config]: config.md

@@ -15,7 +15,7 @@ dest:
   images: 'public/imgs'
   js:     'public/js'
 
-# A list of files/globs wich should trigger browser-sync to reload when changed.
+# An array with globs wich should trigger BrowserSync to reload.
 browserSyncWatch: [
   '%dest.css%/**/*',
   '%dest.fonts%/**/*',
