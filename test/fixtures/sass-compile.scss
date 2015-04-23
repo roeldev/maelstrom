@@ -1,0 +1,29 @@
+$color1: red;
+$color2: purple;
+$value: test;
+
+body
+{
+    background-color: $color1;
+    font-size: 300px;
+
+    -webkit-font-smoothing:  antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -ms-interpolation-mode: bicubic;
+}
+
+div
+{
+    content: 'a scss compile test';
+    color: $color2;
+
+    -webkit-background-size: $value;
+    -moz-background-size: $value;
+    -o-background-size: $value;
+    background-size: $value;
+}
+
+button
+{
+    -ms-appearance: 'button';
+}
