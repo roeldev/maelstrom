@@ -89,7 +89,7 @@ Extend maelstrom by adding your own functions, objects or arrays. To load a plug
 <table>
 <tr><td>Type</td><td><code>string</code></td></tr>
 </table>
-The name to call the plugin: `maelstrom._name_`.
+The name to call the plugin: `maelstrom[name]`.
 
 - <h4>plugin</h4>
 <table>

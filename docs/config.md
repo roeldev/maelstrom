@@ -24,109 +24,145 @@
 
 
 ### src
-> Type: `object`
-
-> Default:
-```js
-{
+<table>
+<tr><td>Type</td><td><code>object</code></td></tr>
+<tr><td>Default</td><td><code>{
     'favicon': 'assets/favicon',
     'flags':   'assets/flags',
     'icons':   'assets/icons',
     'images':  'assets/imgs',
     'js':      'assets/js',
     'sass':    'assets/scss'
-}
-```
-
+}</code></td></tr>
+</table>
 Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 
 
 ### dest
-> Type: `object`
-
-> Default:
-```js
-{
+<table>
+<tr><td>Type</td><td><code>object</code></td></tr>
+<tr><td>Default</td><td><code>{
     'css':    'public/css',
     'fonts':  'public/fonts',
     'images': 'public/imgs',
     'js':     'public/js'
-}
-```
-
+}</code></td></tr>
+</table>
 Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
 
 
 ### browserSyncWatch
-> Type: `array`
-
-> Default: `[]`
-
+<table>
+<tr><td>Type</td><td><code>array</code></td></tr>
+<tr><td>Default</td><td><code>[
+    '%dest.css%/**/*',
+    '%dest.fonts%/**/*',
+    '%dest.images%/**/*',
+    '%dest.js%/**/*',
+    'public/**/*.{html,php}'
+]</code></td></tr>
+</table>
 An array with globs wich should trigger browser-sync to reload the browsers.
 
 
 ### cssConcat
-> Type: `object`
-
-> Default: `{}`
-
+<table>
+<tr><td>Type</td><td><code>object</code></td></tr>
+<tr><td>Default</td><td><code>{}</code></td></tr>
+</table>
 A list of CSS files wich will be concatenated to one file. The output file will be autoprefixed, minified and saved to the `dest.css` folder.
 
-Example: `'output-filename': ['file.css', '/files/to/concat/*.css']`
+Example:
+```
+{
+    'output-filename': ['file.css', '/glob/files/*.css']
+}
+```
+
+
+### config
+<table>
+<tr><td>Type</td><td><code>string</code></td></tr>
+<tr><td>Default</td><td><code>maelstrom.yml</code></td></tr>
+</table>
+The config file to search for in the project root folder.
 
 
 ### defaultMode
-> Type: `string`
-
-> Default: `dev`
-
-> Values: `dev` or `prod`
-
-x
+<table>
+<tr><td>Type</td><td><code>string</code></td></tr>
+<tr><td>Default</td><td><code>dev</code></td></tr>
+<tr><td>Values</td><td><code>dev</code> or <code>prod</code></td></tr>
+</table>
+Specify the default mode. This is either `dev` or `prod`.
 
 
 ### iconsOutputName
-> Type: `string`
+<table>
+<tr><td>Type</td><td><code>string</code></td></tr>
+<tr><td>Default</td><td><code>iconfont</code></td></tr>
+</table>
+The name as what the output fonts or sprite will be saved.
 
-> Default: `iconfont`
 
-x
+### iconsTemplate
+<table>
+<tr><td>Type</td><td><code>string</code></td></tr>
+<tr><td>Default</td><td><code>%templates%/iconfont-frame.js</code></td></tr>
+</table>
 
 
 ### iconsType
-> Type: `string`
-
-> Default: `font`
-
-> Values: `font` or `sprite` (not yet available)
-
-x
+<table>
+<tr><td>Type</td><td><code>string</code></td></tr>
+<tr><td>Default</td><td><code>font</code></td></tr>
+<tr><td>Values</td><td><code>font</code> or <code>sprite</code>* (not yet available)</td></tr>
+</table>
+Specify how you would like to use SVG icons. Valid options are as a `font` or `sprite`. Both options will create a Sass .scss file in the `config.src.sass` folder, wich should be imported with `@import` in your main Sass file. Fonts files are written to `config.dest.fonts`, the sprite file to `config.dest.images`. Any files with the same name will be overwritten.
 
 
 ### imageExtensions
-> Type: `array`
-
-> Default: `['jpg', 'jpeg', 'png', 'gif', 'svg']`
-
-x
+<table>
+<tr><td>Type</td><td><code>array</code></td></tr>
+<tr><td>Default</td><td><code>['jpg', 'jpeg', 'png', 'gif', 'svg']</code></td></tr>
+</table>
+Image file extension wich should be optimized with _gulp-imagemin_.
 
 
 ### jsConcat
-> Type: `object`
+<table>
+<tr><td>Type</td><td><code>object</code></td></tr>
+<tr><td>Default</td><td><code>{}</code></td></tr>
+</table>
+A list of JS wich will be combined to one file. The output file will be minified and saved to the `config.dest.js` folder.
 
-> Default: `{}`
 
-x
+### jsHintConfig
+<table>
+<tr><td>Type</td><td><code>object</code></td></tr>
+<tr><td>Default</td><td><code>%configs%/jshint.yml</code></td></tr>
+</table>
 
 
 ### sassCompiler
-> Type: `string`
+<table>
+<tr><td>Type</td><td><code>string</code></td></tr>
+<tr><td>Default</td><td><code>libsass</code></td></tr>
+<tr><td>Values</td><td><code>libsass</code>, <code>ruby</code>* or <code>compass</code>* (not yet available)</td></tr>
+</table>
+Specify wich library should be used to compile the Sass files to CSS. Available options are `libsass` (_gulp-sass_) and `ruby` (_gulp-ruby-sass_). All output files will be autoprefixed by default. When the `--dev` flag is not added, the files will also be minified.
 
-> Default: `libsass`
 
-> Values: `libsass` or `ruby` (not yet available)
+### verbose
+<table>
+<tr><td>Type</td><td><code>boolean</code></td></tr>
+<tr><td>Default</td><td><code>true</code></td></tr>
+</table>
 
-x
+
+# Variables
+
+# Configuration of modules
 
 
 [config-src]: #src
