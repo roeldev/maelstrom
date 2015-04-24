@@ -3,6 +3,7 @@
 - [Config][docs-config]: All available config options described and explained.
 - [API][docs-api]: Want to know how to use the maelstrom functions?
 - [Plugins][docs-plugins]: Detailed descriptions for all default maelstrom plugins.
+- [Tasks][docs-tasks]: More info about maelstrom's default gulp tasks.
 
 [< Back to Readme](../README.md)
 
@@ -14,7 +15,7 @@
 - [dest][config-dest]
 - [browserSyncWatch][config-browserSyncWatch]
 - [cssConcat][config-cssConcat]
-- [config][config-config]
+- [configFile][config-configFile]
 - [defaultMode][config-defaultMode]
 - [iconsOutputName][config-iconsOutputName]
 - [iconsTemplate][config-iconsTemplate]
@@ -82,7 +83,7 @@ Example:
 ```
 
 
-### config
+### configFile
 <table>
 <tr><td>Type</td><td><code>string</code></td></tr>
 <tr><td>Default</td><td><code>maelstrom.yml</code></td></tr>
@@ -171,7 +172,7 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
 [config-dest]: #dest
 [config-browserSyncWatch]: #browsersyncwatch
 [config-cssConcat]: #cssconcat
-[config-config]:  #config-1
+[config-configFile]:  #configfile
 [config-defaultMode]: #defaultmode
 [config-iconsOutputName]: #iconsoutputname
 [config-iconsTemplate]: #iconstemplate

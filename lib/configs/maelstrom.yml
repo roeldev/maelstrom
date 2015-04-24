@@ -27,7 +27,7 @@ browserSyncWatch: [
 cssConcat: {}
 
 # The config file to search for in the project root folder.
-config: 'maelstrom.yml'
+configFile: 'maelstrom.yml'
 
 # Specify the default mode. This is either `dev` or `prod`.
 defaultMode: dev
