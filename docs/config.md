@@ -44,12 +44,12 @@ Folders returned by the plugin's `.src()` functions. Used while adding tasks to 
 ### dest
 <table>
 <tr><td>Type</td><td><code>object</code></td></tr>
-<tr><td>Default</td><td><code>{
+<tr><td>Default</td><td><pre><code>{
     'css':    'public/css',
     'fonts':  'public/fonts',
     'images': 'public/imgs',
     'js':     'public/js'
-}</code></td></tr>
+}</code></pre></td></tr>
 </table>
 Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
 
@@ -88,7 +88,7 @@ Example:
 <tr><td>Type</td><td><code>string</code></td></tr>
 <tr><td>Default</td><td><code>maelstrom.yml</code></td></tr>
 </table>
-The config file to search for in the project root folder.
+The config file to search for in the project root folder. Supported file formats are `YAML` and `JSON`.
 
 
 ### defaultMode
@@ -145,6 +145,7 @@ A list of JS wich will be combined to one file. The output file will be minified
 <tr><td>Type</td><td><code>object</code></td></tr>
 <tr><td>Default</td><td><code>%configs%/jshint.yml</code></td></tr>
 </table>
+The contents of this object are added to `modules.jshint`. Supported file formats are `YAML` and `JSON`.
 
 
 ### sassCompiler
@@ -153,7 +154,7 @@ A list of JS wich will be combined to one file. The output file will be minified
 <tr><td>Default</td><td><code>libsass</code></td></tr>
 <tr><td>Values</td><td><code>libsass</code>, <code>ruby</code>* or <code>compass</code>* (not yet available)</td></tr>
 </table>
-Specify wich library should be used to compile the Sass files to CSS. Available options are `libsass` (_gulp-sass_) and `ruby` (_gulp-ruby-sass_). All output files will be autoprefixed by default. When the `--dev` flag is not added, the files will also be minified.
+Specify wich library should be used to compile the Sass files to CSS. Available options are `libsass` (_gulp-sass_), `ruby` (_gulp-ruby-sass_) and `compass` (). All output files will be autoprefixed by default. When the `--dev` flag is not added, the files will also be minified.
 
 
 ### verbose
@@ -164,6 +165,7 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
 
 
 # Variables
+Check (confirge)[https://github.com/roeldev/confirge] for more info about the use of variables.
 
 # Configuration of modules
 
