@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/utils_tests.js
- * file version: 0.00.001
+ * file version: 0.00.002
  */
 'use strict';
 
@@ -41,13 +41,13 @@ describe('Maelstrom.utils.isDev()', function()
     it('should return true when --dev', function()
     {
         setMode('dev');
-        Assert.equal(Utils.isDev(), true);
+        Assert.strictEqual(Utils.isDev(), true);
     });
 
     it('should revert to config defaultMode and return true', function()
     {
         setMode('dev', true);
-        Assert.equal(Utils.isDev(), true);
+        Assert.strictEqual(Utils.isDev(), true);
     });
 });
 
@@ -56,13 +56,13 @@ describe('Maelstrom.utils.isProd()', function()
     it('should return true when --prod', function()
     {
         setMode('prod');
-        Assert.equal(Utils.isProd(), true);
+        Assert.strictEqual(Utils.isProd(), true);
     });
 
     it('should revert to config defaultMode and return true', function()
     {
         setMode('prod', true);
-        Assert.equal(Utils.isProd(), true);
+        Assert.strictEqual(Utils.isProd(), true);
     });
 });
 
@@ -121,7 +121,7 @@ describe('Maelstrom.utils.pipeWhen()', function()
 
     it('should return false', function()
     {
-        Assert.equal(Utils.pipeWhen(false, Through.obj()), false);
+        Assert.strictEqual(Utils.pipeWhen(false, Through.obj()), false);
     });
 });
 
@@ -132,7 +132,7 @@ describe('Maelstrom.utils.pipeWhenDev()', function()
         setMode('dev');
         var $input = Through.obj();
 
-        Assert.deepEqual(Utils.pipeWhenDev($input), $input);
+        Assert.strictEqual(Utils.pipeWhenDev($input), $input);
     });
 
     it('should return the same stream [2]', function()
@@ -140,13 +140,13 @@ describe('Maelstrom.utils.pipeWhenDev()', function()
         setMode('prod');
         var $input = Through.obj();
 
-        Assert.deepEqual(Utils.pipeWhenDev($input, true), $input);
+        Assert.strictEqual(Utils.pipeWhenDev($input, true), $input);
     });
 
     it('should return false', function()
     {
         setMode('prod');
-        Assert.equal(Utils.pipeWhenDev(Through.obj()), false);
+        Assert.strictEqual(Utils.pipeWhenDev(Through.obj()), false);
     });
 });
 
@@ -157,7 +157,7 @@ describe('Maelstrom.utils.pipeWhenProd()', function()
         setMode('prod');
         var $input = Through.obj();
 
-        Assert.deepEqual(Utils.pipeWhenProd($input), $input);
+        Assert.strictEqual(Utils.pipeWhenProd($input), $input);
     });
 
     it('should return the same stream [2]', function()
@@ -165,13 +165,13 @@ describe('Maelstrom.utils.pipeWhenProd()', function()
         setMode('dev');
         var $input = Through.obj();
 
-        Assert.deepEqual(Utils.pipeWhenProd($input, true), $input);
+        Assert.strictEqual(Utils.pipeWhenProd($input, true), $input);
     });
 
     it('should return false', function()
     {
         setMode('dev');
-        Assert.equal(Utils.pipeWhenProd(Through.obj()), false);
+        Assert.strictEqual(Utils.pipeWhenProd(Through.obj()), false);
     });
 });
 
@@ -182,12 +182,12 @@ describe('Maelstrom.utils.requirePluginFile()', function()
         var $input    = Path.resolve(__dirname, './fixtures/plugin-valid.js');
         var $expected = require($input);
 
-        Assert.deepEqual(Utils.requirePluginFile($input), $expected);
+        Assert.strictEqual(Utils.requirePluginFile($input), $expected);
     });
 
     it('should not read the file and return false', function()
     {
-        Assert.equal(Utils.requirePluginFile('nope.js'), false);
+        Assert.strictEqual(Utils.requirePluginFile('nope.js'), false);
     });
 });
 
@@ -198,7 +198,7 @@ describe('Maelstrom.utils.isValidPlugin()', function()
         var $file  = Path.resolve(__dirname, './fixtures/plugin-valid.js');
         var $input = Utils.requirePluginFile($file);
 
-        Assert.equal(Utils.isValidPlugin($input), true);
+        Assert.strictEqual(Utils.isValidPlugin($input), true);
     });
 
     it('should load the plugin and fail validating', function()
@@ -206,6 +206,6 @@ describe('Maelstrom.utils.isValidPlugin()', function()
         var $file  = Path.resolve(__dirname, './fixtures/plugin-invalid.js');
         var $input = Utils.requirePluginFile($file);
 
-        Assert.equal(Utils.isValidPlugin($input), false);
+        Assert.strictEqual(Utils.isValidPlugin($input), false);
     });
 });
