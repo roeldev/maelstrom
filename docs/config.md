@@ -13,7 +13,6 @@
 # Config
 - [src][config-src]
 - [dest][config-dest]
-- [browserSyncWatch][config-browserSyncWatch]
 - [cssConcat][config-cssConcat]
 - [configFile][config-configFile]
 - [defaultMode][config-defaultMode]
@@ -52,20 +51,6 @@ Folders returned by the plugin's `.src()` functions. Used while adding tasks to 
 }</code></pre></td></tr>
 </table>
 Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
-
-
-### browserSyncWatch
-<table>
-<tr><td>Type</td><td><code>array</code></td></tr>
-<tr><td>Default</td><td><code>[
-    '%dest.css%/**/*',
-    '%dest.fonts%/**/*',
-    '%dest.images%/**/*',
-    '%dest.js%/**/*',
-    'public/**/*.{html,php}'
-]</code></td></tr>
-</table>
-An array with globs wich should trigger BrowserSync to reload.
 
 
 ### cssConcat
@@ -172,7 +157,6 @@ Check (confirge)[https://github.com/roeldev/confirge] for more info about the us
 
 [config-src]: #src
 [config-dest]: #dest
-[config-browserSyncWatch]: #browsersyncwatch
 [config-cssConcat]: #cssconcat
 [config-configFile]:  #configfile
 [config-defaultMode]: #defaultmode

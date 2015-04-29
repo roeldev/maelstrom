@@ -14,7 +14,6 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "browser-sync": "^2.2.1",
     "confirge": "^0.1.1",
     "del": "^1.1.1",
     "graceful-fs": "^3.0.6",
