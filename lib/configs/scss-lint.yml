@@ -1,5 +1,3 @@
-scss_files: '**/*.scss'
-
 linters:
   BangFormat:
     enabled: true
@@ -83,6 +81,7 @@ linters:
     enabled: true
     allow_leading_underscore: true
     convention: hyphenated_lowercase
+    variable_convention: '(.*)'
 
   NestingDepth:
     enabled: true
