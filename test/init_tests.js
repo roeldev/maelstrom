@@ -4,15 +4,16 @@
  */
 'use strict';
 
-var Maelstrom = require('../lib/index.js');
-var Init      = require('../lib/init.js')(Maelstrom);
-var Utils     = require('../lib/utils.js')(Maelstrom);
-var Plugin    = require('../lib/plugin.js');
-var _         = require('underscore');
-var Assert    = require('assert');
-var Confirge  = require('confirge');
-var Gulp      = require('gulp');
-var Path      = require('path');
+var Maelstrom  = require('../lib/index.js');
+var Init       = require('../lib/init.js')(Maelstrom);
+var Utils      = require('../lib/utils.js')(Maelstrom);
+var Plugin     = require('../lib/plugin.js');
+var _          = require('underscore');
+var Assert     = require('assert');
+var Confirge   = require('confirge');
+var FileSystem = require('graceful-fs');
+var Gulp       = require('gulp');
+var Path       = require('path');
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -168,6 +169,70 @@ describe('Init.createConfig()', function()
         });
 });
 
+describe('Init.loadPlugins()', function()
+{
+    it('should add all plugins to Maelstrom', function()
+    {
+        Maelstrom.tasks = {};
+        Init.loadPlugins();
+
+        var $assert      = true;
+        var $pluginDir   = Path.resolve(__dirname, '../lib/plugins/');
+        var $pluginFiles = FileSystem.readdirSync($pluginDir);
+        var $pluginName;
+
+        for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
+        {
+            $pluginName = Path.basename($pluginFiles[$i], '.js');
+            if (_.isUndefined(Maelstrom[$pluginName]))
+            {
+                $assert = false;
+                break;
+            }
+        }
+
+        Assert($assert);
+    });
+
+    it('should add all the tasks from the plugins to Maelstrom', function()
+    {
+        Maelstrom.tasks = {};
+        Init.loadPlugins();
+
+        var $assert      = true;
+        var $pluginDir   = Path.resolve(__dirname, '../lib/plugins/');
+        var $pluginFiles = FileSystem.readdirSync($pluginDir);
+        var $pluginFile, $plugin;
+
+        for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
+        {
+            $pluginFile = $pluginDir + Path.sep + $pluginFiles[$i];
+            $plugin     = require($pluginFile);
+
+            if (!($plugin instanceof Plugin))
+            {
+                continue;
+            }
+
+            for (var $taskName in $plugin.tasks)
+            {
+                if (!$plugin.tasks.hasOwnProperty($taskName))
+                {
+                    continue;
+                }
+
+                if (_.isUndefined(Maelstrom.tasks[$taskName]))
+                {
+                    $assert = false;
+                    break;
+                }
+            }
+        }
+
+        Assert($assert);
+    });
+});
+
 describe('Init.loadPlugin()', function()
 {
     it('should return the exact same plugin', function()
@@ -197,12 +262,18 @@ describe('Init.loadPlugin()', function()
         $plugin.addTask('task1', Utils.noop);
         $plugin.addTask('task2', Utils.noop);
 
-        var $result = Init.loadPlugin($plugin);
+        Init.loadPlugin($plugin);
 
-        Assert.deepEqual(Maelstrom.tasks,
+        // use custom check because deepEqual does not seem to work
+        function check($item)
         {
-            'task1': $plugin.exportTask('task1'),
-            'task2': $plugin.exportTask('task2')
-        });
+            return (_.isObject($item) &&
+                    ($item.plugin === $plugin) &&
+                    _.isFunction($item.fn));
+        }
+
+        Assert(_.isObject(Maelstrom.tasks) &&
+               check(Maelstrom.tasks.task1) &&
+               check(Maelstrom.tasks.task2));
     });
 });
