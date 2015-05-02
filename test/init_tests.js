@@ -17,6 +17,9 @@ var Path       = require('path');
 
 var PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
 
+Maelstrom.gulp   = Gulp;
+Maelstrom.Plugin = Plugin;
+
 ////////////////////////////////////////////////////////////////////////////////
 
 function getFixtureFile($file)
@@ -175,7 +178,33 @@ describe('Init.loadPlugins()', function loadPluginsTests()
 {
     it('should add all plugins to Maelstrom', function()
     {
+        Maelstrom.config.verbose = false;
         Maelstrom.tasks = {};
+
+        Init.loadPlugins(PLUGIN_DIR);
+
+        var $assert      = true;
+        var $pluginFiles = FileSystem.readdirSync(PLUGIN_DIR);
+        var $pluginName;
+
+        for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
+        {
+            $pluginName = Path.basename($pluginFiles[$i], '.js');
+            if (_.isUndefined(Maelstrom[$pluginName]))
+            {
+                $assert = false;
+                break;
+            }
+        }
+
+        Assert($assert);
+    });
+
+    it('should add all plugins to Maelstrom and display a log', function()
+    {
+        Maelstrom.config.verbose = true;
+        Maelstrom.tasks = {};
+
         Init.loadPlugins(PLUGIN_DIR);
 
         var $assert      = true;
@@ -197,7 +226,9 @@ describe('Init.loadPlugins()', function loadPluginsTests()
 
     it('should add all the tasks from the plugins to Maelstrom', function()
     {
+        Maelstrom.config.verbose = false;
         Maelstrom.tasks = {};
+
         Init.loadPlugins(PLUGIN_DIR);
 
         var $assert      = true;
@@ -275,5 +306,44 @@ describe('Init.loadPlugin()', function loadPluginTests()
         Assert(_.isObject(Maelstrom.tasks) &&
                check(Maelstrom.tasks.task1) &&
                check(Maelstrom.tasks.task2));
+    });
+});
+
+describe('Init.defaultTasks()', function defaultTasksTests()
+{
+    it('should add all tasks with Maelstrom.task()', function()
+    {
+        var $actual = Init.defaultTasks();
+
+        Assert.deepEqual($actual, ['task1', 'task2']);
+    });
+
+    it('should add all tasks to gulp', function()
+    {
+        Init.defaultTasks();
+
+        var $actual    = 0;
+        var $expected  = ['task1', 'task2'];
+        var $gulpTasks = _.keys(Gulp.tasks);
+
+        for (var $i = 0, $iL = $expected.length; $i < $iL; $i++)
+        {
+            if ($gulpTasks.indexOf($expected[$i]) !== -1)
+            {
+                $actual++;
+            }
+        }
+
+        Assert.strictEqual($actual, $expected.length);
+    });
+});
+
+describe('Init.defaultWatcher()', function defaultWatcherTests()
+{
+    it('should add a watch task to gulp', function()
+    {
+        Init.defaultWatcher();
+
+        Assert(_.keys(Gulp.tasks).indexOf('watch') !== -1);
     });
 });

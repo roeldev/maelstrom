@@ -5,8 +5,7 @@
 'use strict';
 
 var _         = require('underscore');
-var Maelstrom = require('../lib/index.js');
-var Utils     = require('../lib/utils.js')(Maelstrom);
+var Utils     = require('../lib/utils.js')({});
 var Plugin    = require('../lib/plugin.js');
 var Assert    = require('assert');
 var Path      = require('path');
