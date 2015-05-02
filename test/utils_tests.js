@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/utils_tests.js
- * file version: 0.00.002
+ * file version: 0.00.003
  */
 'use strict';
 
@@ -10,6 +10,9 @@ var Assert    = require('assert');
 var GulpUtil  = require('gulp-util');
 var Path      = require('path');
 var Through   = require('through2');
+
+var PLUGIN_INVALID = Path.resolve(__dirname, './fixtures/plugins/invalid.js');
+var PLUGIN_VALID   = Path.resolve(__dirname, './fixtures/plugins/valid.js');
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,7 +39,7 @@ function setMode($mode, $setConfig)
 
 //------------------------------------------------------------------------------
 
-describe('Maelstrom.utils.isDev()', function()
+describe('Utils.isDev()', function isDevTests()
 {
     it('should return true when --dev', function()
     {
@@ -51,7 +54,7 @@ describe('Maelstrom.utils.isDev()', function()
     });
 });
 
-describe('Maelstrom.utils.isProd()', function()
+describe('Utils.isProd()', function isProdTests()
 {
     it('should return true when --prod', function()
     {
@@ -66,7 +69,7 @@ describe('Maelstrom.utils.isProd()', function()
     });
 });
 
-describe('Maelstrom.utils.extendArgs()', function()
+describe('Utils.extendArgs()', function extendArgsTests()
 {
     it('it should append the vars and return an array [1]', function()
     {
@@ -83,7 +86,7 @@ describe('Maelstrom.utils.extendArgs()', function()
     });
 });
 
-describe('Maelstrom.utils.pipeStreams()', function()
+describe('Utils.pipeStreams()', function pipeStreamsTests()
 {
     it('should return the same object [1]', function()
     {
@@ -110,7 +113,7 @@ describe('Maelstrom.utils.pipeStreams()', function()
     });
 });
 
-describe('Maelstrom.utils.pipeWhen()', function()
+describe('Utils.pipeWhen()', function pipeWhenTests()
 {
     it('should return the same stream', function()
     {
@@ -125,7 +128,7 @@ describe('Maelstrom.utils.pipeWhen()', function()
     });
 });
 
-describe('Maelstrom.utils.pipeWhenDev()', function()
+describe('Utils.pipeWhenDev()', function pipeWhenDevTests()
 {
     it('should return the same stream [1]', function()
     {
@@ -150,7 +153,7 @@ describe('Maelstrom.utils.pipeWhenDev()', function()
     });
 });
 
-describe('Maelstrom.utils.pipeWhenProd()', function()
+describe('Utils.pipeWhenProd()', function pipeWhenProdTests()
 {
     it('should return the same stream [1]', function()
     {
@@ -175,14 +178,13 @@ describe('Maelstrom.utils.pipeWhenProd()', function()
     });
 });
 
-describe('Maelstrom.utils.requirePluginFile()', function()
+describe('Utils.requirePluginFile()', function requirePluginFileTests()
 {
     it('should read and return the loaded plugin', function()
     {
-        var $input    = Path.resolve(__dirname, './fixtures/plugin-valid.js');
-        var $expected = require($input);
+        var $expected = require(PLUGIN_VALID);
 
-        Assert.strictEqual(Utils.requirePluginFile($input), $expected);
+        Assert.strictEqual(Utils.requirePluginFile(PLUGIN_VALID), $expected);
     });
 
     it('should not read the file and return false', function()
@@ -191,20 +193,18 @@ describe('Maelstrom.utils.requirePluginFile()', function()
     });
 });
 
-describe('Maelstrom.utils.isValidPlugin()', function()
+describe('Utils.isValidPlugin()', function isValidPluginTests()
 {
     it('should load the plugin and successfully validate it', function()
     {
-        var $file  = Path.resolve(__dirname, './fixtures/plugin-valid.js');
-        var $input = Utils.requirePluginFile($file);
+        var $input = Utils.requirePluginFile(PLUGIN_VALID);
 
         Assert.strictEqual(Utils.isValidPlugin($input), true);
     });
 
     it('should load the plugin and fail validating', function()
     {
-        var $file  = Path.resolve(__dirname, './fixtures/plugin-invalid.js');
-        var $input = Utils.requirePluginFile($file);
+        var $input = Utils.requirePluginFile(PLUGIN_INVALID);
 
         Assert.strictEqual(Utils.isValidPlugin($input), false);
     });

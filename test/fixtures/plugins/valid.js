@@ -1,11 +1,11 @@
 /**
- * maelstrom | test/fixtures/plugin-valid.js
+ * maelstrom | test/fixtures/plugins/valid.js
  * file version: 0.00.002
  */
 'use strict';
 
-var Maelstrom    = require('../../lib/index.js');
-var Plugin       = require('../../lib/plugin.js');
+var Maelstrom    = require('../../../lib/index.js');
+var Plugin       = require('../../../lib/plugin.js');
 var PluginExport = new Plugin(__filename);
 var _            = require('underscore');
 var GulpPlumber  = require('gulp-plumber');

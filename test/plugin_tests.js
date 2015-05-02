@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/plugin_tests.js
- * file version: 0.00.001
+ * file version: 0.00.002
  */
 'use strict';
 
@@ -12,14 +12,10 @@ var Assert    = require('assert');
 var Path      = require('path');
 var Through   = require('through2');
 
-var THROUGH_CONSTRUCTOR = Through.obj().constructor;
+var PLUGIN_VALID   = Path.resolve(__dirname, './fixtures/plugins/valid.js');
+var THROUGH_CONSTR = Through.obj().constructor;
 
 ////////////////////////////////////////////////////////////////////////////////
-
-function getFixtureFile($file)
-{
-    return Path.resolve(__dirname, './fixtures/' + $file);
-}
 
 function getPlugin($streams, $tasks)
 {
@@ -42,7 +38,7 @@ function getPlugin($streams, $tasks)
 
 //------------------------------------------------------------------------------
 
-describe('Plugin.addStream()', function()
+describe('Plugin.addStream()', function addStreamTests()
 {
     it('should add the stream to the streams list', function()
     {
@@ -68,7 +64,7 @@ describe('Plugin.addStream()', function()
     });
 });
 
-describe('Plugin.addTask()', function()
+describe('Plugin.addTask()', function addTaskTests()
 {
     it('should add the task to the tasks list', function()
     {
@@ -89,7 +85,7 @@ describe('Plugin.addTask()', function()
     });
 });
 
-describe('Plugin.stream()', function()
+describe('Plugin.stream()', function streamTests()
 {
     // 'stream': function($stream, $args, $alwaysReturnStream)
 
@@ -150,15 +146,15 @@ describe('Plugin.stream()', function()
     {
         var $actual = getPlugin().stream('nope', [], true);
 
-        Assert.strictEqual($actual.constructor, THROUGH_CONSTRUCTOR);
+        Assert.strictEqual($actual.constructor, THROUGH_CONSTR);
     });
 });
 
-describe('Plugin.exportStreamer()', function()
+describe('Plugin.exportStreamer()', function exportStreamerTests()
 {
     it('should export a streamer and copy extra plugin methods', function()
     {
-        var $plugin   = require(getFixtureFile('plugin-valid.js'));
+        var $plugin   = require(PLUGIN_VALID);
         var $streamer = $plugin.exportStreamer();
 
         Assert(_.isFunction($streamer) && _.isFunction($streamer.isValidTest));
@@ -166,7 +162,7 @@ describe('Plugin.exportStreamer()', function()
 
     it('should export a streamer and not add prototype methods', function()
     {
-        var $plugin   = require(getFixtureFile('plugin-valid.js'));
+        var $plugin   = require(PLUGIN_VALID);
         var $streamer = $plugin.exportStreamer();
 
         Assert(_.isFunction($streamer) &&
@@ -175,7 +171,7 @@ describe('Plugin.exportStreamer()', function()
 
     it('should export a streamer wich can return plugin streams [1]', function()
     {
-        var $plugin   = require(getFixtureFile('plugin-valid.js'));
+        var $plugin   = require(PLUGIN_VALID);
         var $streamer = $plugin.exportStreamer();
         var $actual   = $streamer().constructor;
 
@@ -184,7 +180,7 @@ describe('Plugin.exportStreamer()', function()
 
     it('should export a streamer wich can return plugin streams [2]', function()
     {
-        var $plugin   = require(getFixtureFile('plugin-valid.js'));
+        var $plugin   = require(PLUGIN_VALID);
         var $streamer = $plugin.exportStreamer();
         var $actual   = $streamer('plumber').constructor;
 
@@ -193,16 +189,16 @@ describe('Plugin.exportStreamer()', function()
 
     it('should export a streamer wich can return plugin streams [3]', function()
     {
-        var $plugin   = require(getFixtureFile('plugin-valid.js'));
+        var $plugin   = require(PLUGIN_VALID);
         var $streamer = $plugin.exportStreamer();
         var $actual   = $streamer('non-existing').constructor;
 
-        Assert.strictEqual($actual, THROUGH_CONSTRUCTOR);
+        Assert.strictEqual($actual, THROUGH_CONSTR);
     });
 
     it('should export a streamer wich passes through the args [1]', function()
     {
-        var $plugin   = require(getFixtureFile('plugin-valid.js'));
+        var $plugin   = require(PLUGIN_VALID);
         var $streamer = $plugin.exportStreamer();
         var $input    = ['args1', 'args2'];
         var $actual   = $streamer('argsTest', $input);
@@ -212,7 +208,7 @@ describe('Plugin.exportStreamer()', function()
 
     it('should export a streamer wich passes through the args [2]', function()
     {
-        var $plugin   = require(getFixtureFile('plugin-valid.js'));
+        var $plugin   = require(PLUGIN_VALID);
         var $streamer = $plugin.exportStreamer();
         var $input    = ['args1', 'args2'];
         var $actual   = $streamer('argsTest', $input[0], $input[1]);
@@ -221,7 +217,7 @@ describe('Plugin.exportStreamer()', function()
     });
 });
 
-describe('Plugin.exportTask()', function()
+describe('Plugin.exportTask()', function exportTaskTests()
 {
     it('should attach the exact same plugin to the export', function()
     {
@@ -250,15 +246,15 @@ describe('Plugin.exportTask()', function()
 
     it('should return the stream from the task', function()
     {
-        var $plugin = require(getFixtureFile('plugin-valid.js'));
+        var $plugin = require(PLUGIN_VALID);
         var $task   = $plugin.exportTask('through').fn();
 
-        Assert.strictEqual($task().constructor, THROUGH_CONSTRUCTOR);
+        Assert.strictEqual($task().constructor, THROUGH_CONSTR);
     });
 
     it('should pass the arguments to the exported task function [1]', function()
     {
-        var $plugin = require(getFixtureFile('plugin-valid.js'));
+        var $plugin = require(PLUGIN_VALID);
         var $input  = ['args1', 'args2'];
         var $task   = $plugin.exportTask('argsTest').fn($input);
 
@@ -267,7 +263,7 @@ describe('Plugin.exportTask()', function()
 
     it('should pass the arguments to the exported task function [2]', function()
     {
-        var $plugin = require(getFixtureFile('plugin-valid.js'));
+        var $plugin = require(PLUGIN_VALID);
         var $input  = ['args1', 'args2'];
         var $task   = $plugin.exportTask('argsTest').fn.apply(null, $input);
 
@@ -276,9 +272,9 @@ describe('Plugin.exportTask()', function()
 
     it('should return a dummy task function when not exists', function()
     {
-        var $plugin = require(getFixtureFile('plugin-valid.js'));
+        var $plugin = require(PLUGIN_VALID);
         var $task   = $plugin.exportTask('nope').fn();
 
-        Assert.strictEqual($task().constructor, THROUGH_CONSTRUCTOR);
+        Assert.strictEqual($task().constructor, THROUGH_CONSTR);
     });
 });

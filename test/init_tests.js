@@ -15,6 +15,8 @@ var FileSystem = require('graceful-fs');
 var Gulp       = require('gulp');
 var Path       = require('path');
 
+var PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
+
 ////////////////////////////////////////////////////////////////////////////////
 
 function getFixtureFile($file)
@@ -22,15 +24,15 @@ function getFixtureFile($file)
     return Path.resolve(__dirname, './fixtures/' + $file);
 }
 
-function resetConfig()
+/*function resetConfig()
 {
     var $configFile  = Path.resolve(__dirname, '../lib/configs/maelstrom.yml');
     Maelstrom.config = Confirge.read($configFile);
-}
+}*/
 
 //------------------------------------------------------------------------------
 
-describe('Init.isGulpInstance()', function()
+describe('Init.isGulpInstance()', function isGulpInstanceTests()
 {
     it('should successfully validate the gulp instance', function()
     {
@@ -48,7 +50,7 @@ describe('Init.isGulpInstance()', function()
     });
 });
 
-describe('Init.createConfig()', function()
+describe('Init.createConfig()', function createConfigTests()
 {
     it('should use the default config', function()
     {
@@ -169,16 +171,15 @@ describe('Init.createConfig()', function()
         });
 });
 
-describe('Init.loadPlugins()', function()
+describe('Init.loadPlugins()', function loadPluginsTests()
 {
     it('should add all plugins to Maelstrom', function()
     {
         Maelstrom.tasks = {};
-        Init.loadPlugins();
+        Init.loadPlugins(PLUGIN_DIR);
 
         var $assert      = true;
-        var $pluginDir   = Path.resolve(__dirname, '../lib/plugins/');
-        var $pluginFiles = FileSystem.readdirSync($pluginDir);
+        var $pluginFiles = FileSystem.readdirSync(PLUGIN_DIR);
         var $pluginName;
 
         for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
@@ -197,16 +198,15 @@ describe('Init.loadPlugins()', function()
     it('should add all the tasks from the plugins to Maelstrom', function()
     {
         Maelstrom.tasks = {};
-        Init.loadPlugins();
+        Init.loadPlugins(PLUGIN_DIR);
 
         var $assert      = true;
-        var $pluginDir   = Path.resolve(__dirname, '../lib/plugins/');
-        var $pluginFiles = FileSystem.readdirSync($pluginDir);
+        var $pluginFiles = FileSystem.readdirSync(PLUGIN_DIR);
         var $pluginFile, $plugin;
 
         for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
         {
-            $pluginFile = $pluginDir + Path.sep + $pluginFiles[$i];
+            $pluginFile = PLUGIN_DIR + Path.sep + $pluginFiles[$i];
             $plugin     = require($pluginFile);
 
             if (!($plugin instanceof Plugin))
@@ -233,7 +233,7 @@ describe('Init.loadPlugins()', function()
     });
 });
 
-describe('Init.loadPlugin()', function()
+describe('Init.loadPlugin()', function loadPluginTests()
 {
     it('should return the exact same plugin', function()
     {
