@@ -54,10 +54,10 @@ vars:
   bower: 'assets/bower_components'
 
   # path to default configs dir
-  configs: '%module%/lib/configs'
+  configs: '%module%/configs'
 
   # path to templates dir
-  templates: '%module%/lib/templates'
+  templates: '%module%/templates'
 
 
 # All module specific default settings

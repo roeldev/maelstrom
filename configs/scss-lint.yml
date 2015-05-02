@@ -99,6 +99,8 @@ linters:
     enabled: true
     order: [
       'content',
+      'cursor',
+      'pointer-events',
       'display',
       'visibility',
       'overflow',
