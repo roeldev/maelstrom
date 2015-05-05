@@ -1,6 +1,6 @@
 /**
  * maelstrom | gulpfile.js
- * file version: 0.00.004
+ * file version: 0.00.005
  */
 'use strict';
 
@@ -19,7 +19,6 @@ var JS_SRC =
     'gulpfile.js',
     'lib/**/*.js',
     '!lib/**/_*.js',
-    '!lib/templates/*.js',
     'test/*.js'
 ];
 

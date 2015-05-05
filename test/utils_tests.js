@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/utils_tests.js
- * file version: 0.00.003
+ * file version: 0.00.004
  */
 'use strict';
 
@@ -10,6 +10,7 @@ var Assert    = require('assert');
 var GulpUtil  = require('gulp-util');
 var Path      = require('path');
 var Through   = require('through2');
+var Util      = require('util');
 
 var PLUGIN_INVALID = Path.resolve(__dirname, './fixtures/plugins/invalid.js');
 var PLUGIN_VALID   = Path.resolve(__dirname, './fixtures/plugins/valid.js');
@@ -110,6 +111,24 @@ describe('Utils.pipeStreams()', function pipeStreamsTests()
         var $actual = Utils.pipeStreams([false, $input]);
 
         Assert.deepEqual($actual, $input);
+    });
+
+    it('should pipe the streams to the first stream', function()
+    {
+        var $actual = Utils.pipeStreams([Through.obj(),
+                                        Through.obj(),
+                                        Through.obj()]);
+
+        var $expected = Through.obj();
+        $expected.pipe(Through.obj());
+        $expected.pipe(Through.obj());
+
+        // convert the actual objects to a string, otherwise Assert will fail
+        // the deepEqual test. seems like the regular objects are just too big
+        $actual   = Util.inspect($actual, false, null);
+        $expected = Util.inspect($expected, false, null);
+
+        Assert.strictEqual($actual, $expected);
     });
 });
 

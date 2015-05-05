@@ -1,15 +1,19 @@
 /**
  * maelstrom | test/plugin_tests.js
- * file version: 0.00.002
+ * file version: 0.00.003
  */
 'use strict';
 
-var _         = require('underscore');
-var Utils     = require('../lib/utils.js')({});
-var Plugin    = require('../lib/plugin.js');
-var Assert    = require('assert');
-var Path      = require('path');
-var Through   = require('through2');
+var _              = require('underscore');
+var Utils          = require('../lib/utils.js')({});
+var Plugin         = require('../lib/plugin.js');
+var Assert         = require('assert');
+var FileSystem     = require('fs');
+var GulpUtil       = require('gulp-util');
+var Chalk          = GulpUtil.colors;
+var LogInterceptor = require('log-interceptor');
+var Path           = require('path');
+var Through        = require('through2');
 
 var PLUGIN_VALID   = Path.resolve(__dirname, './fixtures/plugins/valid.js');
 var THROUGH_CONSTR = Through.obj().constructor;
@@ -275,5 +279,30 @@ describe('Plugin.exportTask()', function exportTaskTests()
         var $task   = $plugin.exportTask('nope').fn();
 
         Assert.strictEqual($task().constructor, THROUGH_CONSTR);
+    });
+
+    it('should display a warning when the dummy task is executed', function()
+    {
+        var $plugin = require(PLUGIN_VALID);
+        var $task   = $plugin.exportTask('nope').fn();
+        var $file   = new GulpUtil.File(
+        {
+            'cwd':      Path.dirname(Path.dirname(PLUGIN_VALID)),
+            'base':     Path.dirname(PLUGIN_VALID),
+            'path':     PLUGIN_VALID,
+            'contents': FileSystem.readFileSync(PLUGIN_VALID)
+        });
+
+        LogInterceptor();
+
+        var $stream = $task();
+        $stream.write($file, 'utf-8');
+        $stream.end();
+
+        var $log = LogInterceptor.end().join('');
+        $log = Chalk.stripColor($log);
+        $log = $log.substr(11);
+
+        Assert.strictEqual($log, 'Warning: Unknown maelstrom task \'nope\'.\n');
     });
 });

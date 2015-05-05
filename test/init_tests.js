@@ -1,19 +1,21 @@
 /**
  * maelstrom | test/init_tests.js
- * file version: 0.00.001
+ * file version: 0.00.002
  */
 'use strict';
 
-var Maelstrom  = require('../lib/index.js');
-var Init       = require('../lib/init.js')(Maelstrom);
-var Utils      = require('../lib/utils.js')(Maelstrom);
-var Plugin     = require('../lib/plugin.js');
-var _          = require('underscore');
-var Assert     = require('assert');
-var Confirge   = require('confirge');
-var FileSystem = require('graceful-fs');
-var Gulp       = require('gulp');
-var Path       = require('path');
+var Maelstrom      = require('../lib/index.js');
+var Init           = require('../lib/init.js')(Maelstrom);
+var Utils          = require('../lib/utils.js')(Maelstrom);
+var Plugin         = require('../lib/plugin.js');
+var _              = require('underscore');
+var Assert         = require('assert');
+var Confirge       = require('confirge');
+var Chalk          = require('gulp-util').colors;
+var FileSystem     = require('graceful-fs');
+var Gulp           = require('gulp');
+var LogInterceptor = require('log-interceptor');
+var Path           = require('path');
 
 var PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
 
@@ -205,23 +207,39 @@ describe('Init.loadPlugins()', function loadPluginsTests()
         Maelstrom.config.verbose = true;
         Maelstrom.tasks = {};
 
+        var $actual   = [];
+        var $expected = [];
+
+        LogInterceptor();
         Init.loadPlugins(PLUGIN_DIR);
 
-        var $assert      = true;
-        var $pluginFiles = FileSystem.readdirSync(PLUGIN_DIR);
-        var $pluginName;
+        var $logs = LogInterceptor.end();
+        var $log;
 
-        for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
+        for (var $i = 0, $iL = $logs.length; $i < $iL; $i++)
         {
-            $pluginName = Path.basename($pluginFiles[$i], '.js');
-            if (_.isUndefined(Maelstrom[$pluginName]))
-            {
-                $assert = false;
-                break;
-            }
+            $log = $logs[$i];
+            $log = Chalk.stripColor($log);
+
+            $actual.push($log.substr(11));
         }
 
-        Assert($assert);
+        var $pluginFiles = FileSystem.readdirSync(PLUGIN_DIR);
+        var $pluginFile, $pluginName;
+
+        $i  = 0;
+        $iL = $pluginFiles.length;
+
+        for (; $i < $iL; $i++)
+        {
+            $pluginFile = PLUGIN_DIR + Path.sep + $pluginFiles[$i];
+            $pluginName = Path.basename($pluginFiles[$i], '.js');
+
+            $expected.push('- Load plugin \'' + $pluginName + '\': ' +
+                           $pluginFile + '\n');
+        }
+
+        Assert.deepEqual($actual, $expected);
     });
 
     it('should add all the tasks from the plugins to Maelstrom', function()
