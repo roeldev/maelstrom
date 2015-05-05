@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/init_tests.js
- * file version: 0.00.002
+ * file version: 0.00.003
  */
 'use strict';
 
@@ -16,6 +16,7 @@ var FileSystem     = require('graceful-fs');
 var Gulp           = require('gulp');
 var LogInterceptor = require('log-interceptor');
 var Path           = require('path');
+var Tildify        = require('tildify');
 
 var PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
 
@@ -236,7 +237,7 @@ describe('Init.loadPlugins()', function loadPluginsTests()
             $pluginName = Path.basename($pluginFiles[$i], '.js');
 
             $expected.push('- Load plugin \'' + $pluginName + '\': ' +
-                           $pluginFile + '\n');
+                           Tildify($pluginFile) + '\n');
         }
 
         Assert.deepEqual($actual, $expected);
