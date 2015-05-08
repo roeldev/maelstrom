@@ -4,9 +4,9 @@
  */
 'use strict';
 
-var _              = require('underscore');
 var Utils          = require('../lib/utils.js')({});
 var Plugin         = require('../lib/plugin.js');
+var _              = require('underscore');
 var Assert         = require('assert');
 var FileSystem     = require('fs');
 var GulpUtil       = require('gulp-util');
