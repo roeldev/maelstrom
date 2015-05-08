@@ -1,20 +1,21 @@
 /**
  * maelstrom | test/index_tests.js
- * file version: 0.00.001
+ * file version: 0.00.002
  */
 'use strict';
 
 var Maelstrom      = require('../lib/index.js');
-var Init        = require('../lib/init.js')(Maelstrom);
+var Init           = require('../lib/init.js')(Maelstrom);
 // var Utils       = require('../lib/utils.js')(Maelstrom);
 // var Plugin      = require('../lib/plugin.js');
 // var _           = require('underscore');
 var Assert         = require('assert');
 var Chalk          = require('gulp-util').colors;
-var Gulp        = require('gulp');
+var Gulp           = require('gulp');
 var LogInterceptor = require('log-interceptor');
 var Path           = require('path');
 // var Util        = require('util');
+var Tildify        = require('tildify');
 
 var PLUGIN_VALID = Path.resolve(__dirname, './fixtures/plugins/valid.js');
 
@@ -30,6 +31,8 @@ var PLUGIN_VALID = Path.resolve(__dirname, './fixtures/plugins/valid.js');
     Maelstrom.init.apply(Maelstrom, $args);
     return LogInterceptor.end();
 }*/
+
+//LogInterceptor.config({ stripColor: true, trimTimestamp: true });
 
 /******************************************************************************/
 
@@ -52,7 +55,8 @@ describe('Maelstrom.init()', function()
         var $actual = LogInterceptor.end();
 
         Assert.equal(Chalk.stripColor($actual.pop()).substr(11),
-        'Error! Make sure to pass an instance of gulp to maelstrom.init()\n');
+            'Error! Make sure to pass an instance of gulp to ' +
+            'maelstrom.init()\n');
     });
 
     /*it('should load the util functions and add it to the main obj', function()
@@ -96,14 +100,14 @@ describe('Maelstrom.task()', function()
         Maelstrom.tasks = {};
         Maelstrom.config.verbose = true;
 
-        LogInterceptor({ stripColor: true, trimTimestamp: true });
+        LogInterceptor();
         Init.loadPlugin( require(PLUGIN_VALID) );
         Maelstrom.task('through');
 
         var $actual = LogInterceptor.end();
 
         Assert.strictEqual(Chalk.stripColor($actual.pop()).substr(11),
-                           '- Add task \'through\': ' + PLUGIN_VALID + '\n');
+            '- Add task \'through\': ' + Tildify(PLUGIN_VALID) + '\n');
     });
 });
 
