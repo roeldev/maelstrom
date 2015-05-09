@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/utils_tests.js
- * file version: 0.00.004
+ * file version: 0.00.005
  */
 'use strict';
 
@@ -72,18 +72,46 @@ describe('Utils.isProd()', function isProdTests()
 
 describe('Utils.extendArgs()', function extendArgsTests()
 {
-    it('it should append the vars and return an array [1]', function()
+    it('should append the vars and return an array [1]', function()
     {
         var $actual = Utils.extendArgs('var2', 'var1');
 
         Assert.deepEqual($actual, ['var1', 'var2']);
     });
 
-    it('it should append the vars and return an array [2]', function()
+    it('should append the vars and return an array [2]', function()
+    {
+        var $actual = Utils.extendArgs('var2', ['var1']);
+
+        Assert.deepEqual($actual, ['var1', 'var2']);
+    });
+
+    it('should append the vars and return an array [3]', function()
     {
         var $actual = Utils.extendArgs(['var2', false], 'var1');
 
         Assert.deepEqual($actual, ['var1', 'var2', false]);
+    });
+
+    it('should append the vars and return an array [4]', function()
+    {
+        var $actual = Utils.extendArgs(['var2', false], ['var1', true]);
+
+        Assert.deepEqual($actual, ['var1', true, 'var2', false]);
+    });
+
+    it('should return an empty array [1]', function()
+    {
+        var $actual = Utils.extendArgs(undefined, []);
+
+        Assert.strictEqual($actual.length, 0);
+    });
+
+    it('should return an empty array [2]', function()
+    {
+        var $actual = Utils.extendArgs([], []);
+
+        Assert.strictEqual($actual.length, 0);
     });
 });
 

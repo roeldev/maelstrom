@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/index_tests.js
- * file version: 0.00.002
+ * file version: 0.00.003
  */
 'use strict';
 
@@ -17,7 +17,8 @@ var Path           = require('path');
 var Util           = require('util');
 var Tildify        = require('tildify');
 
-var PLUGIN_VALID = Path.resolve(__dirname, './fixtures/plugins/valid.js');
+var PLUGIN_VALID  = Path.resolve(__dirname, './fixtures/plugins/valid.js');
+var PLUGIN_VALID2 = Path.resolve(__dirname, './fixtures/plugins/valid2.js');
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -51,6 +52,18 @@ Maelstrom._PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
 // LogInterceptor.config({ stripColor: true, trimTimestamp: true });
 
 /******************************************************************************/
+
+describe('Maelstrom()', function()
+{
+    it('should pass the arguments to Maelstrom.init()', function()
+    {
+        LogInterceptor();
+        Maelstrom(Gulp, false);
+        LogInterceptor.end();
+
+        Assert.strictEqual(Maelstrom.gulp, Gulp);
+    });
+});
 
 describe('Maelstrom.init()', function()
 {
@@ -184,9 +197,9 @@ describe('Maelstrom.task()', function()
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
-        Maelstrom.task('through');
+        Maelstrom.task('plumber');
 
-        Assert(!_.isUndefined(Gulp.tasks.through));
+        Assert(!_.isUndefined(Gulp.tasks.plumber));
     });
 
     it('should add the task to gulp and return an instance of gulp', function()
@@ -194,7 +207,7 @@ describe('Maelstrom.task()', function()
         Maelstrom.tasks = {};
         Maelstrom.config.verbose = false;
 
-        Init.loadPlugin( require(PLUGIN_VALID) );
+        Init.loadPlugin( require(PLUGIN_VALID2) );
 
         var $actual = Maelstrom.task('through');
 
@@ -207,22 +220,105 @@ describe('Maelstrom.task()', function()
         Maelstrom.config.verbose = true;
 
         LogInterceptor();
-        Init.loadPlugin( require(PLUGIN_VALID) );
+        Init.loadPlugin( require(PLUGIN_VALID2) );
         Maelstrom.task('through');
 
         var $actual = LogInterceptor.end();
 
         Assert.strictEqual(Chalk.stripColor($actual.pop()).substr(11),
-            '- Add task \'through\': ' + Tildify(PLUGIN_VALID) + '\n');
+            '- Add task \'through\': ' + Tildify(PLUGIN_VALID2) + '\n');
     });
 });
 
-/*describe('Maelstrom.watch()', function()
+describe('Maelstrom.watch()', function()
 {
+    it('should return false on invalid task', function()
+    {
+        Assert.strictEqual(Maelstrom.watch('invalid-task'), false);
+    });
 
-});*/
+    it('should display a warning log message', function()
+    {
+        resetGulpTasks();
 
-/*describe('Maelstrom.extend()', function()
+        Maelstrom.tasks = {};
+        Maelstrom.config.verbose = false;
+
+        Init.loadPlugin( require(PLUGIN_VALID) );
+
+        LogInterceptor();
+        Maelstrom.watch('plumber');
+
+        var $actual = LogInterceptor.end();
+
+        Assert.strictEqual(Chalk.stripColor($actual.pop()).substr(11),
+            'Warning! No files to watch for task \'plumber\'!\n');
+    });
+
+    it('should add the task to gulp', function()
+    {
+        resetGulpTasks();
+
+        Maelstrom.tasks = {};
+        Maelstrom.config.verbose = false;
+
+        Init.loadPlugin( require(PLUGIN_VALID) );
+        var $actual = Maelstrom.watch('plumber', ['some/file.*']);
+
+        Assert(_.isObject($actual));
+    });
+});
+
+describe('Maelstrom.extend()', function()
 {
+    it('should not add the value to the main object', function()
+    {
+        delete Maelstrom.test;
+        Maelstrom.extend('test', false);
 
-});*/
+        Assert(_.isUndefined(Maelstrom.test));
+    });
+
+    it('should load the plugin and add to the main object [1]', function()
+    {
+        var $plugin = require(PLUGIN_VALID);
+
+        delete Maelstrom.test;
+        Maelstrom.extend('test', PLUGIN_VALID);
+
+        Assert.strictEqual(Maelstrom.test, $plugin);
+    });
+
+    it('should load the plugin and add to the main object [2]', function()
+    {
+        var $plugin = require(PLUGIN_VALID);
+
+        delete Maelstrom.valid;
+        Maelstrom.extend(PLUGIN_VALID);
+
+        Assert.strictEqual(Maelstrom.valid, $plugin);
+    });
+
+    it('should add the loaded plugin to the main object', function()
+    {
+        var $plugin = require(PLUGIN_VALID);
+
+        delete Maelstrom.test;
+        Maelstrom.extend('test', $plugin);
+
+        Assert.strictEqual(Maelstrom.test, $plugin);
+    });
+
+    it('should add the function to the main object', function()
+    {
+        var $plugin = function()
+        {
+            return 'some plugin test value function';
+        };
+
+        delete Maelstrom.test;
+        Maelstrom.extend('test', $plugin);
+
+        Assert.strictEqual(Maelstrom.test, $plugin);
+    });
+});
