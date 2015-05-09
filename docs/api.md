@@ -38,7 +38,7 @@ Specify wich default maelstrom tasks to add to gulp. By default, all tasks are a
 <table>
 <tr><td>Type</td><td><code>object</code></td></tr>
 </table>
-An optional custom config object. This will overrule both the default maelstrom config and the options loaded from `maelstrom.json`.
+An optional custom config object. This will overrule both the default maelstrom config and the options loaded from your `maelstrom.yml` or `maelstrom.json` file.
 
 
 --------------------------------------------------------------------------------

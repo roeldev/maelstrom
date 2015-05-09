@@ -9,8 +9,13 @@
 
 --------------------------------------------------------------------------------
 
-
 # Config
+You can configure maelstrom by creating either a `maelstrom.yml` or `maelstrom.json` file in your project root folder (same folder as where your `package.json` and `gulpfile.js` files are located). Both YAML and JSON are supported, so just choose the file format you're most comfortable with.
+
+> Note: when both a `maelstrom.yml` and `maelstrom.json` file are present, the JSON file is ignored.
+
+
+# Options
 - [src][config-src]
 - [dest][config-dest]
 - [cssConcat][config-cssConcat]
@@ -28,14 +33,14 @@
 ### src
 <table>
 <tr><td>Type</td><td><code>object</code></td></tr>
-<tr><td>Default</td><td><code>{
+<tr><td>Default</td><td><pre><code>{
     'favicon': 'assets/favicon',
     'flags':   'assets/flags',
     'icons':   'assets/icons',
     'images':  'assets/imgs',
     'js':      'assets/js',
     'sass':    'assets/scss'
-}</code></td></tr>
+}</code></pre></td></tr>
 </table>
 Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 
@@ -148,9 +153,22 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
 <tr><td>Default</td><td><code>true</code></td></tr>
 </table>
 
+### vars
+<table>
+<tr><td>Type</td><td><code>object</code></td></tr>
+<tr><td>Default</td><td><pre><code>{
+    module:    <i>__dirname</i>,
+    src:       {...},
+    dest:      {...},
+    bower:     'assets/bower_components',
+    configs:   '%module%/configs',
+    templates: '%module%/templates'
+}
+</code></pre></td></tr>
+</table>
+This object contains all config variables wich you can use in your config file or custom config object. The default values `src` and `dest` contain the paths specified in the [`src][config-src] and [`dest`][config-dest] config options, and will be flattend (so `{ src: { css: 'path/to/css' } }` becomes `{ src.css: 'path/to/css' }`).
 
-# Variables
-Check (confirge)[https://github.com/roeldev/confirge] for more info about the use of variables.
+See the [confirge][https://github.com/roeldev/confirge] project for more info about the use of variables.
 
 # Configuration of modules
 

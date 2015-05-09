@@ -6,7 +6,7 @@
   [![Test Coverage][coveralls-img]][coveralls-url]
   [![Dependency Status][david-img]][david-url]
 
-**A collection of gulp tasks. Work in progress.**
+**A collection of gulp tasks**
 
 ## Installation
 ```sh
@@ -16,7 +16,7 @@ npm install --save maelstrom
 
 
 ## How to use
-After installation you can configure maelstrom by creating a `maelstrom.json` file in your project root (same folder as where your `package.json` and `gulpfile.js` files are located). See [config][docs-config] for all available options.
+After installation you can configure maelstrom by creating a maelstrom config file in your project root folder (same folder as where your `package.json` and `gulpfile.js` files are located). See [config][docs-config] for more detailed information and all available options.
 
 #### Using all default plugins and tasks
 If you would like maelstrom to add all of it's default tasks to gulp. you only have to have the following two lines in your `gulpfile.js`:
@@ -28,7 +28,7 @@ var gulp      = require('gulp'),
 > Note that you should pass gulp to the `maelstrom.init` function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
 
 #### Using a specific plugin/task
-When you only want to use a certain plugin and/or task, you'll have to add a little more code. Below you'll find an example of what is possible. For a better explanation of the used maelstrom functions, check the [API][docs-api].
+When you only want to use a certain plugin and/or task, you'll have to add a little bit more code. Below you'll find an example of what is possible. For a better explanation of the used maelstrom functions, check the [API][docs-api].
 
 ```js
 var gulp      = require('gulp'),
@@ -54,7 +54,7 @@ gulp.task('watch', function()
     maelstrom.watch('some-default-maelstrom-task');
 });
 ```
-> When using `maelstrom.watch()`, don't forget to add the task with `maelstrom.task()`.
+> When using `maelstrom.watch()`, don't forget to first add the task with `maelstrom.task()`.
 
 Ofcourse you can combine the above examples by requiring maelstrom so it'll add all default tasks, and still be able to use the plugins in your own custom tasks!
 
