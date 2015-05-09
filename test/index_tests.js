@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/index_tests.js
- * file version: 0.00.003
+ * file version: 0.00.004
  */
 'use strict';
 
@@ -53,7 +53,7 @@ Maelstrom._PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
 
 /******************************************************************************/
 
-describe('Maelstrom()', function()
+describe('Maelstrom()', function maelstromTests()
 {
     it('should pass the arguments to Maelstrom.init()', function()
     {
@@ -63,9 +63,14 @@ describe('Maelstrom()', function()
 
         Assert.strictEqual(Maelstrom.gulp, Gulp);
     });
+
+    it('should return the main object when no args are given', function()
+    {
+        Assert.strictEqual(Maelstrom(), Maelstrom);
+    });
 });
 
-describe('Maelstrom.init()', function()
+describe('Maelstrom.init()', function initTests()
 {
     it('should stop initializing on invalid gulp instance', function()
     {
@@ -182,7 +187,7 @@ describe('Maelstrom.init()', function()
     });
 });
 
-describe('Maelstrom.task()', function()
+describe('Maelstrom.task()', function taskTests()
 {
     it('should return false on invalid task', function()
     {
@@ -230,7 +235,7 @@ describe('Maelstrom.task()', function()
     });
 });
 
-describe('Maelstrom.watch()', function()
+describe('Maelstrom.watch()', function watchTests()
 {
     it('should return false on invalid task', function()
     {
@@ -255,7 +260,7 @@ describe('Maelstrom.watch()', function()
             'Warning! No files to watch for task \'plumber\'!\n');
     });
 
-    it('should add the task to gulp', function()
+    it('should add the task to gulp [1]', function()
     {
         resetGulpTasks();
 
@@ -267,9 +272,22 @@ describe('Maelstrom.watch()', function()
 
         Assert(_.isObject($actual));
     });
+
+    it('should add the task to gulp [2]', function()
+    {
+        resetGulpTasks();
+
+        Maelstrom.tasks = {};
+        Maelstrom.config.verbose = false;
+
+        Init.loadPlugin( require(PLUGIN_VALID2) );
+        var $actual = Maelstrom.watch('through');
+
+        Assert(_.isObject($actual));
+    });
 });
 
-describe('Maelstrom.extend()', function()
+describe('Maelstrom.extend()', function extendTests()
 {
     it('should not add the value to the main object', function()
     {

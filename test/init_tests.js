@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/init_tests.js
- * file version: 0.00.003
+ * file version: 0.00.004
  */
 'use strict';
 
@@ -18,7 +18,8 @@ var LogInterceptor = require('log-interceptor');
 var Path           = require('path');
 var Tildify        = require('tildify');
 
-var PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
+var PLUGIN_DIR    = Path.resolve(__dirname, './fixtures/plugins/');
+var PLUGIN_VALID = Path.resolve(__dirname, './fixtures/plugins/valid.js');
 
 Maelstrom.gulp   = Gulp;
 Maelstrom.Plugin = Plugin;
@@ -359,10 +360,26 @@ describe('Init.defaultTasks()', function defaultTasksTests()
 
 describe('Init.defaultWatcher()', function defaultWatcherTests()
 {
-    it('should add a watch task to gulp', function()
+    it('should add a watch task to gulp [1]', function()
     {
         Init.defaultWatcher();
 
         Assert(_.keys(Gulp.tasks).indexOf('watch') !== -1);
+    });
+
+    it('should add a watch task to gulp [2]', function()
+    {
+        Maelstrom.tasks = {};
+
+        Init.loadPlugin( require(PLUGIN_VALID) );
+        Init.defaultWatcher();
+
+        LogInterceptor();
+        Gulp.tasks.watch.fn();
+
+        var $actual = LogInterceptor.end();
+
+        Assert.strictEqual(Chalk.stripColor($actual.shift()).substr(11),
+            'Warning! No files to watch for task \'plumber\'!\n');
     });
 });
