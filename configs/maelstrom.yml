@@ -1,8 +1,8 @@
 # Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 src:
+  bower:   'assets/bower_components'
   css:     'assets/css'
   favicon: 'assets/favicon'
-  flags:   'assets/flags'
   icons:   'assets/icons'
   images:  'assets/imgs'
   js:      'assets/js'
@@ -49,9 +49,6 @@ verbose: true
 
 # Define all variables wich are used in the config
 vars:
-
-  # path to bower components dir
-  bower: 'assets/bower_components'
 
   # path to default configs dir
   configs: '%module%/configs'

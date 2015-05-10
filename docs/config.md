@@ -29,17 +29,19 @@ You can configure maelstrom by creating either a `maelstrom.yml` or `maelstrom.j
 - [jsHintConfig][config-jsHintConfig]
 - [sassCompiler][config-sassCompiler]
 - [verbose][config-verbose]
+- [vars][config-vars]
 
 ### src
 <table>
 <tr><td>Type</td><td><code>object</code></td></tr>
 <tr><td>Default</td><td><pre><code>{
-    'favicon': 'assets/favicon',
-    'flags':   'assets/flags',
-    'icons':   'assets/icons',
-    'images':  'assets/imgs',
-    'js':      'assets/js',
-    'sass':    'assets/scss'
+    bower:   'assets/bower_components'
+    css:     'assets/css'
+    favicon: 'assets/favicon'
+    icons:   'assets/icons'
+    images:  'assets/imgs'
+    js:      'assets/js'
+    sass:    'assets/scss'
 }</code></pre></td></tr>
 </table>
 Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
@@ -160,7 +162,6 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
     module:    <i>__dirname</i>,
     src:       {...},
     dest:      {...},
-    bower:     'assets/bower_components',
     configs:   '%module%/configs',
     templates: '%module%/templates'
 }
@@ -168,7 +169,7 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
 </table>
 This object contains all config variables wich you can use in your config file or custom config object. The default values `src` and `dest` contain the paths specified in the [`src][config-src] and [`dest`][config-dest] config options, and will be flattend (so `{ src: { css: 'path/to/css' } }` becomes `{ src.css: 'path/to/css' }`).
 
-See the [confirge][https://github.com/roeldev/confirge] project for more info about the use of variables.
+See the [confirge](https://github.com/roeldev/confirge) project for more info about the use of variables.
 
 # Configuration of modules
 
@@ -186,6 +187,7 @@ See the [confirge][https://github.com/roeldev/confirge] project for more info ab
 [config-jsHintConfig]: #jshintconfig
 [config-sassCompiler]: #sasscompiler
 [config-verbose]: #verbose
+[config-vars]: #vars
 
 [docs-requirements]: requirements.md
 [docs-config]: config.md
