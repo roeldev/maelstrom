@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "confirge": "^0.2.2",
-    "del": "^1.1.1",
     "graceful-fs": "^3.0.6",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-changed": "^1.1.1",
@@ -33,7 +32,6 @@
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-ruby-sass": "^1.0.1",
     "gulp-sass": "^2.0.0",
     "gulp-scss-lint": "^0.1.11",
     "gulp-scss-lint-stylish": "^0.1.2",
@@ -44,7 +42,6 @@
     "jshint": "^2.7.0",
     "jshint-stylish": "^1.0.1",
     "lodash": "^3.3.1",
-    "main-bower-files": "^2.6.2",
     "run-sequence": "^1.0.2",
     "through2": "^0.6.3",
     "tildify": "^1.0.0",
@@ -68,8 +65,20 @@
   "keywords": [
     "gulpfriendly",
     "gulp",
+    "tasks",
+    "collection",
+    "sass",
+    "scss",
+    "css",
+    "js",
+    "javascript",
     "svg",
     "icon",
-    "font"
+    "font",
+    "concat",
+    "minify",
+    "autoprefix",
+    "lint",
+    "codestyle"
   ]
 }
