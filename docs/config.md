@@ -177,8 +177,6 @@ This object contains all config variables wich you can use in your config file o
 
 See the [confirge](https://github.com/roeldev/confirge) project for more info about the use of variables.
 
-# Configuration of modules
-
 
 [config-src]: #src
 [config-dest]: #dest
