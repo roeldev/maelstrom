@@ -11,61 +11,31 @@
 
 
 # Available tasks
-- Sass
-- Images
-- Icons
 
+## css
+This will concat, autoprefix and minify (when `--prod`) all files from the `cssConcat` option in the config and save them in the `dest.css` folder.
 
-### gulp sass [--compiler <libsass|ruby>] [--dev] [--prod]
+## icons
+This will combine all SVG from the `src.icons` folder and output an icon font to `dest.font`. It will also create a Sass codepoints file in the subfolder `maelstrom` in `src.sass` wich you should use in your main Sass.
 
-#### `--dev`
-> Type: `boolean`
+## images
+Minifies all images from the `src.images` folder and saves them in `dest.images`.
 
-> Default: `0`
+## js
+Executes the `js:lint` and `js:concat` tasks with _run-sequence_.
 
-> Values: `0` or `1`
+## js:concat
+This will concat and uglify (when `--prod`) all files from the `jsConcat` option in the config and save them in the `dest.js` folder.
 
-This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
+## js:lint
+The javascript code from `src.js` will be linted with _jshint_. Any problems will be display with _jshint-stylish_.
 
-#### `--prod`
-> Type: `boolean`
+## sass
+Sass files located in `src.sass` will be compiled, autoprefixed and minified (when `--prod`) and saved to the `dest.css` folder.
 
-> Default: `0`
+## sass:lint
+All files in the `src.sass` folder (except in the `maelstrom` subfolder) will be linted with _gulp-scss-lint_ and _scss-lint_. Any problems will be displayed with _gulp-scss-lint-stylish_.
 
-> Values: `0` or `1`
-
-
-### gulp images [--optimize][ --resize][ --quality]
-#### `--optimize`
-> Type: `boolean`
-
-> Default: `1`
-
-> Values: `0` or `1`
-
-Optimize images with _imagemin_.
-
-#### `--resize`
-> Type: `number`
-
-> Default: `0`
-
-> Format: `width`x`height`
-
-Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
-
-#### `--quality`
-> Type: `number`
-
-> Default: `1`
-
-> Values: a number from `1` to `100`.
-
-Specify the image quality. A higher number means better quality, but also a larger file size.
-
-
-### gulp icons
-Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
 
 [docs-requirements]: requirements.md
 [docs-config]: config.md
