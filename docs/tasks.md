@@ -7,10 +7,24 @@
 
 [< Back to Readme](../README.md)
 
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
+
 --------------------------------------------------------------------------------
 
-
 # Available tasks
+
+- [css][task-css]
+- [icons][task-icons]
+- [images][task-images]
+- [js][task-js]
+- [js:concat][task-jsconcat]
+- [js:lint][task-jslint]
+- [sass][task-sass]
+- [sass:lint][task-sasslint]
 
 ## css
 This will concat, autoprefix and minify (when `--prod`) all files from the `cssConcat` option in the config and save them in the `dest.css` folder.
@@ -36,9 +50,11 @@ Sass files located in `src.sass` will be compiled, autoprefixed and minified (wh
 ## sass:lint
 All files in the `src.sass` folder (except in the `maelstrom` subfolder) will be linted with _gulp-scss-lint_ and _scss-lint_. Any problems will be displayed with _gulp-scss-lint-stylish_.
 
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md
+[task-css]: #task-css
+[task-icons]: #task-icons
+[task-images]: #task-images
+[task-js]: #task-js
+[task-jsconcat]: #task-jsconcat
+[task-jslint]: #task-jslint
+[task-sass]: #task-sass
+[task-sasslint]: #task-sasslint

@@ -6,6 +6,17 @@
   [![Test Coverage][coveralls-img]][coveralls-url]
   [![Dependency Status][david-img]][david-url]
 
+[npm-img]: https://badge.fury.io/js/maelstrom.svg
+[npm-url]: https://www.npmjs.com/package/maelstrom
+[travis-img]: https://img.shields.io/travis/roeldev/maelstrom/master.svg?label=linux
+[travis-url]: https://travis-ci.org/roeldev/maelstrom
+[appveyor-img]: https://img.shields.io/appveyor/ci/roeldev/maelstrom/master.svg?label=windows
+[appveyor-url]: https://ci.appveyor.com/project/roeldev/maelstrom
+[coveralls-img]: https://img.shields.io/coveralls/roeldev/maelstrom/master.svg
+[coveralls-url]: https://coveralls.io/r/roeldev/maelstrom?branch=master
+[david-img]: https://david-dm.org/roeldev/maelstrom.svg
+[david-url]: https://david-dm.org/roeldev/maelstrom
+
 **A collection of gulp tasks**
 
 ## Installation
@@ -22,8 +33,8 @@ After installation you can configure maelstrom by creating a maelstrom config fi
 If you would like maelstrom to add all of it's default tasks to gulp. you only have to have the following two lines in your `gulpfile.js`:
 
 ```js
-var gulp      = require('gulp'),
-    maelstrom = require('maelstrom').init(gulp);
+var gulp      = require('gulp');
+var maelstrom = require('maelstrom').init(gulp);
 ```
 > Note that you should pass gulp to the `maelstrom.init` function wich is returned by `require('maelstrom')`. Without this, maelstrom will not work.
 
@@ -31,8 +42,8 @@ var gulp      = require('gulp'),
 When you only want to use a certain plugin and/or task, you'll have to add a little bit more code. Below you'll find an example of what is possible. For a better explanation of the used maelstrom functions, check the [API][docs-api].
 
 ```js
-var gulp      = require('gulp'),
-    maelstrom = require('maelstrom');
+var gulp      = require('gulp');
+var maelstrom = require('maelstrom');
 
 // init maelstrom
 maelstrom.init(gulp, false);
@@ -64,17 +75,6 @@ Ofcourse you can combine the above examples by requiring maelstrom so it'll add 
 - [API][docs-api]: Want to know how to use the maelstrom functions?
 - [Plugins][docs-plugins]: Detailed descriptions for all default maelstrom plugins.
 - [Tasks][docs-tasks]: More info about maelstrom's default gulp tasks.
-
-[npm-img]: https://badge.fury.io/js/maelstrom.svg
-[npm-url]: https://www.npmjs.com/package/maelstrom
-[travis-img]: https://img.shields.io/travis/roeldev/maelstrom/master.svg?label=linux
-[travis-url]: https://travis-ci.org/roeldev/maelstrom
-[appveyor-img]: https://img.shields.io/appveyor/ci/roeldev/maelstrom/master.svg?label=windows
-[appveyor-url]: https://ci.appveyor.com/project/roeldev/maelstrom
-[coveralls-img]: https://img.shields.io/coveralls/roeldev/maelstrom/master.svg
-[coveralls-url]: https://coveralls.io/r/roeldev/maelstrom?branch=master
-[david-img]: https://david-dm.org/roeldev/maelstrom.svg
-[david-url]: https://david-dm.org/roeldev/maelstrom
 
 [docs-requirements]: docs/requirements.md
 [docs-config]: docs/config.md

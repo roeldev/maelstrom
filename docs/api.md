@@ -7,8 +7,13 @@
 
 [< Back to Readme](../README.md)
 
---------------------------------------------------------------------------------
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
 
+--------------------------------------------------------------------------------
 
 # API
 - [maelstrom.init()][api-maelstrom-init]
@@ -102,9 +107,3 @@ A plugin to add to maelstrom.
 [api-maelstrom-task]: #maelstromtasktaskname-options
 [api-maelstrom-watch]: #maelstromwatchtaskname-extrafiles-extratasks
 [api-maelstrom-extend]: #maelstromextendname-plugin
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md

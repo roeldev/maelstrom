@@ -7,8 +7,13 @@
 
 [< Back to Readme](../README.md)
 
---------------------------------------------------------------------------------
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
 
+--------------------------------------------------------------------------------
 
 # Available plugins
 - [CSS][plugin-css]
@@ -108,9 +113,3 @@ Wrapper for _gulp-plumber_ combined with _gulp-notify_.
 [plugin-js]: #javascript
 [plugin-plumber]: #plumber
 [plugin-sass]: #sass
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md

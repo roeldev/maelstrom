@@ -7,6 +7,12 @@
 
 [< Back to Readme](../README.md)
 
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
+
 --------------------------------------------------------------------------------
 
 # Config
@@ -188,9 +194,3 @@ See the [confirge](https://github.com/roeldev/confirge) project for more info ab
 [config-sassCompiler]: #sasscompiler
 [config-verbose]: #verbose
 [config-vars]: #vars
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md

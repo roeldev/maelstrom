@@ -7,8 +7,13 @@
 
 [< Back to Readme](../README.md)
 
---------------------------------------------------------------------------------
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
 
+--------------------------------------------------------------------------------
 
 # Requirements
 To avoid any problems, make sure the following software is installed on your system. Some maelstrom plugins may not function without them:
@@ -48,9 +53,3 @@ gem install scss-lint
 [url-vsx2013-desktop]: https://www.microsoft.com/en-us/download/details.aspx?id=44914
 [url-git]: http://git-scm.com/downloads
 [url-ruby]: https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md
