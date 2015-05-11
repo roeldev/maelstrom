@@ -1,4 +1,4 @@
-@import '<%= bowerDir %>frame-scss/source/iconfont';
+@import '<%= bowerDir %>concrete/source/iconfont';
 
 @include add-iconfont('<%= fontName %>', '<%= className %>', '<%= fontPath %>')
 {

@@ -7,30 +7,21 @@
 
 [< Back to Readme](../README.md)
 
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
+
 --------------------------------------------------------------------------------
 
-
 # Available plugins
-- [BrowserSync][plugin-browserSync]
 - [CSS][plugin-css]
 - [Icons][plugin-icons]
 - [Images][plugin-images]
 - [JavaScript][plugin-js]
 - [Plumber][plugin-plumber]
 - [Sass][plugin-sass]
-
-
---------------------------------------------------------------------------------
-## BrowserSync
-
-### maelstrom.browserSync()
-Adds browser-sync reload to a gulp stream.
-
-### maelstrom.browserSync.start()
-Starts browser-sync.
-
-### maelstrom.browserSync.watch()
-Adds a gulp watch action and reloads browser-sync on change.
 
 
 --------------------------------------------------------------------------------
@@ -116,16 +107,9 @@ Wrapper for _gulp-plumber_ combined with _gulp-notify_.
 ### maelstrom.sass.src()
 
 
-[plugin-browserSync]: #browsersync
 [plugin-css]: #css
 [plugin-icons]: #icons
 [plugin-images]: #images
 [plugin-js]: #javascript
 [plugin-plumber]: #plumber
 [plugin-sass]: #sass
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md

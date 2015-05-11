@@ -7,8 +7,13 @@
 
 [< Back to Readme](../README.md)
 
---------------------------------------------------------------------------------
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
 
+--------------------------------------------------------------------------------
 
 # API
 - [maelstrom.init()][api-maelstrom-init]
@@ -38,7 +43,7 @@ Specify wich default maelstrom tasks to add to gulp. By default, all tasks are a
 <table>
 <tr><td>Type</td><td><code>object</code></td></tr>
 </table>
-An optional custom config object. This will overrule both the default maelstrom config and the options loaded from `maelstrom.json`.
+An optional custom config object. This will overrule both the default maelstrom config and the options loaded from your `maelstrom.yml` or `maelstrom.json` file.
 
 
 --------------------------------------------------------------------------------
@@ -102,9 +107,3 @@ A plugin to add to maelstrom.
 [api-maelstrom-task]: #maelstromtasktaskname-options
 [api-maelstrom-watch]: #maelstromwatchtaskname-extrafiles-extratasks
 [api-maelstrom-extend]: #maelstromextendname-plugin
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md

@@ -7,13 +7,23 @@
 
 [< Back to Readme](../README.md)
 
+[docs-requirements]: requirements.md
+[docs-config]: config.md
+[docs-api]: api.md
+[docs-plugins]: plugins.md
+[docs-tasks]: tasks.md
+
 --------------------------------------------------------------------------------
 
-
 # Config
+You can configure maelstrom by creating either a `maelstrom.yml` or `maelstrom.json` file in your project root folder (same folder as where your `package.json` and `gulpfile.js` files are located). Both YAML and JSON are supported, so just choose the file format you're most comfortable with.
+
+> Note: when both a `maelstrom.yml` and `maelstrom.json` file are present, the JSON file is ignored.
+
+
+# Options
 - [src][config-src]
 - [dest][config-dest]
-- [browserSyncWatch][config-browserSyncWatch]
 - [cssConcat][config-cssConcat]
 - [configFile][config-configFile]
 - [defaultMode][config-defaultMode]
@@ -25,18 +35,20 @@
 - [jsHintConfig][config-jsHintConfig]
 - [sassCompiler][config-sassCompiler]
 - [verbose][config-verbose]
+- [vars][config-vars]
 
 ### src
 <table>
 <tr><td>Type</td><td><code>object</code></td></tr>
-<tr><td>Default</td><td><code>{
-    'favicon': 'assets/favicon',
-    'flags':   'assets/flags',
-    'icons':   'assets/icons',
-    'images':  'assets/imgs',
-    'js':      'assets/js',
-    'sass':    'assets/scss'
-}</code></td></tr>
+<tr><td>Default</td><td><pre><code>{
+    bower:   'assets/bower_components'
+    css:     'assets/css'
+    favicon: 'assets/favicon'
+    icons:   'assets/icons'
+    images:  'assets/imgs'
+    js:      'assets/js'
+    sass:    'assets/scss'
+}</code></pre></td></tr>
 </table>
 Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 
@@ -44,28 +56,14 @@ Folders returned by the plugin's `.src()` functions. Used while adding tasks to 
 ### dest
 <table>
 <tr><td>Type</td><td><code>object</code></td></tr>
-<tr><td>Default</td><td><code>{
+<tr><td>Default</td><td><pre><code>{
     'css':    'public/css',
     'fonts':  'public/fonts',
     'images': 'public/imgs',
     'js':     'public/js'
-}</code></td></tr>
+}</code></pre></td></tr>
 </table>
 Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
-
-
-### browserSyncWatch
-<table>
-<tr><td>Type</td><td><code>array</code></td></tr>
-<tr><td>Default</td><td><code>[
-    '%dest.css%/**/*',
-    '%dest.fonts%/**/*',
-    '%dest.images%/**/*',
-    '%dest.js%/**/*',
-    'public/**/*.{html,php}'
-]</code></td></tr>
-</table>
-An array with globs wich should trigger BrowserSync to reload.
 
 
 ### cssConcat
@@ -88,7 +86,7 @@ Example:
 <tr><td>Type</td><td><code>string</code></td></tr>
 <tr><td>Default</td><td><code>maelstrom.yml</code></td></tr>
 </table>
-The config file to search for in the project root folder.
+The config file to search for in the project root folder. Supported file formats are `YAML` and `JSON`.
 
 
 ### defaultMode
@@ -145,6 +143,7 @@ A list of JS wich will be combined to one file. The output file will be minified
 <tr><td>Type</td><td><code>object</code></td></tr>
 <tr><td>Default</td><td><code>%configs%/jshint.yml</code></td></tr>
 </table>
+The contents of this object are added to `modules.jshint`. Supported file formats are `YAML` and `JSON`.
 
 
 ### sassCompiler
@@ -153,7 +152,7 @@ A list of JS wich will be combined to one file. The output file will be minified
 <tr><td>Default</td><td><code>libsass</code></td></tr>
 <tr><td>Values</td><td><code>libsass</code>, <code>ruby</code>* or <code>compass</code>* (not yet available)</td></tr>
 </table>
-Specify wich library should be used to compile the Sass files to CSS. Available options are `libsass` (_gulp-sass_) and `ruby` (_gulp-ruby-sass_). All output files will be autoprefixed by default. When the `--dev` flag is not added, the files will also be minified.
+Specify wich library should be used to compile the Sass files to CSS. Available options are `libsass` (_gulp-sass_), `ruby` (_gulp-ruby-sass_) and `compass` (). All output files will be autoprefixed by default. When the `--dev` flag is not added, the files will also be minified.
 
 
 ### verbose
@@ -162,15 +161,25 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
 <tr><td>Default</td><td><code>true</code></td></tr>
 </table>
 
+### vars
+<table>
+<tr><td>Type</td><td><code>object</code></td></tr>
+<tr><td>Default</td><td><pre><code>{
+    module:    <i>__dirname</i>,
+    src:       {...},
+    dest:      {...},
+    configs:   '%module%/configs',
+    templates: '%module%/templates'
+}
+</code></pre></td></tr>
+</table>
+This object contains all config variables wich you can use in your config file or custom config object. The default values `src` and `dest` contain the paths specified in the [`src][config-src] and [`dest`][config-dest] config options, and will be flattend (so `{ src: { css: 'path/to/css' } }` becomes `{ src.css: 'path/to/css' }`).
 
-# Variables
-
-# Configuration of modules
+See the [confirge](https://github.com/roeldev/confirge) project for more info about the use of variables.
 
 
 [config-src]: #src
 [config-dest]: #dest
-[config-browserSyncWatch]: #browsersyncwatch
 [config-cssConcat]: #cssconcat
 [config-configFile]:  #configfile
 [config-defaultMode]: #defaultmode
@@ -182,9 +191,4 @@ Specify wich library should be used to compile the Sass files to CSS. Available 
 [config-jsHintConfig]: #jshintconfig
 [config-sassCompiler]: #sasscompiler
 [config-verbose]: #verbose
-
-[docs-requirements]: requirements.md
-[docs-config]: config.md
-[docs-api]: api.md
-[docs-plugins]: plugins.md
-[docs-tasks]: tasks.md
+[config-vars]: #vars

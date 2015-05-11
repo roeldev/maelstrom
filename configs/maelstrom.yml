@@ -1,8 +1,8 @@
 # Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
 src:
+  bower:   'assets/bower_components'
   css:     'assets/css'
   favicon: 'assets/favicon'
-  flags:   'assets/flags'
   icons:   'assets/icons'
   images:  'assets/imgs'
   js:      'assets/js'
@@ -14,14 +14,6 @@ dest:
   fonts:  'public/fonts'
   images: 'public/imgs'
   js:     'public/js'
-
-# An array with globs wich should trigger BrowserSync to reload.
-browserSyncWatch: [
-  '%dest.css%/**/*',
-  '%dest.fonts%/**/*',
-  '%dest.images%/**/*',
-  '%dest.js%/**/*',
-  'public/**/*.{html,php}']
 
 # A list of CSS files wich will be concatenated to one file. The output file will be autoprefixed, minified and saved to the `dest.css` folder.
 cssConcat: {}
@@ -58,14 +50,11 @@ verbose: true
 # Define all variables wich are used in the config
 vars:
 
-  # path to bower components dir
-  bower: 'assets/bower_components'
-
   # path to default configs dir
-  configs: '%module%/lib/configs'
+  configs: '%module%/configs'
 
   # path to templates dir
-  templates: '%module%/lib/templates'
+  templates: '%module%/templates'
 
 
 # All module specific default settings
@@ -75,15 +64,6 @@ modules:
   autoprefixer:
     cascade:  false
     browsers: ['last 4 version']
-
-  # browser-sync: https://github.com/BrowserSync/browser-sync
-  # The `files` option is set from `config.browserSyncWatch`.
-  browserSync:
-    proxy:  localhost:8000
-    port:   80
-    open:   false
-    ui:     false
-    notify: false
 
   # gulp-iconfont: https://github.com/nfroidure/gulp-iconfont
   # The `fontName` option is set from `config.iconsOutputname`.

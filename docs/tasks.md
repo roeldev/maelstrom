@@ -7,68 +7,54 @@
 
 [< Back to Readme](../README.md)
 
---------------------------------------------------------------------------------
-
-
-# Available tasks
-- Sass
-- Images
-- Icons
-
-
-### gulp sass [--compiler <libsass|ruby>] [--dev] [--prod]
-
-#### `--dev`
-> Type: `boolean`
-
-> Default: `0`
-
-> Values: `0` or `1`
-
-This flag indicates if the compiled CSS file should not be minified. The default value is `1`, an optional value of `0` can be used, wich disables minifying the output file.
-
-#### `--prod`
-> Type: `boolean`
-
-> Default: `0`
-
-> Values: `0` or `1`
-
-
-### gulp images [--optimize][ --resize][ --quality]
-#### `--optimize`
-> Type: `boolean`
-
-> Default: `1`
-
-> Values: `0` or `1`
-
-Optimize images with _imagemin_.
-
-#### `--resize`
-> Type: `number`
-
-> Default: `0`
-
-> Format: `width`x`height`
-
-Resizes the images to the specified width and height values. This can be either a pixel value like `300x200` to resize to a fixed size. Or a percentage like `50%` or `60%x40%` to scale the width and height according to the given percentag.
-
-#### `--quality`
-> Type: `number`
-
-> Default: `1`
-
-> Values: a number from `1` to `100`.
-
-Specify the image quality. A higher number means better quality, but also a larger file size.
-
-
-### gulp icons
-Combineert SVGs en maakt of font bestanden, of een grote SVG sprite. In beide gevallen wordt een Sass import bestand aangemaakt in de `assets/scss/` map. Vervolgens wordt een evt. gegenereerd SVG bestand geoptimaliseerd.
-
 [docs-requirements]: requirements.md
 [docs-config]: config.md
 [docs-api]: api.md
 [docs-plugins]: plugins.md
 [docs-tasks]: tasks.md
+
+--------------------------------------------------------------------------------
+
+# Available tasks
+
+- [css][task-css]
+- [icons][task-icons]
+- [images][task-images]
+- [js][task-js]
+- [js:concat][task-jsconcat]
+- [js:lint][task-jslint]
+- [sass][task-sass]
+- [sass:lint][task-sasslint]
+
+## css
+This will concat, autoprefix and minify (when `--prod`) all files from the `cssConcat` option in the config and save them in the `dest.css` folder.
+
+## icons
+This will combine all SVG from the `src.icons` folder and output an icon font to `dest.font`. It will also create a Sass codepoints file in the subfolder `maelstrom` in `src.sass` wich you should use in your main Sass.
+
+## images
+Minifies all images from the `src.images` folder and saves them in `dest.images`.
+
+## js
+Executes the `js:lint` and `js:concat` tasks with _run-sequence_.
+
+## js:concat
+This will concat and uglify (when `--prod`) all files from the `jsConcat` option in the config and save them in the `dest.js` folder.
+
+## js:lint
+The javascript code from `src.js` will be linted with _jshint_. Any problems will be display with _jshint-stylish_.
+
+## sass
+Sass files located in `src.sass` will be compiled, autoprefixed and minified (when `--prod`) and saved to the `dest.css` folder.
+
+## sass:lint
+All files in the `src.sass` folder (except in the `maelstrom` subfolder) will be linted with _gulp-scss-lint_ and _scss-lint_. Any problems will be displayed with _gulp-scss-lint-stylish_.
+
+[task-css]: #task-css
+[task-icons]: #task-icons
+[task-images]: #task-images
+[task-js]: #task-js
+[task-jsconcat]: #task-jsconcat
+[task-jslint]: #task-jslint
+[task-sass]: #task-sass
+[task-sasslint]: #task-sasslint
