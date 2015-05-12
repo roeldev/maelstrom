@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/index_tests.js
- * file version: 0.00.004
+ * file version: 0.00.005
  */
 'use strict';
 
@@ -138,7 +138,7 @@ describe('Maelstrom.init()', function initTests()
     it('should add the default tasks to the main object [1]', function()
     {
         resetGulpTasks();
-        silentInit([true]);
+        silentInit([]);
 
         Assert(checkTasksAdded());
     });
@@ -146,7 +146,31 @@ describe('Maelstrom.init()', function initTests()
     it('should add the default tasks to the main object [2]', function()
     {
         resetGulpTasks();
+        silentInit([true]);
+
+        Assert(checkTasksAdded());
+    });
+
+    it('should add the default tasks to the main object [3]', function()
+    {
+        resetGulpTasks();
         silentInit([{}]);
+
+        Assert(checkTasksAdded());
+    });
+
+    it('should add the default tasks to the main object [4]', function()
+    {
+        resetGulpTasks();
+        silentInit([true, {}]);
+
+        Assert(checkTasksAdded());
+    });
+
+    it('should add the default tasks to the main object [5]', function()
+    {
+        resetGulpTasks();
+        silentInit([{}, {}]);
 
         Assert(checkTasksAdded());
     });
@@ -173,7 +197,7 @@ describe('Maelstrom.init()', function initTests()
     it('should not add the default tasks to the main object [1]', function()
     {
         resetGulpTasks();
-        silentInit([false, {}]);
+        silentInit([false]);
 
         Assert(checkTasksNotAdded());
     });
@@ -181,7 +205,7 @@ describe('Maelstrom.init()', function initTests()
     it('should not add the default tasks to the main object [2]', function()
     {
         resetGulpTasks();
-        silentInit([{}, {}]);
+        silentInit([false, {}]);
 
         Assert(checkTasksNotAdded());
     });
