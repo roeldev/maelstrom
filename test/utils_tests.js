@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/utils_tests.js
- * file version: 0.00.005
+ * file version: 0.00.006
  */
 'use strict';
 
@@ -98,6 +98,20 @@ describe('Utils.extendArgs()', function extendArgsTests()
         var $actual = Utils.extendArgs(['var2', false], ['var1', true]);
 
         Assert.deepEqual($actual, ['var1', true, 'var2', false]);
+    });
+
+    it('should append the vars and return an array [5]', function()
+    {
+        var $actual = Utils.extendArgs(undefined, 'var1');
+
+        Assert.deepEqual($actual, ['var1']);
+    });
+
+    it('should append the vars and return an array [6]', function()
+    {
+        var $actual = Utils.extendArgs(undefined, ['var1']);
+
+        Assert.deepEqual($actual, ['var1']);
     });
 
     it('should return an empty array [1]', function()
