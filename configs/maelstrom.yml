@@ -79,6 +79,10 @@ modules:
     progressive: true
     interlaced:  true
 
+  # jscs: https://github.com/jscs-dev/gulp-jscs
+  jscs:
+    configPath: '%configs%/jscs.json'
+
   # jshint: https://github.com/jshint/jshint
   jshint:
     lookup: true
