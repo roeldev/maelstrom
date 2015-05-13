@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/index_tests.js
- * file version: 0.00.005
+ * file version: 0.00.006
  */
 'use strict';
 
@@ -39,16 +39,16 @@ function silentInit($args, $breakSilence)
 
 function resetGulpTasks()
 {
-    for (var $taskName in Maelstrom.tasks)
+    for (var $taskName in Maelstrom._tasks)
     {
-        if (Maelstrom.tasks.hasOwnProperty($taskName))
+        if (Maelstrom._tasks.hasOwnProperty($taskName))
         {
             delete Gulp.tasks[$taskName];
         }
     }
 }
 
-Maelstrom._PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
+Maelstrom._pluginDir = Path.resolve(__dirname, './fixtures/plugins/');
 // LogInterceptor.config({ stripColor: true, trimTimestamp: true });
 
 /******************************************************************************/
@@ -119,9 +119,9 @@ describe('Maelstrom.init()', function initTests()
 
     function checkTasksAdded()
     {
-        for (var $taskName in Maelstrom.tasks)
+        for (var $taskName in Maelstrom._tasks)
         {
-            if (!Maelstrom.tasks.hasOwnProperty($taskName))
+            if (!Maelstrom._tasks.hasOwnProperty($taskName))
             {
                 continue;
             }
@@ -178,9 +178,9 @@ describe('Maelstrom.init()', function initTests()
 
     function checkTasksNotAdded()
     {
-        for (var $taskName in Maelstrom.tasks)
+        for (var $taskName in Maelstrom._tasks)
         {
-            if (!Maelstrom.tasks.hasOwnProperty($taskName))
+            if (!Maelstrom._tasks.hasOwnProperty($taskName))
             {
                 continue;
             }
@@ -222,7 +222,7 @@ describe('Maelstrom.task()', function taskTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
@@ -233,7 +233,7 @@ describe('Maelstrom.task()', function taskTests()
 
     it('should add the task to gulp and return an instance of gulp', function()
     {
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID2) );
@@ -245,7 +245,7 @@ describe('Maelstrom.task()', function taskTests()
 
     it('should add the task to gulp and display a log message', function()
     {
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = true;
 
         LogInterceptor();
@@ -270,7 +270,7 @@ describe('Maelstrom.watch()', function watchTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
@@ -288,7 +288,7 @@ describe('Maelstrom.watch()', function watchTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
@@ -301,7 +301,7 @@ describe('Maelstrom.watch()', function watchTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID2) );

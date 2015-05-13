@@ -1,11 +1,11 @@
 /**
  * maelstrom | test/utils_tests.js
- * file version: 0.00.006
+ * file version: 0.00.007
  */
 'use strict';
 
 var Maelstrom = require('../lib/index.js');
-var Utils     = require('../lib/utils.js')(Maelstrom);
+var Utils     = Maelstrom.utils;
 var Assert    = require('assert');
 var GulpUtil  = require('gulp-util');
 var Path      = require('path');
@@ -48,6 +48,12 @@ describe('Utils.isDev()', function isDevTests()
         Assert.strictEqual(Utils.isDev(), true);
     });
 
+    it('should return false when --prod', function()
+    {
+        setMode('prod');
+        Assert.strictEqual(Utils.isDev(), false);
+    });
+
     it('should revert to config defaultMode and return true', function()
     {
         setMode('dev', true);
@@ -63,10 +69,51 @@ describe('Utils.isProd()', function isProdTests()
         Assert.strictEqual(Utils.isProd(), true);
     });
 
+    it('should return false when --dev', function()
+    {
+        setMode('dev');
+        Assert.strictEqual(Utils.isProd(), false);
+    });
+
     it('should revert to config defaultMode and return true', function()
     {
         setMode('prod', true);
         Assert.strictEqual(Utils.isProd(), true);
+    });
+});
+
+describe('Utils.isVerbose()', function isVerbose()
+{
+    it('should return true when set with env', function()
+    {
+        GulpUtil.env.verbose     = true;
+        Maelstrom.config.verbose = false;
+
+        Assert.strictEqual(Utils.isVerbose(), true);
+    });
+
+    it('should return true when not set with env but in config', function()
+    {
+        GulpUtil.env.verbose     = undefined;
+        Maelstrom.config.verbose = true;
+
+        Assert.strictEqual(Utils.isVerbose(), true);
+    });
+
+    it('should return false when negative with env', function()
+    {
+        GulpUtil.env.verbose     = false;
+        Maelstrom.config.verbose = true;
+
+        Assert.strictEqual(Utils.isVerbose(), false);
+    });
+
+    it('should return false when negative with env and config', function()
+    {
+        GulpUtil.env.verbose     = false;
+        Maelstrom.config.verbose = false;
+
+        Assert.strictEqual(Utils.isVerbose(), false);
     });
 });
 

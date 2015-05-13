@@ -1,10 +1,9 @@
 /**
  * maelstrom | gulpfile.js
- * file version: 0.00.005
+ * file version: 0.00.006
  */
 'use strict';
 
-var Maelstrom       = require('./lib/index.js');
 var Gulp            = require('gulp');
 var GulpJsCs        = require('gulp-jscs');
 var GulpJsCsStylish = require('gulp-jscs-stylish');
@@ -12,6 +11,7 @@ var GulpJsHint      = require('gulp-jshint');
 var GulpMocha       = require('gulp-mocha');
 var GulpSize        = require('gulp-size');
 var Delete          = require('del');
+var Maelstrom       = require('./lib/index.js').init(Gulp, false);
 var RunSequence     = require('run-sequence');
 
 var JS_SRC =
@@ -23,29 +23,6 @@ var JS_SRC =
 ];
 
 ////////////////////////////////////////////////////////////////////////////////
-
-Maelstrom.init(Gulp,
-{
-    'src':
-    {
-        'images': './tests/input',
-        'js':     './tests/input',
-        'sass':   './tests/input'
-    },
-
-    'dest':
-    {
-        'images': './tests/output',
-        'css':    './tests/output',
-        'js':     './tests/output'
-    },
-
-    'jshintConfig': false
-});
-
-/*Maelstrom.extend('tests/custom-plugin.js');
-Maelstrom.extend('customPlugin2', 'tests/custom-plugin.js');
-Maelstrom.extend('customPlugin3', {});*/
 
 //------------------------------------------------------------------------------
 // Test related tasks
@@ -140,7 +117,7 @@ Gulp.task('dev', function()
     RunSequence('test', 'lint');
 });
 
-Gulp.task('watch', function()
+Gulp.task('watch:dev', function()
 {
     Gulp.watch(JS_SRC, ['dev']);
 });
