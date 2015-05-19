@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/init_tests.js
- * file version: 0.00.005
+ * file version: 0.00.006
  */
 'use strict';
 
@@ -10,7 +10,6 @@ var Plugin         = require('../lib/plugin.js');
 var _              = require('underscore');
 var Assert         = require('assert');
 var Confirge       = require('confirge');
-var Chalk          = require('gulp-util').colors;
 var FileSystem     = require('graceful-fs');
 var Gulp           = require('gulp');
 var LogInterceptor = require('log-interceptor');
@@ -18,7 +17,7 @@ var Noop           = Maelstrom.utils.noop;
 var Path           = require('path');
 var Tildify        = require('tildify');
 
-var PLUGIN_DIR    = Path.resolve(__dirname, './fixtures/plugins/');
+var PLUGIN_DIR   = Path.resolve(__dirname, './fixtures/plugins/');
 var PLUGIN_VALID = Path.resolve(__dirname, './fixtures/plugins/valid.js');
 
 Maelstrom.gulp   = Gulp;
@@ -30,6 +29,8 @@ function getFixtureFile($file)
 {
     return Path.resolve(__dirname, './fixtures/' + $file);
 }
+
+LogInterceptor.config({ 'stripColor': true, 'trimTimestamp': true });
 
 //------------------------------------------------------------------------------
 
@@ -203,30 +204,16 @@ describe('Init.loadPlugins()', function loadPluginsTests()
         Maelstrom.config.verbose = true;
         Maelstrom._tasks = {};
 
-        var $actual   = [];
-        var $expected = [];
-
         LogInterceptor();
         Init.loadPlugins(PLUGIN_DIR);
 
-        var $logs = LogInterceptor.end();
-        var $log;
-
-        for (var $i = 0, $iL = $logs.length; $i < $iL; $i++)
-        {
-            $log = $logs[$i];
-            $log = Chalk.stripColor($log);
-
-            $actual.push($log.substr(11));
-        }
+        var $actual   = LogInterceptor.end();
+        var $expected = [];
 
         var $pluginFiles = FileSystem.readdirSync(PLUGIN_DIR);
         var $pluginFile, $pluginName;
 
-        $i  = 0;
-        $iL = $pluginFiles.length;
-
-        for (; $i < $iL; $i++)
+        for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
         {
             $pluginFile = PLUGIN_DIR + Path.sep + $pluginFiles[$i];
             $pluginName = Path.basename($pluginFiles[$i], '.js');
@@ -373,7 +360,7 @@ describe('Init.defaultWatcher()', function defaultWatcherTests()
 
         var $actual = LogInterceptor.end();
 
-        Assert.strictEqual(Chalk.stripColor($actual.shift()).substr(11),
+        Assert.strictEqual($actual.shift(),
             'Warning! No files to watch for task \'plumber\'!\n');
     });
 });
