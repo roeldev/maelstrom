@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/plugin_tests.js
- * file version: 0.00.003
+ * file version: 0.00.004
  */
 'use strict';
 
@@ -10,7 +10,6 @@ var _              = require('underscore');
 var Assert         = require('assert');
 var FileSystem     = require('fs');
 var GulpUtil       = require('gulp-util');
-var Chalk          = GulpUtil.colors;
 var LogInterceptor = require('log-interceptor');
 var Path           = require('path');
 var Through        = require('through2');
@@ -293,16 +292,13 @@ describe('Plugin.exportTask()', function exportTaskTests()
             'contents': FileSystem.readFileSync(PLUGIN_VALID)
         });
 
-        LogInterceptor();
+        LogInterceptor({ 'stripColor': true, 'trimTimestamp': true });
 
         var $stream = $task();
         $stream.write($file, 'utf-8');
         $stream.end();
 
-        var $log = LogInterceptor.end().join('');
-        $log = Chalk.stripColor($log);
-        $log = $log.substr(11);
-
-        Assert.strictEqual($log, 'Warning: Unknown maelstrom task \'nope\'.\n');
+        Assert.strictEqual(LogInterceptor.end().join(''),
+                           'Warning: Unknown maelstrom task \'nope\'.\n');
     });
 });

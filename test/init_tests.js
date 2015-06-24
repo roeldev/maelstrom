@@ -1,24 +1,23 @@
 /**
  * maelstrom | test/init_tests.js
- * file version: 0.00.004
+ * file version: 0.00.006
  */
 'use strict';
 
 var Maelstrom      = require('../lib/index.js');
 var Init           = require('../lib/init.js')(Maelstrom);
-var Utils          = require('../lib/utils.js')(Maelstrom);
 var Plugin         = require('../lib/plugin.js');
 var _              = require('underscore');
 var Assert         = require('assert');
 var Confirge       = require('confirge');
-var Chalk          = require('gulp-util').colors;
 var FileSystem     = require('graceful-fs');
 var Gulp           = require('gulp');
 var LogInterceptor = require('log-interceptor');
+var Noop           = Maelstrom.utils.noop;
 var Path           = require('path');
 var Tildify        = require('tildify');
 
-var PLUGIN_DIR    = Path.resolve(__dirname, './fixtures/plugins/');
+var PLUGIN_DIR   = Path.resolve(__dirname, './fixtures/plugins/');
 var PLUGIN_VALID = Path.resolve(__dirname, './fixtures/plugins/valid.js');
 
 Maelstrom.gulp   = Gulp;
@@ -31,11 +30,7 @@ function getFixtureFile($file)
     return Path.resolve(__dirname, './fixtures/' + $file);
 }
 
-/*function resetConfig()
-{
-    var $configFile  = Path.resolve(__dirname, '../lib/configs/maelstrom.yml');
-    Maelstrom.config = Confirge.read($configFile);
-}*/
+LogInterceptor.config({ 'stripColor': true, 'trimTimestamp': true });
 
 //------------------------------------------------------------------------------
 
@@ -183,7 +178,7 @@ describe('Init.loadPlugins()', function loadPluginsTests()
     it('should add all plugins to Maelstrom', function()
     {
         Maelstrom.config.verbose = false;
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
 
         Init.loadPlugins(PLUGIN_DIR);
 
@@ -207,32 +202,18 @@ describe('Init.loadPlugins()', function loadPluginsTests()
     it('should add all plugins to Maelstrom and display a log', function()
     {
         Maelstrom.config.verbose = true;
-        Maelstrom.tasks = {};
-
-        var $actual   = [];
-        var $expected = [];
+        Maelstrom._tasks = {};
 
         LogInterceptor();
         Init.loadPlugins(PLUGIN_DIR);
 
-        var $logs = LogInterceptor.end();
-        var $log;
-
-        for (var $i = 0, $iL = $logs.length; $i < $iL; $i++)
-        {
-            $log = $logs[$i];
-            $log = Chalk.stripColor($log);
-
-            $actual.push($log.substr(11));
-        }
+        var $actual   = LogInterceptor.end();
+        var $expected = [];
 
         var $pluginFiles = FileSystem.readdirSync(PLUGIN_DIR);
         var $pluginFile, $pluginName;
 
-        $i  = 0;
-        $iL = $pluginFiles.length;
-
-        for (; $i < $iL; $i++)
+        for (var $i = 0, $iL = $pluginFiles.length; $i < $iL; $i++)
         {
             $pluginFile = PLUGIN_DIR + Path.sep + $pluginFiles[$i];
             $pluginName = Path.basename($pluginFiles[$i], '.js');
@@ -247,7 +228,7 @@ describe('Init.loadPlugins()', function loadPluginsTests()
     it('should add all the tasks from the plugins to Maelstrom', function()
     {
         Maelstrom.config.verbose = false;
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
 
         Init.loadPlugins(PLUGIN_DIR);
 
@@ -272,7 +253,7 @@ describe('Init.loadPlugins()', function loadPluginsTests()
                     continue;
                 }
 
-                if (_.isUndefined(Maelstrom.tasks[$taskName]))
+                if (_.isUndefined(Maelstrom._tasks[$taskName]))
                 {
                     $assert = false;
                     break;
@@ -288,7 +269,7 @@ describe('Init.loadPlugin()', function loadPluginTests()
 {
     it('should return the exact same plugin', function()
     {
-        var $input = Utils.noop;
+        var $input = Noop;
 
         Assert.strictEqual(Init.loadPlugin($input), $input);
     });
@@ -297,8 +278,8 @@ describe('Init.loadPlugin()', function loadPluginTests()
     {
         var $plugin = new Plugin(__filename);
         $plugin.testVar = [true, false, 'random string'];
-        $plugin.addStream('stream1', Utils.noop);
-        $plugin.addStream('stream2', Utils.noop);
+        $plugin.addStream('stream1', Noop);
+        $plugin.addStream('stream2', Noop);
 
         var $result = Init.loadPlugin($plugin);
 
@@ -307,11 +288,11 @@ describe('Init.loadPlugin()', function loadPluginTests()
 
     it('should add the tasks to Maelstrom', function()
     {
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
 
         var $plugin = new Plugin(__filename);
-        $plugin.addTask('task1', Utils.noop);
-        $plugin.addTask('task2', Utils.noop);
+        $plugin.addTask('task1', Noop);
+        $plugin.addTask('task2', Noop);
 
         Init.loadPlugin($plugin);
 
@@ -323,9 +304,9 @@ describe('Init.loadPlugin()', function loadPluginTests()
                     _.isFunction($item.fn));
         }
 
-        Assert(_.isObject(Maelstrom.tasks) &&
-               check(Maelstrom.tasks.task1) &&
-               check(Maelstrom.tasks.task2));
+        Assert(_.isObject(Maelstrom._tasks) &&
+               check(Maelstrom._tasks.task1) &&
+               check(Maelstrom._tasks.task2));
     });
 });
 
@@ -369,7 +350,7 @@ describe('Init.defaultWatcher()', function defaultWatcherTests()
 
     it('should add a watch task to gulp [2]', function()
     {
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
 
         Init.loadPlugin( require(PLUGIN_VALID) );
         Init.defaultWatcher();
@@ -379,7 +360,7 @@ describe('Init.defaultWatcher()', function defaultWatcherTests()
 
         var $actual = LogInterceptor.end();
 
-        Assert.strictEqual(Chalk.stripColor($actual.shift()).substr(11),
+        Assert.strictEqual($actual.shift(),
             'Warning! No files to watch for task \'plumber\'!\n');
     });
 });

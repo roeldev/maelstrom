@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/index_tests.js
- * file version: 0.00.005
+ * file version: 0.00.007
  */
 'use strict';
 
@@ -10,7 +10,6 @@ var Utils          = require('../lib/utils.js')(Maelstrom);
 var Plugin         = require('../lib/plugin.js');
 var _              = require('underscore');
 var Assert         = require('assert');
-var Chalk          = require('gulp-util').colors;
 var Gulp           = require('gulp');
 var LogInterceptor = require('log-interceptor');
 var Path           = require('path');
@@ -31,7 +30,14 @@ function silentInit($args, $breakSilence)
 
     $args.unshift(Gulp);
 
-    LogInterceptor($breakSilence === true);
+    LogInterceptor(
+    {
+        'passDown':         ($breakSilence === true),
+        'stripColor':       false,
+        'trimTimestamp':    false,
+        'trimLinebreak':    false,
+        'splitOnLinebreak': false
+    });
 
     Maelstrom.init.apply(Maelstrom, $args);
     return LogInterceptor.end();
@@ -39,19 +45,20 @@ function silentInit($args, $breakSilence)
 
 function resetGulpTasks()
 {
-    for (var $taskName in Maelstrom.tasks)
+    for (var $taskName in Maelstrom._tasks)
     {
-        if (Maelstrom.tasks.hasOwnProperty($taskName))
+        if (Maelstrom._tasks.hasOwnProperty($taskName))
         {
             delete Gulp.tasks[$taskName];
         }
     }
 }
 
-Maelstrom._PLUGIN_DIR = Path.resolve(__dirname, './fixtures/plugins/');
-// LogInterceptor.config({ stripColor: true, trimTimestamp: true });
+Maelstrom._pluginDir = Path.resolve(__dirname, './fixtures/plugins/');
 
-/******************************************************************************/
+LogInterceptor.config({ 'stripColor': true, 'trimTimestamp': true });
+
+//------------------------------------------------------------------------------
 
 describe('Maelstrom()', function maelstromTests()
 {
@@ -88,7 +95,7 @@ describe('Maelstrom.init()', function initTests()
 
         var $actual = LogInterceptor.end();
 
-        Assert.equal(Chalk.stripColor($actual.pop()).substr(11),
+        Assert.equal($actual.pop(),
             'Error! Make sure to pass an instance of gulp to ' +
             'maelstrom.init()\n');
     });
@@ -113,15 +120,16 @@ describe('Maelstrom.init()', function initTests()
     it('should load the Plugin class and add it to the main obj', function()
     {
         silentInit();
+
         Assert.strictEqual(Maelstrom.Plugin, Plugin);
     });
 
 
     function checkTasksAdded()
     {
-        for (var $taskName in Maelstrom.tasks)
+        for (var $taskName in Maelstrom._tasks)
         {
-            if (!Maelstrom.tasks.hasOwnProperty($taskName))
+            if (!Maelstrom._tasks.hasOwnProperty($taskName))
             {
                 continue;
             }
@@ -178,9 +186,9 @@ describe('Maelstrom.init()', function initTests()
 
     function checkTasksNotAdded()
     {
-        for (var $taskName in Maelstrom.tasks)
+        for (var $taskName in Maelstrom._tasks)
         {
-            if (!Maelstrom.tasks.hasOwnProperty($taskName))
+            if (!Maelstrom._tasks.hasOwnProperty($taskName))
             {
                 continue;
             }
@@ -222,7 +230,7 @@ describe('Maelstrom.task()', function taskTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
@@ -233,7 +241,7 @@ describe('Maelstrom.task()', function taskTests()
 
     it('should add the task to gulp and return an instance of gulp', function()
     {
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID2) );
@@ -245,7 +253,7 @@ describe('Maelstrom.task()', function taskTests()
 
     it('should add the task to gulp and display a log message', function()
     {
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = true;
 
         LogInterceptor();
@@ -254,7 +262,7 @@ describe('Maelstrom.task()', function taskTests()
 
         var $actual = LogInterceptor.end();
 
-        Assert.strictEqual(Chalk.stripColor($actual.pop()).substr(11),
+        Assert.strictEqual($actual.pop(),
             '- Add task \'through\': ' + Tildify(PLUGIN_VALID2) + '\n');
     });
 });
@@ -270,7 +278,7 @@ describe('Maelstrom.watch()', function watchTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
@@ -280,7 +288,7 @@ describe('Maelstrom.watch()', function watchTests()
 
         var $actual = LogInterceptor.end();
 
-        Assert.strictEqual(Chalk.stripColor($actual.pop()).substr(11),
+        Assert.strictEqual($actual.pop(),
             'Warning! No files to watch for task \'plumber\'!\n');
     });
 
@@ -288,7 +296,7 @@ describe('Maelstrom.watch()', function watchTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
@@ -301,7 +309,7 @@ describe('Maelstrom.watch()', function watchTests()
     {
         resetGulpTasks();
 
-        Maelstrom.tasks = {};
+        Maelstrom._tasks = {};
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID2) );

@@ -33,7 +33,7 @@ js:
 
   # jscs: https://github.com/jscs-dev/gulp-jscs
   jscs:
-    configPath: '%configs%/jscs.json'
+    configPath: '%configs%/jscs.yml'
 
   # jshint: https://github.com/jshint/jshint
   jshint:
