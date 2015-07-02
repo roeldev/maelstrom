@@ -2,13 +2,13 @@
 
   [![NPM Version][npm-img]][npm-url]
   [![Linux Build][travis-img]][travis-url]
-  [![Windows Build][appveyor-img]][appveyor-url]
   [![Test Coverage][coveralls-img]][coveralls-url]
   [![Dependency Status][david-img]][david-url]
 
 [npm-img]: https://badge.fury.io/js/maelstrom.svg
 [npm-url]: https://www.npmjs.com/package/maelstrom
-[travis-img]: https://img.shields.io/travis/roeldev/maelstrom/master.svg?label=linux
+[travis-img_old]: https://img.shields.io/travis/roeldev/maelstrom/master.svg?label=linux
+[travis-img]: https://img.shields.io/travis/roeldev/maelstrom/master.svg
 [travis-url]: https://travis-ci.org/roeldev/maelstrom
 [appveyor-img]: https://img.shields.io/appveyor/ci/roeldev/maelstrom/master.svg?label=windows
 [appveyor-url]: https://ci.appveyor.com/project/roeldev/maelstrom
