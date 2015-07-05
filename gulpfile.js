@@ -126,3 +126,5 @@ Gulp.task('watch:lint', function()
 {
     Gulp.watch(JS_SRC, ['lint']);
 });
+
+Gulp.task('watch', ['watch:dev', 'watch:lint']);

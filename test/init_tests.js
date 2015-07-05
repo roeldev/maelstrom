@@ -1,6 +1,6 @@
 /**
  * maelstrom | test/init_tests.js
- * file version: 0.00.006
+ * file version: 0.00.007
  */
 'use strict';
 
@@ -64,18 +64,19 @@ describe('Init.createConfig()', function createConfigTests()
 
     it('should extend the default config', function()
     {
-        Maelstrom.config =
-        {
+        Maelstrom.config = {
             'option1': 'value1',
             'option2': 'value2'
         };
 
-        Assert.deepEqual(Init.createConfig({ 'option3': 'value3' }),
-        {
+        var $result   = Init.createConfig({ 'option3': 'value3' });
+        var $expected = {
             'option1': 'value1',
             'option2': 'value2',
             'option3': 'value3'
-        });
+        };
+
+        Assert.deepEqual($result, $expected);
     });
 
     it('should replace the default config', function()
