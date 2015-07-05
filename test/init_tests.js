@@ -219,6 +219,7 @@ describe('Init.loadPlugins()', function loadPluginsTests()
             $pluginFile = PLUGIN_DIR + Path.sep + $pluginFiles[$i];
             $pluginName = Path.basename($pluginFiles[$i], '.js');
 
+            $expected.push('');
             $expected.push('- Load plugin \'' + $pluginName + '\': ' +
                            Tildify($pluginFile) + '\n');
         }
@@ -360,6 +361,7 @@ describe('Init.defaultWatcher()', function defaultWatcherTests()
         Gulp.tasks.watch.fn();
 
         var $actual = LogInterceptor.end();
+        $actual.shift();
 
         Assert.strictEqual($actual.shift(),
             'Warning! No files to watch for task \'plumber\'!\n');
