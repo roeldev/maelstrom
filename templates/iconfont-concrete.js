@@ -1,6 +1,6 @@
-@import '<%= bowerDir %>/concrete/source/iconfont';
+@import '<%= importFile %>';
 
-@include add-iconfont('<%= fontName %>', '<%= className %>', '<%= fontPath %>')
+@include iconfont('<%= fontName %>', '<%= className %>', '<%= fontPath %>')
 {
 <% _.each(glyphs, function(glyph) { %>
     .<%= className %>-<%= glyph.name %>:before
