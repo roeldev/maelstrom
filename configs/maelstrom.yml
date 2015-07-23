@@ -94,7 +94,7 @@ icons:
   # Name of template to use
   templateFile: '%templates%/iconfont-concrete.js'
   # sass file to @import
-  importFile: '%src.bower%/concrete/source/iconfont'
+  importFile: '%src.bower%/concrete/src/iconfont'
 
   # gulp-iconfont: https://github.com/nfroidure/gulp-iconfont
   iconfont:
