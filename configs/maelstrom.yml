@@ -98,7 +98,7 @@ icons:
 
   # gulp-iconfont: https://github.com/nfroidure/gulp-iconfont
   iconfont:
-    appendCodepoints:   true
+    appendUnicode:      true
     normalize:          true
     centerHorizontally: true
     fixedWidth:         false
