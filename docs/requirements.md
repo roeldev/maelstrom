@@ -33,12 +33,11 @@ To avoid any problems, make sure the following software is installed on your sys
 - **[Visual Studio Express (only for Windows)][url-vsx2015]**
 > Install [Visual Studio 2015 Express for Desktop][url-vsx2015] and add the system environment variable _GYP_MSVS_VERSION_ with value `2015`, or install [Visual Studio Express 2013][url-vsx2013] and with the environment variable _GYP_MSVS_VERSION_ set to `2013`. This will make sure node-gyp runs without problems.
 
-After that you probably need to restart your computer or sign-out and sign-in again to make sure all system env vars are loaded :)
 
 **Node modules:**
 Make sure these npm packages are installed using the `-g` or `--global` flag:
 ```sh
-npm install -g gulp jshint jscs
+npm install -g gulp jshint jscs karma
 ```
 
 **Ruby gems:**
@@ -48,10 +47,9 @@ gem install compass
 gem install scss-lint
 ```
 
-[url-nodejs]: https://nodejs.org/download/
-[url-python]: https://www.python.org/downloads/release/python-279/
+[url-nodejs]: https://nodejs.org/en/download/
+[url-python]: https://www.python.org/downloads/
 [url-git]: http://git-scm.com/downloads
 [url-ruby]: https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller
-[url-vsx2012]: http://go.microsoft.com/?linkid=9816758
 [url-vsx2015]: https://www.visualstudio.com/products/mt238358
 [url-vsx2013]: https://www.microsoft.com/en-us/download/details.aspx?id=44914
