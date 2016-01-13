@@ -30,6 +30,7 @@ js:
   # A list of JS wich will be combined to one file. The output file will be minified and saved to the `dest.js` folder.
   concat: {}
   jshintFile: '%configs%/jshint.yml'
+  sourcemaps: true
 
   # jscs: https://github.com/jscs-dev/gulp-jscs
   jscs:
