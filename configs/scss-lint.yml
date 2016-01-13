@@ -21,7 +21,7 @@ linters:
     enabled: true
 
   DeclarationOrder:
-    enabled: true
+    enabled: false
 
   DuplicateProperty:
     enabled: true
@@ -85,7 +85,7 @@ linters:
 
   NestingDepth:
     enabled: true
-    max_depth: 3
+    max_depth: 5
 
   PlaceholderInExtend:
     enabled: true
@@ -97,103 +97,116 @@ linters:
 
   PropertySortOrder:
     enabled: true
-    order: [
-      'content',
-      'cursor',
-      'pointer-events',
-      'display',
-      'visibility',
-      'overflow',
-      'overflow-x',
-      'overflow-y',
-      'position',
-      'z-index',
-      'top',
-      'bottom',
-      'left',
-      'right',
-      'float',
-      'clear',
-      'table-layout',
-      'border-collapse',
-      'empty-cells',
-      'box-sizing',
-      'width',
-      'min-width',
-      'max-width',
-      'height',
-      'min-height',
-      'max-height',
-      'margin',
-      'margin-top',
-      'margin-bottom',
-      'margin-left',
-      'margin-right',
-      'padding',
-      'padding-top',
-      'padding-bottom',
-      'padding-left',
-      'padding-right',
-      'border',
-      'border-top',
-      'border-bottom',
-      'border-left',
-      'border-right',
-      'border-width',
-      'border-style',
-      'border-color',
-      'border-radius',
-      'border-top-width',
-      'border-top-style',
-      'border-top-color',
-      'border-bottom-width',
-      'border-bottom-style',
-      'border-bottom-color',
-      'border-left-width',
-      'border-left-style',
-      'border-left-color',
-      'border-right-width',
-      'border-right-style',
-      'border-right-color',
-      'border-top-left-radius',
-      'border-top-right-radius',
-      'border-bottom-left-radius',
-      'border-bottom-right-radius',
-      'outline',
-      'outline-width',
-      'outline-style',
-      'outline-color',
-      'white-space',
-      'list-style',
-      'list-style-type',
-      'list-style-position',
-      'list-style-image',
-      'background',
-      'background-color',
-      'background-image',
-      'background-attachment',
-      'background-position',
-      'background-repeat',
-      'background-size',
-      'opacity',
-      'color',
-      'font',
-      'font-family',
-      'font-size',
-      'font-style',
-      'font-variant',
-      'font-weight',
-      'letter-spacing',
-      'line-height',
-      'text-align',
-      'text-decoration',
-      'text-indent',
-      'text-transform',
-      'text-shadow',
-      'box-shadow',
-      'animation',
-      'transform',
-      'transition']
+    order:
+      - content
+      - cursor
+      - pointer-events
+      - display
+      - vertical-align
+      - flex
+      - flex-basis
+      - flex-flow
+      - flex-direction
+      - flex-grow
+      - flex-shrink
+      - flex-wrap
+      - justify-content
+      - align-content
+      - align-items
+      - align-self
+      - visibility
+      - opacity
+      - overflow
+      - overflow-x
+      - overflow-y
+      - position
+      - z-index
+      - order
+      - top
+      - bottom
+      - left
+      - right
+      - float
+      - clear
+      - table-layout
+      - border-collapse
+      - empty-cells
+      - box-sizing
+      - width
+      - min-width
+      - max-width
+      - height
+      - min-height
+      - max-height
+      - margin
+      - margin-top
+      - margin-bottom
+      - margin-left
+      - margin-right
+      - padding
+      - padding-top
+      - padding-bottom
+      - padding-left
+      - padding-right
+      - border
+      - border-top
+      - border-bottom
+      - border-left
+      - border-right
+      - border-width
+      - border-style
+      - border-color
+      - border-radius
+      - border-top-width
+      - border-top-style
+      - border-top-color
+      - border-bottom-width
+      - border-bottom-style
+      - border-bottom-color
+      - border-left-width
+      - border-left-style
+      - border-left-color
+      - border-right-width
+      - border-right-style
+      - border-right-color
+      - border-top-left-radius
+      - border-top-right-radius
+      - border-bottom-left-radius
+      - border-bottom-right-radius
+      - outline
+      - outline-width
+      - outline-style
+      - outline-color
+      - white-space
+      - list-style
+      - list-style-type
+      - list-style-position
+      - list-style-image
+      - background
+      - background-color
+      - background-image
+      - background-attachment
+      - background-position
+      - background-repeat
+      - background-size
+      - color
+      - font
+      - font-family
+      - font-size
+      - font-style
+      - font-variant
+      - font-weight
+      - letter-spacing
+      - line-height
+      - text-align
+      - text-decoration
+      - text-indent
+      - text-transform
+      - text-shadow
+      - box-shadow
+      - animation
+      - transform
+      - transition
 
   PropertySpelling:
     enabled: true

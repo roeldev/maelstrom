@@ -82,7 +82,7 @@ requirePaddingNewlinesBeforeKeywords:
 
 requireParenthesesAroundIIFE: true
 
-requireQuotedKeysInObjects: true
+requireQuotedKeysInObjects: false
 
 requireSemicolons: true
 
@@ -107,8 +107,6 @@ requireSpaceAfterLineComment:
   allExcept:
     - '#'
     - '='
-    - '------------------------------------------------------------------------------'
-    - '//////////////////////////////////////////////////////////////////////////////'
 
 requireSpaceBeforeBinaryOperators: true
 

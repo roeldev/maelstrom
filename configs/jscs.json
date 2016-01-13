@@ -34,14 +34,13 @@
     "requirePaddingNewlinesBeforeKeywords":
         ["do", "case", "try", "void", "while", "function"],
     "requireParenthesesAroundIIFE": true,
-    "requireQuotedKeysInObjects": true,
+    "requireQuotedKeysInObjects": false,
     "requireSemicolons": true,
     "requireSpaceAfterBinaryOperators": true,
     "requireSpaceAfterKeywords":
         ["do", "for", "if", "else", "switch", "case", "try", "catch", "void", "while", "with", "return", "typeof"],
     "requireSpaceAfterLineComment":
-        { "allExcept": ["#", "=",
-            "------------------------------------------------------------------------------", "//////////////////////////////////////////////////////////////////////////////"] },
+        { "allExcept": ["#", "="] },
     "requireSpaceBeforeBinaryOperators": true,
     "requireSpaceBeforeObjectValues": true,
     "requireSpaceBetweenArguments": true,

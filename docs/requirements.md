@@ -22,7 +22,7 @@ To avoid any problems, make sure the following software is installed on your sys
 > On Windows: make sure to install the 32-bit version!
 
 - **[Python 2.7.x][url-python]**
-> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`), install [Visual Studio Express 2013 for Windows 8.1][url-vsx2013-w81] or [Visual Studio Express 2013 Desktop][url-vsx2013-desktop], and add the system environment variable PYTHON with value `C:\Python27\python.exe` in the Advanced System Settings panel.
+> On Windows: make sure to install the 32-bit version, use the default installation location (ie. `C:\Python27`) and add the system environment variable _PYTHON_ with value `C:\Python27\python.exe` in the Advanced System Settings panel.
 
 - **[Git][url-git]**
 > On Windows: make sure to install with the option 'Use Git from the Windows Command Prompt', so Git is added to your PATH variable.
@@ -30,14 +30,15 @@ To avoid any problems, make sure the following software is installed on your sys
 - **[Ruby][url-ruby]**
 > On Windows: use the default installation location with the option 'Add Ruby executables to your PATH' selected.
 
-After that you probably need to restart your computer or sign-out and sign-in again to make sure all system env vars are loaded :)
+- **[Visual Studio Express (only for Windows)][url-vsx2015]**
+> Install [Visual Studio 2015 Express for Desktop][url-vsx2015] and add the system environment variable _GYP_MSVS_VERSION_ with value `2015`, or install [Visual Studio Express 2013][url-vsx2013] and with the environment variable _GYP_MSVS_VERSION_ set to `2013`. This will make sure node-gyp runs without problems.
+
 
 **Node modules:**
 Make sure these npm packages are installed using the `-g` or `--global` flag:
 ```sh
-npm install -g gulp jshint jscs
+npm install -g gulp jshint jscs karma
 ```
-> On Windows: make sure to add `--msvs_version=2013`
 
 **Ruby gems:**
 Install the required Ruby gems with Bundler: `bundle install`; or install them manually:
@@ -46,10 +47,9 @@ gem install compass
 gem install scss-lint
 ```
 
-[url-nodejs]: https://nodejs.org/download/
-[url-python]: https://www.python.org/downloads/release/python-279/
-[url-vsx2012]: http://go.microsoft.com/?linkid=9816758
-[url-vsx2013-w81]: https://www.microsoft.com/en-us/download/details.aspx?id=44917
-[url-vsx2013-desktop]: https://www.microsoft.com/en-us/download/details.aspx?id=44914
+[url-nodejs]: https://nodejs.org/en/download/
+[url-python]: https://www.python.org/downloads/
 [url-git]: http://git-scm.com/downloads
 [url-ruby]: https://www.ruby-lang.org/en/documentation/installation/#rubyinstaller
+[url-vsx2015]: https://www.visualstudio.com/products/mt238358
+[url-vsx2013]: https://www.microsoft.com/en-us/download/details.aspx?id=44914
