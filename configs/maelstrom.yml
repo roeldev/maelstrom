@@ -60,7 +60,8 @@ css:
 ## Sass plugin
 sass:
   # Specify wich library should be used to compile the Sass files to CSS. Available options are `libsass` (_gulp-sass_) and `ruby` (_gulp-ruby-sass_). All output files will be autoprefixed by default. When the `--dev` flag is not added, the files will also be minified.
-  compiler: libsass # libsass|ruby|compass
+  compiler:   libsass # libsass|ruby|compass
+  sourcemaps: true
 
   # gulp-sass: https://github.com/dlmanning/gulp-sass
   libsass:
