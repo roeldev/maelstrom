@@ -105,14 +105,12 @@ icons:
     fontHeight:         100
     fontName:           '%icons.outputName%'
 
-
 ## Default module settings
 main:
   # gulp-notify: https://github.com/mikaelbr/gulp-notify
   notify:
-    success:
-
-    warning:
+    success: {}
+    warning: {}
 
     error:
       message: 'Error: <%= error.message %>'
