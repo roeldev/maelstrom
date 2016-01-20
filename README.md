@@ -12,7 +12,7 @@
   [travis-url]: https://travis-ci.org/roeldev/maelstrom
   [appveyor-img]: https://img.shields.io/appveyor/ci/roeldev/maelstrom/master.svg?label=windows
   [appveyor-url]: https://ci.appveyor.com/project/roeldev/maelstrom
-  [coveralls-img]: https://img.shields.io/coveralls/roeldev/maelstrom/master.svg
+  [coveralls-img]: https://coveralls.io/repos/github/roeldev/maelstrom/badge.svg?branch=master
   [coveralls-url]: https://coveralls.io/r/roeldev/maelstrom?branch=master
   [david-img]: https://david-dm.org/roeldev/maelstrom.svg
   [david-url]: https://david-dm.org/roeldev/maelstrom
