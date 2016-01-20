@@ -226,11 +226,11 @@ linters:
 
   SelectorDepth:
     enabled: true
-    max_depth: 3
+    max_depth: 4
 
   SelectorFormat:
     enabled: true
-    convention: hyphenated_lowercase
+    convention: hyphenated_BEM
 
   Shorthand:
     enabled: true
