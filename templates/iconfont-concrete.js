@@ -7,7 +7,7 @@
 
         %<%= glyph.className %>
         {
-            content: '\<%= glyph.content %>';
+            content: '\<%= glyph.content %>' !important;
         }
         .<%= glyph.className %>:before
         {
