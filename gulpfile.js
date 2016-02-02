@@ -1,6 +1,5 @@
 /**
  * maelstrom | gulpfile.js
- * file version: 0.00.006
  */
 'use strict';
 
