@@ -1,0 +1,7 @@
+dest:
+  js: '**/*/.js'
+
+js:
+  mode: node
+
+verbose: true
