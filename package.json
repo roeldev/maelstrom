@@ -19,7 +19,8 @@
     "setup": "npm install",
     "start": "npm run setup && gulp watch",
     "test": "mocha --reporter spec --check-leaks --globals store@sparkles",
-    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks --globals store@sparkles"
+    "test-ci": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks --globals store@sparkles",
+    "depcheck": "depcheck --ignores=mocha-lcov-reporter"
   },
   "dependencies": {
     "confirge": "^0.4.0",
@@ -28,11 +29,6 @@
     "gulp-plumber": "^1.0.1",
     "gulp-size": "^2.0.0",
     "gulp-util": "^3.0.6",
-    "maelstrom-css": "latest",
-    "maelstrom-icons": "latest",
-    "maelstrom-images": "latest",
-    "maelstrom-js": "latest",
-    "maelstrom-sass": "latest",
     "through2": "^2.0.0",
     "tildify": "^1.1.1",
     "underscore": "^1.8.3"
@@ -43,6 +39,7 @@
     "gulp-mocha": "^2.1.3",
     "istanbul": "^0.4.2",
     "log-interceptor": "^1.0.0",
+    "maelstrom-js": "latest",
     "mocha": "^2.3.3",
     "mocha-lcov-reporter": "1.0.0"
   },
