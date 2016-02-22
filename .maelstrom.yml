@@ -1,5 +1,9 @@
-dest:
-  js: '**/*/.js'
+src:
+  js:
+    - 'gulpfile.js'
+    - 'lib/**/*.js'
+    - '!lib/**/_*.js'
+    - 'test/*.js'
 
 js:
   mode: node
