@@ -16,7 +16,7 @@ dest:
   js:     'public/js'
 
 # The config file to search for in the project root folder.
-configFile: '.maelstrom.yml'
+configFile: './.maelstrom.yml'
 
 # Specify the default mode. This is either `dev` or `prod`.
 defaultMode: dev
@@ -132,6 +132,6 @@ main:
 # Define all variables wich are used in the config
 vars:
   # path to default configs dir
-  configs: '%root%/configs'
+  configs: '%root%/lib/configs'
   # path to templates dir
-  templates: '%root%/templates'
+  templates: '%root%/lib/templates'
