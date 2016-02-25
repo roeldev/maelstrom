@@ -3,6 +3,7 @@ src:
     - 'gulpfile.js'
     - 'lib/**/*.js'
     - '!lib/**/_*.js'
+    - '!lib/templates/*.js'
     - 'test/*.js'
 
 js:
