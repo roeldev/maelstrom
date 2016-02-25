@@ -30,9 +30,9 @@
     "gulp-plumber": "^1.0.1",
     "gulp-size": "^2.0.0",
     "gulp-util": "^3.0.6",
+    "lodash": "^4.5.1",
     "through2": "^2.0.0",
-    "tildify": "^1.1.1",
-    "underscore": "^1.8.3"
+    "tildify": "^1.1.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
