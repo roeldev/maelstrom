@@ -28,10 +28,10 @@ verbose: true
 ## JS plugin
 js:
   # A list of JS wich will be combined to one file. The output file will be minified and saved to the `dest.js` folder.
-  concat: {}
+  concat:     {}
   jshintFile: '%configs%/jshint.yml'
   sourcemaps: true
-  lint: true
+  lint:       true
 
   # jscs: https://github.com/jscs-dev/gulp-jscs
   jscs:
@@ -65,7 +65,8 @@ sass:
   # Specify wich library should be used to compile the Sass files to CSS. Available options are `libsass` (_gulp-sass_) and `ruby` (_gulp-ruby-sass_). All output files will be autoprefixed by default. When the `--dev` flag is not added, the files will also be minified.
   compiler:   libsass # libsass|ruby|compass
   sourcemaps: true
-  lint: true
+  lint:       false
+  wait:       500
 
   # gulp-sass: https://github.com/dlmanning/gulp-sass
   libsass:
@@ -102,15 +103,22 @@ icons:
   templateFile: '%templates%/iconfont-concrete.js'
   # sass file to @import
   importFile: '%src.bower%/concrete/src/iconfont'
+  # apply fix by uppercasing the first u character of the icon svgs
+  applyUnicodeFix: true
 
   # gulp-iconfont: https://github.com/nfroidure/gulp-iconfont
   iconfont:
-    appendUnicode:      true
+    prependUnicode:     true
     normalize:          true
     centerHorizontally: true
     fixedWidth:         false
     fontHeight:         100
     fontName:           '%icons.outputName%'
+    formats:
+      - ttf
+      - eot
+      - woff
+      - svg
 
 ## Default module settings
 main:
