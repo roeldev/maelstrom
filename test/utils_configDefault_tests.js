@@ -3,9 +3,9 @@
  */
 'use strict';
 
-const Expect = require('chai').expect;
-
 const configDefault = require('../lib/utils/configDefault');
+
+const expect = require('chai').expect;
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -17,12 +17,12 @@ describe('utils/configDefault()', function configDefaultTests()
 {
     it('should read the config file', function()
     {
-        Expect( configDefault(FIXTURE_FILE) ).to.be.an('object');
+        expect( configDefault(FIXTURE_FILE) ).to.be.an('object');
     });
 
     it('should parse the config file', function()
     {
-        Expect( configDefault(FIXTURE_FILE) ).to.deep.equal(
+        expect( configDefault(FIXTURE_FILE) ).to.deep.equal(
         {
             'default':
             {

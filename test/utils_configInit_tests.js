@@ -4,11 +4,12 @@
 'use strict';
 
 const Confirge = require('confirge');
-const Expect   = require('chai').expect;
 const Path     = require('path');
 
-const Maelstrom  = require('../lib/index.js');
+const Maelstrom  = require('../lib/index');
 const configInit = require('../lib/utils/configInit');
+
+const expect = require('chai').expect;
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -23,7 +24,7 @@ describe('utils/configInit()', function configInitTests()
         let $expected = Confirge.replace(Maelstrom.config,
                                          Maelstrom.config.vars);
 
-        Expect( configInit(Maelstrom.config) ).to.deep.equal($expected);
+        expect( configInit(Maelstrom.config) ).to.deep.equal($expected);
     });
 
     it('should extend the default config', function()
@@ -39,7 +40,7 @@ describe('utils/configInit()', function configInitTests()
             'option3': 'value3'
         };
 
-        Expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
+        expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
         {
             'option1': 'value1',
             'option2': 'value2',
@@ -62,7 +63,7 @@ describe('utils/configInit()', function configInitTests()
         };
 
         let $expected = configInit($defaultConfig, $customConfig);
-        Expect( $expected ).to.deep.equal( $customConfig );
+        expect( $expected ).to.deep.equal( $customConfig );
     });
 
     it('should load the default file and extend the default config', function()
@@ -80,7 +81,7 @@ describe('utils/configInit()', function configInitTests()
             'option2': 'replacement2'
         };
 
-        Expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
+        expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
         {
             'option1':       'replacement1',
             'option2':       'replacement2',
@@ -105,7 +106,7 @@ describe('utils/configInit()', function configInitTests()
             'configFile': FIXTURE_FILE
         };
 
-        Expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
+        expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
         {
             'option1':       'ok!',
             'option2':       'replacement2',
@@ -132,7 +133,7 @@ describe('utils/configInit()', function configInitTests()
             'configFile': $configFile
         };
 
-        Expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
+        expect( configInit($defaultConfig, $customConfig) ).to.deep.equal(
         {
             'option1':    'replacement1',
             'option2':    'replacement2',

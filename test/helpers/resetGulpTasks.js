@@ -3,18 +3,17 @@
  */
 'use strict';
 
+const Maelstrom = require('../../lib/index.js');
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-module.exports = function($maelstrom)
+module.exports = function resetGulpTasks()
 {
-    return function resetGulpTasks()
+    for (let $taskName in Maelstrom._tasks)
     {
-        for (let $taskName in $maelstrom._tasks)
+        if (Maelstrom._tasks.hasOwnProperty($taskName))
         {
-            if ($maelstrom._tasks.hasOwnProperty($taskName))
-            {
-                delete $maelstrom.gulp.tasks[$taskName];
-            }
+            delete Maelstrom.gulp.tasks[$taskName];
         }
-    };
+    }
 };

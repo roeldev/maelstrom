@@ -6,30 +6,28 @@
 const _              = require('lodash');
 const Gulp           = require('gulp');
 const LogInterceptor = require('log-interceptor');
+const Maelstrom      = require('../../lib/index.js');
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-module.exports = function($maelstrom)
+module.exports = function silentInit($args, $breakSilence)
 {
-    return function silentInit($args, $breakSilence)
+    if (!_.isArray($args))
     {
-        if (!_.isArray($args))
-        {
-            $args = [];
-        }
+        $args = [];
+    }
 
-        $args.unshift(Gulp);
+    $args.unshift(Gulp);
 
-        LogInterceptor(
-        {
-            'passDown':         ($breakSilence === true),
-            'stripColor':       false,
-            'trimTimestamp':    false,
-            'trimLinebreak':    false,
-            'splitOnLinebreak': false
-        });
+    LogInterceptor(
+    {
+        'passDown':         ($breakSilence === true),
+        'stripColor':       false,
+        'trimTimestamp':    false,
+        'trimLinebreak':    false,
+        'splitOnLinebreak': false
+    });
 
-        $maelstrom.init.apply($maelstrom, $args);
-        return LogInterceptor.end();
-    };
-}
+    Maelstrom.init.apply(Maelstrom, $args);
+    return LogInterceptor.end();
+};
