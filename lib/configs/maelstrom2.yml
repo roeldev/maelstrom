@@ -1,0 +1,47 @@
+# Folders returned by the plugin's `.src()` functions. Used while adding tasks to gulp.
+src:
+  bower:   '%dir.assets%/bower_components'
+  css:     '%dir.assets%/css'
+  favicon: '%dir.assets%/favicon'
+  icons:   '%dir.assets%/icons'
+  images:  '%dir.assets%/imgs'
+  js:      '%dir.assets%/js'
+  sass:    '%dir.assets%/scss'
+
+# Folders returned by the plugin's `.dest()` functions. Used inside task functions wich are added to gulp.
+dest:
+  css:    '%dir.public%/css'
+  fonts:  '%dir.public%/fonts'
+  images: '%dir.public%/imgs'
+  js:     '%dir.public%/js'
+
+# The config file to search for in the project root folder.
+configFile: './.maelstrom.yml'
+
+# Specify the default mode. This is either `dev` or `prod`.
+defaultMode: dev
+
+# Turn information on/off of plugins that are loaded and added tasks.
+verbose: true
+
+## Default module settings
+main:
+  # gulp-notify: https://github.com/mikaelbr/gulp-notify
+  notify:
+    success: {}
+    warning: {}
+
+    error:
+      message: 'Error: <%= error.message %>'
+      time:    8000
+      wait:    false
+
+  # gulp-size: https://github.com/sindresorhus/gulp-size
+  size:
+    showFiles: true
+
+# Define all variables wich are used in the config
+vars:
+  dir:
+    assets: 'assets'
+    public: 'public'

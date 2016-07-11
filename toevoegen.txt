@@ -1,0 +1,34 @@
+publish/release
+    :patch
+    :minor
+    :major
+        --alpha
+        --beta
+
+- version bump doorvoeren
+- git commit
+- npm publish
+- bower publish
+
+--------------------------------------------------------------------------------
+
+favicon
+    :clean
+
+- favicon svg/png/jpg omzetten naar .ico en .png files
+- wegschrijven naar assets/imgs/favicons map
+- favicon link hrefs injecten
+
+--------------------------------------------------------------------------------
+
+fonts
+    :clean
+
+- font X omzetten naar Y en Z
+- font svg minifieën
+
+--------------------------------------------------------------------------------
+
+js
+
+- browserify support toevoegen

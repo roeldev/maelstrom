@@ -1,58 +1,123 @@
 /**
- * maelstrom | test/Maelstrom_tests.js
+ * maelstrom | test/index_tests.js
+ * file version: 0.00.007
  */
 'use strict';
 
-const Gulp           = require('gulp');
-const LogInterceptor = require('log-interceptor');
+var Maelstrom      = require('../lib/index.js');
+var Init           = require('../lib/init.js')(Maelstrom);
+var Utils          = require('../lib/utils.js')(Maelstrom);
+var Plugin         = require('../lib/plugin.js');
+var _              = require('underscore');
+var Assert         = require('assert');
+var Gulp           = require('gulp');
+var LogInterceptor = require('log-interceptor');
+var Path           = require('path');
+var Util           = require('util');
+var Tildify        = require('tildify');
 
-const Maelstrom = require('../lib/index');
+var PLUGIN_VALID  = Path.resolve(__dirname, './fixtures/plugins/valid.js');
+var PLUGIN_VALID2 = Path.resolve(__dirname, './fixtures/plugins/valid2.js');
 
-const expect         = require('chai').expect;
-const silentInit     = require('./helpers/silentInit');
-const resetGulpTasks = require('./helpers/resetGulpTasks');
+////////////////////////////////////////////////////////////////////////////////
 
-// // // // // // // // // // // // // // // // // // // // // // // // // // //
-
-LogInterceptor.config(
+function silentInit($args, $breakSilence)
 {
-    'stripColor':    true,
-    'trimTimestamp': true
-});
+    if (!_.isArray($args))
+    {
+        $args = [];
+    }
 
-// -----------------------------------------------------------------------------
+    $args.unshift(Gulp);
+
+    LogInterceptor(
+    {
+        'passDown':         ($breakSilence === true),
+        'stripColor':       false,
+        'trimTimestamp':    false,
+        'trimLinebreak':    false,
+        'splitOnLinebreak': false
+    });
+
+    Maelstrom.init.apply(Maelstrom, $args);
+    return LogInterceptor.end();
+}
+
+function resetGulpTasks()
+{
+    for (var $taskName in Maelstrom._tasks)
+    {
+        if (Maelstrom._tasks.hasOwnProperty($taskName))
+        {
+            delete Gulp.tasks[$taskName];
+        }
+    }
+}
+
+Maelstrom._pluginDir = Path.resolve(__dirname, './fixtures/plugins/');
+
+LogInterceptor.config({ 'stripColor': true, 'trimTimestamp': true });
+
+//------------------------------------------------------------------------------
+
+describe('Maelstrom()', function maelstromTests()
+{
+    it('should pass the arguments to Maelstrom.init()', function()
+    {
+        LogInterceptor();
+        Maelstrom(Gulp, false);
+        LogInterceptor.end();
+
+        Assert.strictEqual(Maelstrom.gulp, Gulp);
+    });
+
+    it('should return the main object when no args are given', function()
+    {
+        Assert.strictEqual(Maelstrom(), Maelstrom);
+    });
+});
 
 describe('Maelstrom.init()', function initTests()
 {
     it('should stop initializing on invalid gulp instance', function()
     {
-        let $li     = new LogInterceptor();
-        let $actual = Maelstrom.init({});
+        LogInterceptor();
+        var $actual = Maelstrom.init({});
+        LogInterceptor.end();
 
-        $li.endAll();
-
-        expect($actual).to.be.false;
+        Assert.strictEqual($actual, false);
     });
 
     it('should display an error msg on invalid gulp instance', function()
     {
-        let $li = new LogInterceptor();
+        LogInterceptor();
         Maelstrom.init({});
 
-        $li.end();
+        var $actual = LogInterceptor.end();
 
-        expect( $li.result.pop() ).to.equal(
-            'Make sure to pass an instance of gulp to maelstrom.init()');
+        Assert.equal($actual.pop(),
+            'Error! Make sure to pass an instance of gulp to ' +
+            'maelstrom.init()\n');
     });
 
-    /*it('should add the gulp instance to the main object', function()
+    it('should add the gulp instance to the main object', function()
     {
         silentInit();
 
-        expect(Maelstrom.gulp).to.be.instanceof(Gulp);
-    });*/
+        Assert.strictEqual(Maelstrom.gulp, Gulp);
+    });
 
-    /*it('should load the Plugin class and add it to the main obj', function()
+    it('should load the util functions and add it to the main obj', function()
+    {
+        silentInit();
+
+        var $actual   = Util.inspect(Maelstrom.utils, false, null);
+        var $expected = Util.inspect(Utils, false, null);
+
+        Assert.strictEqual($actual, $expected);
+    });
+
+    it('should load the Plugin class and add it to the main obj', function()
     {
         silentInit();
 
@@ -62,7 +127,7 @@ describe('Maelstrom.init()', function initTests()
 
     function checkTasksAdded()
     {
-        for (let $taskName in Maelstrom._tasks)
+        for (var $taskName in Maelstrom._tasks)
         {
             if (!Maelstrom._tasks.hasOwnProperty($taskName))
             {
@@ -121,7 +186,7 @@ describe('Maelstrom.init()', function initTests()
 
     function checkTasksNotAdded()
     {
-        for (let $taskName in Maelstrom._tasks)
+        for (var $taskName in Maelstrom._tasks)
         {
             if (!Maelstrom._tasks.hasOwnProperty($taskName))
             {
@@ -151,10 +216,10 @@ describe('Maelstrom.init()', function initTests()
         silentInit([false, {}]);
 
         Assert(checkTasksNotAdded());
-    });*/
+    });
 });
 
-/*describe('Maelstrom.task()', function taskTests()
+describe('Maelstrom.task()', function taskTests()
 {
     it('should return false on invalid task', function()
     {
@@ -181,7 +246,7 @@ describe('Maelstrom.init()', function initTests()
 
         Init.loadPlugin( require(PLUGIN_VALID2) );
 
-        let $actual = Maelstrom.task('through');
+        var $actual = Maelstrom.task('through');
 
         Assert.strictEqual($actual, Gulp);
     });
@@ -195,7 +260,7 @@ describe('Maelstrom.init()', function initTests()
         Init.loadPlugin( require(PLUGIN_VALID2) );
         Maelstrom.task('through');
 
-        let $actual = LogInterceptor.end();
+        var $actual = LogInterceptor.end();
 
         Assert.strictEqual($actual.pop(),
             '- Add task \'through\': ' + Tildify(PLUGIN_VALID2) + '\n');
@@ -221,7 +286,7 @@ describe('Maelstrom.watch()', function watchTests()
         LogInterceptor();
         Maelstrom.watch('plumber');
 
-        let $actual = LogInterceptor.end();
+        var $actual = LogInterceptor.end();
 
         Assert.strictEqual($actual.pop(),
             'Warning! No files to watch for task \'plumber\'!\n');
@@ -235,7 +300,7 @@ describe('Maelstrom.watch()', function watchTests()
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID) );
-        let $actual = Maelstrom.watch('plumber', ['some/file.*']);
+        var $actual = Maelstrom.watch('plumber', ['some/file.*']);
 
         Assert(_.isObject($actual));
     });
@@ -248,7 +313,7 @@ describe('Maelstrom.watch()', function watchTests()
         Maelstrom.config.verbose = false;
 
         Init.loadPlugin( require(PLUGIN_VALID2) );
-        let $actual = Maelstrom.watch('through');
+        var $actual = Maelstrom.watch('through');
 
         Assert(_.isObject($actual));
     });
@@ -266,7 +331,7 @@ describe('Maelstrom.extend()', function extendTests()
 
     it('should load the plugin and add to the main object [1]', function()
     {
-        let $plugin = require(PLUGIN_VALID);
+        var $plugin = require(PLUGIN_VALID);
 
         delete Maelstrom.test;
         Maelstrom.extend('test', PLUGIN_VALID);
@@ -276,7 +341,7 @@ describe('Maelstrom.extend()', function extendTests()
 
     it('should load the plugin and add to the main object [2]', function()
     {
-        let $plugin = require(PLUGIN_VALID);
+        var $plugin = require(PLUGIN_VALID);
 
         delete Maelstrom.valid;
         Maelstrom.extend(PLUGIN_VALID);
@@ -286,7 +351,7 @@ describe('Maelstrom.extend()', function extendTests()
 
     it('should add the loaded plugin to the main object', function()
     {
-        let $plugin = require(PLUGIN_VALID);
+        var $plugin = require(PLUGIN_VALID);
 
         delete Maelstrom.test;
         Maelstrom.extend('test', $plugin);
@@ -296,7 +361,7 @@ describe('Maelstrom.extend()', function extendTests()
 
     it('should add the function to the main object', function()
     {
-        let $plugin = function()
+        var $plugin = function()
         {
             return 'some plugin test value function';
         };
@@ -307,4 +372,3 @@ describe('Maelstrom.extend()', function extendTests()
         Assert.strictEqual(Maelstrom.test, $plugin);
     });
 });
-*/

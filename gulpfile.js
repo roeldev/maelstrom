@@ -23,8 +23,10 @@ Gulp.task('test', function()
 Gulp.task('dev', function()
 {
     process.stdout.write('\u001b[2J');
-    RunSequence('test', 'lint');
+    RunSequence('test', 'js:lint');
 });
+
+// -----------------------------------------------------------------------------
 
 Gulp.task('watch:dev', function()
 {
@@ -33,7 +35,7 @@ Gulp.task('watch:dev', function()
 
 Gulp.task('watch:lint', function()
 {
-    Gulp.watch(Maelstrom.config.src.js, ['lint']);
+    Gulp.watch(Maelstrom.config.src.js, ['js:lint']);
 });
 
 Gulp.task('watch', ['watch:dev', 'watch:lint']);
