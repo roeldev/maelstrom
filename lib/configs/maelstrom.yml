@@ -80,6 +80,14 @@ sass:
     style:          expanded
     sourceComments: true
 
+  mocha:
+    ignoreLeaks: true
+
+  sassdoc:
+    src:     './src/'
+    dest:    docs
+    verbose: true
+
   # gulp-scss-lint: https://github.com/juanfran/gulp-scss-lint
   scssLint:
     config:     '%configs%/scss-lint.yml'
