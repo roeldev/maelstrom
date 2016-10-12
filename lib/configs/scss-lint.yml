@@ -214,8 +214,24 @@ linters:
 
   PropertyUnits:
     enabled: true
-    global: ['em', 'ex', '%', 'px', 'ch', 'cm', 'mm', 'in',
-             'pt', 'pc', 'rem', 'vh', 'vw', 'vmin', 'vmax']
+    global:
+      - '%'
+      - ch
+      - cm
+      - em
+      - ex
+      - in
+      - mm
+      - ms
+      - pc
+      - pt
+      - px
+      - rem
+      - s
+      - vh
+      - vw
+      - vmax
+      - vmin
     properties: {}
 
   QualifyingElement:
